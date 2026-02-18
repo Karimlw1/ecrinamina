@@ -70,13 +70,13 @@ const Body = document.querySelector(".Body");
 function showMenu() {
     const menuContent = document.querySelector(".socials");
     menuContent.classList.toggle("visible");
-    Body.style.display= 'none';
+    Body.style.display = 'none';
 }
 
-function exitMenu(){
+function exitMenu() {
     const menu2 = document.querySelector(".socials");
     menu2.classList.remove("visible");
-    Body.style.display= 'block';
+    Body.style.display = 'block';
 }
 
 /* copyright */
@@ -88,13 +88,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const productsContainer = document.getElementById("productsContainer");
 
 fetch("/api/products")
-  .then(res => res.json())
-  .then(products => {
-    Object.values(products).forEach(product => {
-      const div = document.createElement("div");
-      div.className = "product details";
-      div.dataset.id = product.id;
-      div.innerHTML = `
+    .then(res => res.json())
+    .then(products => {
+        Object.values(products).forEach(product => {
+            const div = document.createElement("div");
+            div.className = "product details";
+            div.dataset.id = product.id;
+            div.innerHTML = `
         <img src="${product.image}" alt="${product.name}" />
         <div class="info">
           <div class="price">$${product.price}</div>
@@ -103,7 +103,7 @@ fetch("/api/products")
           </button>
         </div>
       `;
-      productsContainer.appendChild(div);
+            productsContainer.appendChild(div);
+        });
     });
-  });
 
