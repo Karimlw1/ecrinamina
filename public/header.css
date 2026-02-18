@@ -1,0 +1,184 @@
+.navbar {
+   height: 60px;
+    background: #fdfdfd;
+    color: rgb(15, 15, 15);
+    border-bottom: solid 1px rgb(0 0 0 / 10%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.navbar h3 {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.menu {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.menu .socials {
+    position: fixed;
+    top: 0;
+    left: -2000px;
+    width: 100%;
+    max-width: 700px;
+    height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    place-self: anchor-center;
+
+    background: linear-gradient(#ffffff, #f4f6fa);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+/* Visible state */
+.menu .socials.visible {
+    transform: translateX(0);
+    left: 0;
+}
+
+.socials img {
+    height: 150px;
+    border-radius: 50%;
+    margin: 70px auto 40px;
+    display: block;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.15),
+        0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.menu .socials .button {
+    width: 90%;
+    max-width: 500px;
+    padding: 18px 22px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+
+    box-shadow:
+        8px 8px 20px rgba(0,0,0,0.08),
+        -8px -8px 20px rgba(255,255,255,0.9);
+
+    transition: all 0.25s ease;
+}
+.button i{
+    text-decoration: none;
+    align-content: center;
+    text-align: center;
+}
+/* Hover effect */
+.menu .socials .button:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        12px 12px 25px rgba(0,0,0,0.12),
+        -8px -8px 20px rgba(255,255,255,0.9);
+}
+
+
+.button.whatsapp {
+    color: #0f640c;
+    margin-top: 100px;
+}
+
+.button.instagram {
+    background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color: transparent;
+}
+.button.instagram i {
+    background: content-box;
+}
+
+.button.tiktok {
+    color: #000;
+}
+
+.button.facebook {
+    color: #2d80ce;
+}
+
+a i {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conf {
+    margin-top: 40px;
+    font-size: 24px;
+    color: #1e1bdd;
+    text-decoration: underline;
+    transition: color 1s ease;
+}
+
+.conf:hover {
+    color: #070707; 
+}
+
+.exitMenu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    background: #ffffff;
+    color: #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease;
+}
+
+.exitMenu:hover {
+    transform: scale(1.1);
+}
+
+.cart {
+    position: relative;
+    font-size: 20px;
+}
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: #000000;
+    color: #ffffff;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font: -webkit-small-control;
+    font-weight: bold;
+}
