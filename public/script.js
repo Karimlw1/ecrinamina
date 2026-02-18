@@ -79,9 +79,6 @@ function exitMenu() {
     Body.style.display = 'block';
 }
 
-/* copyright */
-
-document.getElementById('year').textContent = new Date().getFullYear();
 
 //* display products */
 
