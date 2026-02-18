@@ -41,9 +41,9 @@
  }
 
  button {
-     background: rgb(66, 66, 66);
-     border: none;
-     color: white;
+     background: rgb(255, 255, 255);
+     border: 1px solid rgb(216, 215, 215);
+     color: rgb(0, 0, 0);
      padding: 8px 12px;
      border-radius: 6px;
      cursor: pointer;
@@ -59,7 +59,8 @@
     justify-self: center;
     margin-top: 32px;
     font-variant-numeric: oldstyle-nums;
-    background-color: #ffffff;
+    background-color: #eaecec33;
+    border-radius: 20px;
         justify-items: center;
     max-width: 517px;
 }
@@ -68,19 +69,21 @@
 
 .product {
     width: 95%;
-    background: white;
+    height: 230px;
+    background: rgb(248, 248, 248);
     border-radius: 7px;
+    border: 1px solid rgb(233, 233, 233);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: 0px 0px 10px rgb(0 0 0 / 9%);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.09);
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .product:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(134, 134, 134, 0.15);
 }
 
 .product button {
@@ -90,7 +93,7 @@
 
 .product img {
   width: 100%;
-  height: 220px;
+  height: 160px;
   object-fit: fill;     
   object-position: center;
   background-color: #f2f2f2; /* soft fallback while loading */
@@ -108,7 +111,7 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #111;
+  background: #19191a;
   color: #fff;
   font-size: 12px;
   padding: 4px 8px;
