@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 // -------------------
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = "karimlw1";
-const REPO = "My_dressing_by_amida";
+const REPO = "ecrinamina";
 const BRANCH = "main";
 
 // -------------------
@@ -60,7 +60,7 @@ function isAdmin(req, res, next) {
 app.post("/admin/upload-image", isAdmin, upload.single("image"), async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "mydressing_products"
+      folder: "ecrinamina_products"
     });
     fs.unlinkSync(req.file.path); // remove temp file
     res.json({ imageUrl: result.secure_url });

@@ -1,7 +1,7 @@
 {
-  "name": "my_dressing_by_amida",
+  "name": "ecrinamina",
   "version": "1.0.0",
-  "description": "",
+  "description": "My Dressing by Amida",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,22 +9,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Karimlw1/My_dressing_by_amida.git"
+    "url": "git+https://github.com/Karimlw1/ecrinamina.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/Karimlw1/My_dressing_by_amida/issues"
+    "url": "https://github.com/Karimlw1/ecrinamina/issues"
   },
-  "homepage": "https://github.com/Karimlw1/My_dressing_by_amida#readme",
+  "homepage": "https://github.com/Karimlw1/ecrinamina#readme",
   "dependencies": {
     "@octokit/rest": "^22.0.1",
-    "axios": "^1.13.4",
+    "axios": "^1.13.5",
     "cloudinary": "^2.9.0",
     "cors": "^2.8.6",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "multer": "^2.0.2"
   }
