@@ -1,18 +1,21 @@
 /* CAROUSEL */
 
 .carousel {
-    width: 100%;
-    height: 300px;
+    width: 90%;
+    place-self: anchor-center;
+    height: 200px;
     overflow: hidden;
     position: relative;
-    background: #000;
     touch-action: pan-y;
+    margin-top: 20px;
+    border-radius: 20px;
 }
 
 .slides {
     display: flex;
     transition: transform 0.4s ease-in-out;
     width: 100%;
+    height: -webkit-fill-available;
 }
 
 
@@ -31,7 +34,7 @@
 
 .slide img {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
     -webkit-user-drag: none;
     pointer-events: none;
@@ -43,12 +46,12 @@
     left: 20px;
     color: white;
     font-size: 10px;
-    box-shadow: inset 10px 5px 15px rgba(194, 190, 190, 0.473);
+    box-shadow: inset 10px 5px 15px rgba(0 0 0 /13%);
 }
 
 .caption h2 {
     font-size: 22px;
-    color: darkgoldenrod;
+    color: rgb(21, 89, 116);
     display: ruby-text;
     font-variant-caps: small-caps;
 }
@@ -62,8 +65,8 @@
 .dots {
     position: absolute;
     bottom: 10px;
+    left: 30px;
     width: 100%;
-    text-align: center;
 }
 
 .dot {
@@ -77,14 +80,24 @@
 }
 
 .dot.active {
-    background: orange;
+    background: rgb(94, 255, 0);
+}
+
+.search{
+    display: flex;
+    padding: 10px 30px;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: 1px solid grey;
+    text-align: left;
+    place-self: anchor-center;
 }
 
 /* CATEGORIES */
 
 .categories {
     margin-top: 20px;
-    background: linear-gradient(rgba(247, 237, 222, 0.363), rgba(177, 127, 127, 0.5));
+    background: linear-gradient(rgba(255, 255, 255, 0.363), rgba(54, 72, 80, 0.5));
     border-radius: 0 0 10px 10px;
     padding: 15px 10%;
 }
@@ -93,6 +106,7 @@
 
 .categories h3 {
     margin-bottom: 10px;
+    -webkit-text-stroke: thin
 }
 .category-container{
     display: flex;
@@ -100,6 +114,7 @@
     align-content: space-between;
     gap: 10px;
     align-items: center;
+    align-content: center;
 }
 
 .grid {
@@ -108,18 +123,13 @@
     gap: 12px;
     justify-self: center;
     width: 80%;
+    justify-items: center;
 
-}
-.flex {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
 }
 
 .category {
-    max-width: 300px;
-    height: 160px;
+    max-width: 150px;
+    height: 130px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -129,45 +139,50 @@
     cursor: pointer;
     font-weight: bolder;
     color: rgb(255, 255, 255);
-    box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.8);
+    box-shadow: 1px 5px 15px rgba(192, 191, 191, 0.8);
 }
 
 .category:nth-child(1) {
-    background: url("https://i.pinimg.com/1200x/90/d2/7b/90d27bf408fb13f255ed7887fd414feb.jpg");
+    background: url("https://i.pinimg.com/736x/73/9c/7e/739c7e9aa5fa6ca224887a6e63932966.jpg");
     background-size: cover;
     background-repeat: round;
+    width: 100%;
 }
 
 .category:nth-child(2) {
-    background: url("https://i.pinimg.com/736x/bd/4b/77/bd4b77af3f7a141bc96e64c9d2dc63fc.jpg");
+    background: url("https://i.pinimg.com/736x/3e/24/b7/3e24b7db916793d5959ca7be0d31bc52.jpg");
     background-size: cover;
     background-repeat: round;
+    width: 100%;
 }
 
 .category:nth-child(3) {
-    background: url("https://i.pinimg.com/736x/b6/7f/36/b67f36818bc6fd59331823e073041de3.jpg");
+    background: url("https://i.pinimg.com/736x/9f/80/f6/9f80f693697217e02bdada230b68a686.jpg");
     background-size: cover;
     background-repeat: round;
+    width: 100%;
 
 }
 
 .category:nth-child(4) {
-    background: url("https://i.pinimg.com/736x/35/1f/31/351f317f8c6d4cb2b178120794c4650b.jpg");
+    background: url("https://i.pinimg.com/736x/26/af/6b/26af6bc826807ee279c943d04a9de1ce.jpg");
     background-size: cover;
     background-repeat: round;
     width: 100%;
 }
 
 .category:nth-child(5) {
-    background: url("https://i.pinimg.com/1200x/42/a5/9d/42a59d6e33afca58750dd5345ca8cf84.jpg");
-    background-size: cover;
+    background: url("https://i.pinimg.com/736x/dd/75/69/dd756909e025cafcf0e1b5a2cc2f84d0.jpg");
+    background-size: contain;
     background-repeat: round;
+    width: 100%;
 }
 
 .category:nth-child(6) {
-    background: url("https://i.pinimg.com/736x/20/0f/70/200f7043ce70f244a18b8b580852e138.jpg");
+    background: url("https://i.pinimg.com/736x/79/eb/b0/79ebb0af2cf120165577eed01b291b82.jpg");
     background-size: cover;
     background-repeat: round;
+    width: 100%;
     color: grey;
 }
 
@@ -245,7 +260,7 @@
     }
 
     .carousel {
-        height: 370px;
+        height: 200px;
     }
 
     .slide img {
