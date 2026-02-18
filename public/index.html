@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta
       name="description"
-      content="My Dressing By Amida is a fashion brand offering elegant dresses and modern clothing for women."
+      content="Ecrin d'amina is a fashion brand offering elegant dresses and modern clothing for women."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My dressing by amida Home</title>
+    <title>Ecrin d'amina Home</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="generals.css" />
@@ -31,13 +31,12 @@
         <strong
           onclick="showMenu()"
           style="
-            color: rgb(255, 252, 252);
-            background-color: black;
+            color: rgb(0, 0, 0);
             padding: 8px 10px;
             border-radius: 50%;
             font-size: 15px;
           "
-          ><i class="fa fa-phone"></i>
+          ><i class="fa fa-comments"></i>
         </strong>
 
         <div class="socials">
@@ -64,13 +63,14 @@
           >
         </div>
       </div>
-      <h3><strong>My dressing by amida</strong></h3>
+      <h3><strong>Ecrin d'amina</strong></h3>
       <div
         class="cart"
         onclick="location.href = 'cart.html'"
         style="cursor: pointer"
       >
-        🛒 <span class="badge" id="cartCount"></span>
+        <i class="fa fa-shopping-bag"></i>
+        <span class="badge" id="cartCount"></span>
       </div>
     </header>
 
@@ -78,7 +78,7 @@
       <div class="slides">
         <div class="slide">
           <img
-            src="https://i.pinimg.com/1200x/6e/3b/6c/6e3b6cff7af0c7e6445103d02f2bef5e.jpg"
+            src="https://i.pinimg.com/736x/2f/3d/0b/2f3d0bc8d1ef0458842eda799f021baf.jpg"
             alt=""
           />
           <div class="caption">
@@ -89,7 +89,7 @@
 
         <div class="slide">
           <img
-            src="https://i.pinimg.com/736x/7d/b8/4a/7db84aba851e96846229e42d6535a42a.jpg"
+            src="https://i.pinimg.com/736x/d2/02/40/d202405b27f0f500b19b5d3fd84cd70a.jpg"
             alt=""
           />
           <div class="caption">
@@ -100,18 +100,18 @@
 
         <div class="slide">
           <img
-            src="https://i.pinimg.com/736x/51/4d/22/514d22430ca8a0badf0598751eef49b8.jpg"
+            src="https://i.pinimg.com/736x/8f/39/1c/8f391c4a604b7164a4040aeed5495b33.jpg"
             alt=""
           />
           <div class="caption">
-            <h2>Best Deals</h2>
-            <p>Save more on top brands</p>
+            <h2>Beauté & Skincare</h2>
+            <p>La peau parle. Offrez-lui ce qui la fait briller.</p>
           </div>
         </div>
 
         <div class="slide">
           <img
-            src="https://i.pinimg.com/736x/7f/9d/95/7f9d9562949f1e8f278e9ceed2968eb9.jpg"
+            src="https://i.pinimg.com/736x/a9/c8/5f/a9c85fea6da4512692ae9916c215c640.jpg"
             alt=""
           />
           <div class="caption">
@@ -128,17 +128,24 @@
         <span class="dot"></span>
       </div>
     </section>
+    <input
+      type="search"
+      name="search"
+      id=""
+      class="search"
+      placeholder="Rechercher un article"
+    />
     <section class="Body">
       <section class="categories">
         <h3>Categories</h3>
         <div class="category-container">
           <div class="grid">
             <div class="category" onclick="location.href = 'FashionH.html'">
-              <p>Fashion Homme</p>
+              <p>Homme</p>
             </div>
 
             <div class="category" onclick="location.href = 'FashionF.html'">
-              <p>Fashion Femme</p>
+              <p>Femme</p>
             </div>
 
             <div class="category" onclick="location.href = 'beaute.html'">
@@ -147,54 +154,93 @@
                 Skin care
               </p>
             </div>
-          </div>
-          <div class="flex">
+
             <div
               class="category"
               onclick="location.href = 'gift.html'"
-              style="
-                width: 50%;
-                background: url(https://i.pinimg.com/736x/1a/8a/0d/1a8a0d1a3532fe45ea7ac60bd43b3f47.jpg);
-                background-repeat: round;
-              "
+              style="background-repeat: round"
             >
               <p>Cadeau</p>
             </div>
             <div
               class="category"
               onclick="location.href = 'accessoires.html'"
-              style="
-                width: 50%;
-                background: url(https://i.pinimg.com/1200x/d2/ae/cd/d2aecd7387bf896efe08024eda3e405f.jpg);
-                background-repeat: round;
-              "
+              style="background-repeat: round"
             >
               <p>Accessoires</p>
+            </div>
+
+            <div
+              class="category"
+              onclick="location.href = 'Fleurs.html'"
+              style="background-repeat: round"
+            >
+              <p style="color: white">Fleurs</p>
             </div>
           </div>
         </div>
       </section>
 
-      <h2 style="font-size: x-large; margin: 10px 0 0 20px">Explorez</h2>
+      <h2 style="font-size: x-large; margin: 10px 0 0 20px">En stock</h2>
 
-      <section class="products" id="productsContainer"></section>
-
-      <div class="texts">
-        <div class="slide-from-left reveal">Jusqu’à -30% sur vos achats</div>
-        <div class="slide-from-left reveal">Stock disponible immédiatement</div>
-        <div class="slide-from-left reveal">
-          Des milliers de clients satisfaits
+      <section class="products" id="productsContainer">
+        <div class="product">
+          <img
+            src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1770391843/mydressing_products/dke6y4vnshulrheo80ms.jpg"
+            alt="Chemise satinÃÂÃÂ©e manches longues"
+          />
+          <div class="info">
+            <div class="price">30</div>
+            <button
+              class="details-bttn"
+              onclick="location.href = 'product.html?id=${product.id}'"
+            >
+              Acheter
+            </button>
+          </div>
         </div>
-        <div class="slide-from-left reveal">
-          Cadeaux uniques pour vos proches
+        <div class="product">
+          <img
+            src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1770391843/mydressing_products/dke6y4vnshulrheo80ms.jpg"
+            alt="Chemise satinÃÂÃÂ©e manches longues"
+          />
+          <div class="info">
+            <div class="price">30</div>
+            <button
+              class="details-bttn"
+              onclick="location.href = 'product.html?id=${product.id}'"
+            >
+              Acheter
+            </button>
+          </div>
         </div>
-      </div>
+        <div class="product">
+          <img
+            src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1770391843/mydressing_products/dke6y4vnshulrheo80ms.jpg"
+            alt="Chemise satinÃÂÃÂ©e manches longues"
+          />
+          <div class="info">
+            <div class="price">30</div>
+            <button
+              class="details-bttn"
+              onclick="location.href = 'product.html?id=${product.id}'"
+            >
+              Acheter
+            </button>
+          </div>
+        </div>
+      </section>
 
       <footer>
-        <p>
-          © <span id="year"></span> My Dressing by Amida. <br />
-          All rights reserved.
-        </p>
+        <i class="fa fa-home">
+          <p>Home</p>
+        </i>
+        <i class="fa fa-shopping-bag">
+          <p>cart</p>
+        </i>
+        <i class="fa fa-comments">
+          <p>Chat</p>
+        </i>
       </footer>
     </section>
     <script src="script.js"></script>
