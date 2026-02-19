@@ -2,6 +2,7 @@
 .divCarousel {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .carousel {
