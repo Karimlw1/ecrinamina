@@ -28,26 +28,35 @@
      flex: 1;
      display: grid;
      grid-template-columns: repeat(2, 1fr);
+     position: absolute;
+     margin-top: 130px;
+     margin-left: -7px;
+     backdrop-filter: blur(1px);
 
  }
 
 
 
  .price {
-     color: rgb(0, 0, 0);
+     color: rgb(0 0 0);
      font-weight: bold;
-     margin: 8px 0;
+     margin: 6px 18px;
+     border-radius: 20px;
+     padding: 3px;
+     backdrop-filter: blur(45px);
 
  }
 
  button {
-     background: rgb(255, 255, 255);
      border: 1px solid rgb(216, 215, 215);
-     color: rgb(0, 0, 0);
+     color: darkred;
      padding: 8px 12px;
      border-radius: 6px;
      cursor: pointer;
-
+     font-weight: bold;
+     font-size: x-small;
+     background-clip: text;
+     backdrop-filter: blur(2px);
  }
 
  .products {
@@ -70,7 +79,7 @@
 
  .product {
      width: 95%;
-     height: 230px;
+     height: 200px;
      background: rgb(248, 248, 248);
      border-radius: 7px;
      border: 1px solid rgb(233, 233, 233);
@@ -94,7 +103,7 @@
 
  .product img {
      width: 100%;
-     height: 160px;
+     height: 100%;
      object-fit: fill;
      object-position: center;
      background-color: #f2f2f2;
