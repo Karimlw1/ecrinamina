@@ -140,7 +140,7 @@
     flex: 1;
     outline: none;
     width: 100%;
-    background: transparent;
+    background: white;
     font-size: 1rem;
     color: var(--text);
     border: none;
@@ -293,7 +293,7 @@
     font-size: 16px;
     text-align: center;
     position: absolute;
-    margin-top: 167px;
+    margin-top: 126px;
     color: black;
 
 }
@@ -375,9 +375,18 @@
     .categories {
         padding: 15px;
     }
-    .category{
+
+    .category {
         max-width: 80px;
         height: 80px;
+    }
+
+    .category p {
+        font-size: 16px;
+        text-align: center;
+        position: absolute;
+        margin-top: 137px;
+        color: black;
     }
 
     .grid {
