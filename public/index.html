@@ -122,13 +122,37 @@
         </div>
       </section>
       <div class="divCarousel">
-    <input
-      type="search"
-      name="search"
-      id=""
-      class="search"
-      placeholder="Rechercher un article"
-    />
+        
+       <div class="search-wrapper">
+  <div class="search-container">
+    
+    <svg class="search-icon" viewBox="0 0 24 24">
+      <path d="M21 21l-4.35-4.35m1.35-5.15a7 7 0 11-14 0 7 7 0 0114 0z"
+        stroke="currentColor" stroke-width="2" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <div class="marquee-input">
+      <input
+        type="text"
+        id="SearchInput"
+        autocomplete="off"
+        aria-label="Search products"
+      />
+      <span class="fake-placeholder">
+        Rechercher produit, couleur, taille, prix...
+      </span>
+    </div>
+
+    <button id="clearSearch" aria-label="Clear search">
+      ✕
+    </button>
+
+  </div>
+
+  <div id="resultsCount"></div>
+</div>
+
 
     <section class="carousel">
       <div class="slides">
@@ -209,6 +233,7 @@
         </i>
       </footer>
     </section>
+    <script src="search.js"></script>
     <script src="script.js"></script>
     <script src="product-link.js"></script>
     <script src="cart.js"></script>

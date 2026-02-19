@@ -79,6 +79,26 @@ function exitMenu() {
     Body.style.display = 'block';
 }
 
+//*hide placeholder search 
+
+const input = document.getElementById("SearchInput");
+const fakePlaceholder = document.querySelector(".fake-placeholder");
+
+input.addEventListener("input", () => {
+    fakePlaceholder.style.display = input.value ? "none" : "block";
+});
+
+input.addEventListener("focus", () => {
+    fakePlaceholder.style.display = "none";
+});
+
+input.addEventListener("blur", () => {
+    if (!input.value) {
+        fakePlaceholder.style.display = "block";
+    }
+});
+
+
 
 //* display products */
 const productsContainer = document.getElementById("productsContainer");
@@ -102,3 +122,4 @@ fetch("./api/products")
             productsContainer.appendChild(div);
         });
     });
+
