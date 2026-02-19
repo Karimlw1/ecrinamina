@@ -8,6 +8,7 @@
      max-width: 700px;
      justify-self: center;
      border: solid 1px rgba(197, 194, 194, 0.603);
+     border-top: none;
  }
 
  * {
