@@ -10,7 +10,7 @@
 .carousel {
     width: 90%;
     place-self: anchor-center;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
     position: relative;
     touch-action: pan-y;
@@ -49,7 +49,7 @@
 
 .caption {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     left: 20px;
     color: white;
     font-size: 10px;
