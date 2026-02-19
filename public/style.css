@@ -1,8 +1,11 @@
 /* CAROUSEL */
 .divCarousel {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
+    gap: 30px;
+    padding: 15px;
+    background: linear-gradient(167deg, #a6eaff, #4f444405 100px);
 }
 
 .carousel {
