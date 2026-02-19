@@ -12,7 +12,7 @@ fetch("/api/products")
     refreshCategoryStockUI()
   });
 
-  function initProduct() {
+function initProduct() {
   if (!id) {
     console.log("ID produit manquant dans l'URL");
     return;
@@ -33,7 +33,7 @@ fetch("/api/products")
   }
 
   renderProduct();
-  
+
 }
 
 function renderProduct() {

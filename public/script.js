@@ -83,7 +83,7 @@ function exitMenu() {
 //* display products */
 const productsContainer = document.getElementById("productsContainer");
 
-fetch("/api/products")
+fetch("./api/products")
     .then(res => res.json())
     .then(products => {
         Object.values(products).forEach(product => {
