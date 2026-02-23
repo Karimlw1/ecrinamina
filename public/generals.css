@@ -24,13 +24,17 @@
      font-size: 1.3rem;
      font-family: 'Cormorant Garamond', serif;
  }
- 
- .dark-mode {
+
+.dark-mode {
      background-color: #121212;
      color: #e0e0e0;
- }
+}
+.fa-sun .active{
+    display: block;
+    color: #b8820d;
 
- .info {
+}
+.info {
      padding: 10px;
      flex: 1;
      display: grid;
@@ -39,11 +43,11 @@
      margin-top: 130px;
      margin-left: -7px;
 
- }
+}
 
 
 
- .price {
+.price {
      color: rgb(0 0 0);
      font-weight: bold;
      margin: 6px 18px;
@@ -53,7 +57,7 @@
 
  }
 
- button {
+button {
      border: 1px solid rgb(216, 215, 215);
      padding: 8px 12px;
      border-radius: 6px;
@@ -66,7 +70,7 @@
 
  }
 
- .products {
+.products {
      padding: 15px;
      display: grid;
      grid-template-columns: repeat(2, 1fr);
@@ -79,11 +83,11 @@
      justify-items: center;
      max-width: 517px;
      padding-bottom: 120px;
- }
+}
 
 
 
- .product {
+.product {
      width: 95%;
      height: 200px;
      background: rgb(248, 248, 248);
@@ -95,37 +99,37 @@
      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.09);
      cursor: pointer;
      transition: transform 0.2s ease, box-shadow 0.2s ease;
- }
+}
 
- .product:hover {
+.product:hover {
      transform: translateY(-3px);
      box-shadow: 0 10px 25px rgba(134, 134, 134, 0.15);
- }
+}
 
- .product button {
+.product button {
      pointer-events: none;
- }
+}
 
 
- .product img {
+.product img {
      width: 100%;
      height: 100%;
      object-fit: fill;
      object-position: center;
      background-color: #f2f2f2;
      /* soft fallback while loading */
- }
+}
 
 
- .product:hover {
+.product:hover {
      cursor: pointer;
- }
+}
 
- .category {
+.category {
      position: relative;
- }
+}
 
- .category .count {
+.category .count {
      position: absolute;
      top: 8px;
      right: 8px;
@@ -136,4 +140,4 @@
      border-radius: 999px;
      font-weight: 600;
      opacity: 0.9;
- }
+}

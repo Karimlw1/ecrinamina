@@ -101,10 +101,20 @@ input.addEventListener("blur", () => {
 //* dark mode toggle  *//
 
 const darkModeToggle = document.getElementById("darkModeToggle");
+const lighModeToggle = document.getElementById("lightModeToggle");
 
 darkModeToggle.addEventListener("change", () => {
+    darkModeToggle.style.display = "none";
+    lighModeToggle.classList.add("active");
     document.body.classList.toggle("dark-mode", darkModeToggle.checked);
 });
+
+lightModeToggle.addEventListener("click", () => {
+    lighModeToggle.classList.remove("active");
+    darkModeToggle.style.display = "block";
+    document.body.classList.remove("dark-mode");
+});
+
 function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle("dark-mode");
