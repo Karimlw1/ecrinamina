@@ -123,3 +123,9 @@ fetch("./api/products")
         });
     });
 
+//* dark mode toggle  *//
+
+function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+}

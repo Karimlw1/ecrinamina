@@ -24,6 +24,11 @@
      font-size: 1.3rem;
      font-family: 'Cormorant Garamond', serif;
  }
+ 
+ .dark-mode {
+     background-color: #121212;
+     color: #e0e0e0;
+ }
 
  .info {
      padding: 10px;
