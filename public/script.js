@@ -102,15 +102,36 @@ input.addEventListener("blur", () => {
 const darkModeToggle = document.getElementById("darkModeToggle");
 const lightModeToggle = document.getElementById("lightModeToggle");
 const body = document.body;
+const storedMode = localStorage.getItem("mode");
+const navbar = document.querySelector(".navbar");
+const categories = document.querySelector(".categories");
+const products = document.querySelector(".products");
+
+const footer = document.querySelector(".footer");
+if (storedMode === "dark") {
+    body.classList.add("dark-mode");
+    darkModeToggle.classList.add("active1");
+}
+
 
 darkModeToggle.addEventListener("click", () => {
     body.classList.add("dark-mode");
+    navbar.classList.add("dark-mode");
+    categories.classList.add("dark-mode");
+    products.classList.add("dark-mode");
+    footer.classList.add("dark-mode");
     lightModeToggle.classList.remove("active1");
     darkModeToggle.classList.add("active1");
+    localStorage.setItem("mode", "dark");   
 });
 
 lightModeToggle.addEventListener("click", () => {
     body.classList.remove("dark-mode");
+    navbar.classList.remove("dark-mode");
+    categories.classList.remove("dark-mode");
+    products.classList.remove("dark-mode");
+    footer.classList.remove("dark-mode");
+    localStorage.setItem("mode", "light");
     darkModeToggle.classList.remove("active1");
     lightModeToggle.classList.add("active1");
 });

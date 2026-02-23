@@ -53,6 +53,11 @@
     width: 26px;
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
 }
+
+.dark-mode .fa-solid, .dark-mode .fas {
+    filter: invert(1);
+}
+
 .info {
      padding: 10px;
      flex: 1;
