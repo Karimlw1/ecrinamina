@@ -122,7 +122,6 @@ darkModeToggle.addEventListener("click", () => {
     navbar.classList.add("dark-mode");
     category.classList.remove("light-mode");
     category.classList.add("dark-mode");
-    p.classList.remove("light-mode");
     p.classList.add("dark-mode");
     products.classList.remove("light-mode");
     products.classList.add("dark-mode");
