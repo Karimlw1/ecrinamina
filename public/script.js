@@ -105,7 +105,7 @@ const body = document.body;
 const storedMode = localStorage.getItem("mode");
 const navbar = document.querySelector(".navbar");
 const category = document.querySelector(".category");
-const p = document.p || document.querySelector("p");
+const p = document.p || document.querySelectorAll("p");
 
 const products = document.querySelector(".products");
 const footer = document.footer || document.querySelector("footer");
