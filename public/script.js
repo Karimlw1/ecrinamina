@@ -100,24 +100,23 @@ input.addEventListener("blur", () => {
 
 //* dark mode toggle  *//
 
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+darkModeToggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-mode", darkModeToggle.checked);
+});
 function toggleDarkMode() {
     const body = document.body;
-    const i = document.querySelector(".fa");
-    const html = document.documentElement;
-    const p = document.querySelector(".category p");
     body.classList.toggle("dark-mode");
-    i.classList.toggle("dark-mode");
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    const lightModeToggle = document.getElementById("lightModeToggle");
-    if (darkModeToggle.checked) {
-        darkModeToggle.checked = false;
-        lightModeToggle.checked = true;
-    } else {
-        darkModeToggle.checked = true;
-        lightModeToggle.checked = false;
-    }
-}
 
+    // Save the user's preference in localStorage
+    if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+    } else {
+        localStorage.setItem("darkMode", "disabled");
+    }
+
+}
 
 
 //* display products */
