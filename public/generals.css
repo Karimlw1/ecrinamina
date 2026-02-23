@@ -50,7 +50,7 @@
 .fa-solid, .fas {
     display: block;
     font-weight: 900;
-    width: 26px;
+    width: 21px;
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
 }
 
