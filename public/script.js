@@ -105,14 +105,14 @@ const body = document.body;
 
 darkModeToggle.addEventListener("click", () => {
     body.classList.add("dark-mode");
-    lightModeToggle.classList.remove("active");
-    darkModeToggle.classList.add("active");
+    lightModeToggle.classList.remove("active1");
+    darkModeToggle.classList.add("active1");
 });
 
 lightModeToggle.addEventListener("click", () => {
     body.classList.remove("dark-mode");
-    darkModeToggle.classList.remove("active");
-    lightModeToggle.classList.add("active");
+    darkModeToggle.classList.remove("active1");
+    lightModeToggle.classList.add("active1");
 });
 
 
