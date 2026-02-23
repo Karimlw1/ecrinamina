@@ -106,8 +106,7 @@ const storedMode = localStorage.getItem("mode");
 const navbar = document.querySelector(".navbar");
 const categories = document.querySelector(".categories");
 const products = document.querySelector(".products");
-
-const footer = document.querySelector(".footer");
+const footer = document.footer || document.querySelector("footer");
 if (storedMode === "dark") {
     body.classList.add("dark-mode");
     darkModeToggle.classList.add("active1");
