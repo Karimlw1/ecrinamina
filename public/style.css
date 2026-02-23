@@ -285,11 +285,11 @@
     background-color: black;
     border-radius: 20px;
     height: 36px;
-    width: 74px;
+    width: 60px;
     margin-top: 29px;
     display: flex;
     flex-direction: row;
-    gap: inherit;
+    gap: 6px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
