@@ -29,6 +29,17 @@
      background-color: #121212;
      color: #e0e0e0;
 }
+#lightModeToggle {
+    content: "\f185";
+    color: gold;
+    background-color: #797979;
+    width: 135%;
+    display: block;
+    height: 29px;
+    border-radius: 16px;
+    text-align: center;
+    align-content: center;
+}
 .active1{
     content: "\f185";
     color: gold;
