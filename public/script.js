@@ -98,38 +98,20 @@ input.addEventListener("blur", () => {
     }
 });
 
-//* dark mode toggle  *//
-
+//* dark mode and light mode *//
 const darkModeToggle = document.getElementById("darkModeToggle");
+const lightModeToggle = document.getElementById("lightModeToggle");
+const body = document.body;
 
-
-darkModeToggle.addEventListener("change", () => {
-    darkModeToggle.style.display = "none";
-    lightModeToggle.classList.add("active");
-    document.body.classList.toggle("dark-mode", darkModeToggle.checked);
+darkModeToggle.addEventListener("click", () => {
+    body.classList.add("dark-mode");
+    body.classList.remove("light-mode");
 });
 
 lightModeToggle.addEventListener("click", () => {
-    lighModeToggle.classList.remove("active");
-    darkModeToggle.style.display = "block";
-    document.body.classList.remove("dark-mode");
+    body.classList.add("light-mode");
+    body.classList.remove("dark-mode");
 });
-
-function toggleDarkMode() {
-    const body = document.body;
-    const lighModeToggle = document.getElementById("lightModeToggle");
-
-    body.classList.toggle("dark-mode");
-    lightModeToggle.classList.toggle("active");
-
-    // Save the user's preference in localStorage
-    if (body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkMode", "enabled");
-    } else {
-        localStorage.setItem("darkMode", "disabled");
-    }
-
-}
 
 
 //* display products */
