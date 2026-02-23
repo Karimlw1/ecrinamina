@@ -127,8 +127,9 @@ fetch("./api/products")
 
 function toggleDarkMode() {
     const body = document.body;
-    const i = document.i;
+    const i = document.querySelector(".fa");
     const html = document.documentElement;
+    const p = document.querySelector(".category p");
     body.classList.toggle("dark-mode");
     i.classList.toggle("dark-mode");
     const darkModeToggle = document.getElementById("darkModeToggle");
