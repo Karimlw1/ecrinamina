@@ -104,10 +104,10 @@ const lightModeToggle = document.getElementById("lightModeToggle");
 const body = document.body;
 const storedMode = localStorage.getItem("mode");
 const navbar = document.querySelector(".navbar");
-const category = document.querySelector(".category");
+const category = document.querySelectorAll(".category");
 const p = document.p || document.querySelectorAll("p");
 
-const products = document.querySelector(".products");
+const products = document.querySelectorAll(".products");
 const footer = document.footer || document.querySelector("footer");
 if (storedMode === "dark") {
     body.classList.add("dark-mode");
