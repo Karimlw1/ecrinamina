@@ -285,8 +285,14 @@
     background: url("https://i.pinimg.com/736x/79/eb/b0/79ebb0af2cf120165577eed01b291b82.jpg");
     background-size: cover;
     background-repeat: round;
-    width: 100%;
-    color: grey;
+    background-repeat: round;
+    border-radius: 20px;
+    height: 36px;
+    width: 74px;
+    margin-top: 28px;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
 }
 
 .category p {
