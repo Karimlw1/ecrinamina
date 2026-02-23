@@ -101,11 +101,11 @@ input.addEventListener("blur", () => {
 //* dark mode toggle  *//
 
 const darkModeToggle = document.getElementById("darkModeToggle");
-const lighModeToggle = document.getElementById("lightModeToggle");
+
 
 darkModeToggle.addEventListener("change", () => {
     darkModeToggle.style.display = "none";
-    lighModeToggle.classList.add("active");
+    lightModeToggle.classList.add("active");
     document.body.classList.toggle("dark-mode", darkModeToggle.checked);
 });
 
@@ -117,7 +117,10 @@ lightModeToggle.addEventListener("click", () => {
 
 function toggleDarkMode() {
     const body = document.body;
+    const lighModeToggle = document.getElementById("lightModeToggle");
+
     body.classList.toggle("dark-mode");
+    lightModeToggle.classList.toggle("active");
 
     // Save the user's preference in localStorage
     if (body.classList.contains("dark-mode")) {
