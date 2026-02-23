@@ -289,7 +289,7 @@
     margin-top: 29px;
     display: flex;
     flex-direction: row;
-    gap: 0px;
+    gap: inherit;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 

@@ -30,8 +30,15 @@
      color: #e0e0e0;
 }
 .fa-sun .active{
+    content: "\f185";
+    color: gold;
+    background-color: #797979;
+    width: 135%;
     display: block;
-    color: #b8820d;
+    height: 29px;
+    border-radius: 16px;
+    text-align: center;
+    align-content: center;
 
 }
 .info {
