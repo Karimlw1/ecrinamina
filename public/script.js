@@ -104,7 +104,9 @@ const lightModeToggle = document.getElementById("lightModeToggle");
 const body = document.body;
 const storedMode = localStorage.getItem("mode");
 const navbar = document.querySelector(".navbar");
-const categories = document.querySelector(".categories");
+const category = document.querySelector(".category");
+const p = document.querySelector(".p");
+
 const products = document.querySelector(".products");
 const footer = document.footer || document.querySelector("footer");
 if (storedMode === "dark") {
@@ -114,10 +116,17 @@ if (storedMode === "dark") {
 
 
 darkModeToggle.addEventListener("click", () => {
+    body.classList.remove("light-mode");
     body.classList.add("dark-mode");
+    navbar.classList.remove("light-mode");
     navbar.classList.add("dark-mode");
-    categories.classList.add("dark-mode");
+    category.classList.remove("light-mode");
+    category.classList.add("dark-mode");
+    p.classList.remove("light-mode");
+    p.classList.add("dark-mode");
+    products.classList.remove("light-mode");
     products.classList.add("dark-mode");
+    footer.classList.remove("light-mode");
     footer.classList.add("dark-mode");
     lightModeToggle.classList.remove("active1");
     darkModeToggle.classList.add("active1");
@@ -126,10 +135,17 @@ darkModeToggle.addEventListener("click", () => {
 
 lightModeToggle.addEventListener("click", () => {
     body.classList.remove("dark-mode");
+    body.classList.add("light-mode");
     navbar.classList.remove("dark-mode");
-    categories.classList.remove("dark-mode");
+    navbar.classList.add("light-mode");
+    category.classList.remove("dark-mode");
+    category.classList.add("light-mode");
+    p.classList.remove("dark-mode");
+    p.classList.add("light-mode");
     products.classList.remove("dark-mode");
+    products.classList.add("light-mode");
     footer.classList.remove("dark-mode");
+    footer.classList.add("light-mode");
     localStorage.setItem("mode", "light");
     darkModeToggle.classList.remove("active1");
     lightModeToggle.classList.add("active1");

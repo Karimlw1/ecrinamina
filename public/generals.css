@@ -24,21 +24,19 @@
      font-size: 1.3rem;
      font-family: 'Cormorant Garamond', serif;
  }
-
+.light-mode {
+     background-color: rgb(255, 255, 255);
+     color: rgb(0, 0, 0);
+     box-shadow: 0 0 10px rgb(177 169 169 / 76%);
+}
 .dark-mode {
      background-color: #121212;
+     box-shadow: 0 0 10px rgb(239 239 239 / 60%);
      color: #e0e0e0;
 }
 #lightModeToggle {
-    content: "\f185";
     color: gold;
     background-color: #797979;
-    width: 135%;
-    display: block;
-    height: 29px;
-    border-radius: 16px;
-    text-align: center;
-    align-content: center;
 }
 .active1{
     content: "\f185";
@@ -67,6 +65,9 @@
 
 .dark-mode .fa-solid, .dark-mode .fas {
     color: #e0e0e0;
+}
+.light-mode .fa-solid, .light-mode .fas {
+    color: #333;
 }
 
 .info {

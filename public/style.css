@@ -3,6 +3,11 @@
     color: var(--text);
     box-shadow: 0 0 10px rgb(177 169 169 / 76%);
 }
+.light-mode {
+    background-color: var(--bg);
+    color: var(--text);
+    box-shadow: 0 0 10px rgb(177 169 169 / 76%);
+}
 /* CAROUSEL */
 .divCarousel {
     display: flex;
