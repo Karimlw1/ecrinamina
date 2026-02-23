@@ -77,12 +77,11 @@
       <section class="categories">
         <div class="category-container">
           <div class="grid">
-            
             <div class="category" onclick="location.href = 'FashionH.html'">
               <p>Homme</p>
             </div>
-            
-             <div class="category" onclick="location.href = 'FashionF.html'">
+
+            <div class="category" onclick="location.href = 'FashionF.html'">
               <p>Femme</p>
             </div>
 
@@ -91,14 +90,14 @@
               onclick="location.href = 'beaute.html'"
               style="background-repeat: round"
             >
-              <p>beauté & <br />
-                Skin care</p>
-            </div>
-            
-            <div class="category" onclick="location.href = 'gift.html'">
               <p>
-                cadeau
+                beauté & <br />
+                Skin care
               </p>
+            </div>
+
+            <div class="category" onclick="location.href = 'gift.html'">
+              <p>cadeau</p>
             </div>
 
             <div
@@ -111,124 +110,126 @@
 
             <div
               class="category"
-              onclick="location.href = 'Fleur.html'"
+              onclick="toggleDarkMode()"
               style="background-repeat: round"
             >
-              <p>Fleur</p>
+              <p>Dark Mode</p>
             </div>
-            
-            
           </div>
         </div>
       </section>
       <div class="divCarousel">
-        
-       <div class="search-wrapper">
-  <div class="search-container">
-    
-    <svg class="search-icon" viewBox="0 0 24 24">
-      <path d="M21 21l-4.35-4.35m1.35-5.15a7 7 0 11-14 0 7 7 0 0114 0z"
-        stroke="currentColor" stroke-width="2" fill="none"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+        <div class="search-wrapper">
+          <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24">
+              <path
+                d="M21 21l-4.35-4.35m1.35-5.15a7 7 0 11-14 0 7 7 0 0114 0z"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
 
-    <div class="marquee-input">
-      <input
-        type="text"
-        id="SearchInput"
-        autocomplete="off"
-        aria-label="Search products"
-      />
-      <span class="fake-placeholder">
-        Rechercher produit, couleur, taille, prix...
-      </span>
-    </div>
+            <div class="marquee-input">
+              <input
+                type="text"
+                id="SearchInput"
+                autocomplete="off"
+                aria-label="Search products"
+              />
+              <span class="fake-placeholder">
+                Rechercher produit, couleur, taille, prix...
+              </span>
+            </div>
 
-    <button id="clearSearch" aria-label="Clear search">
-      ✕
-    </button>
-
-  </div>
-
-  <div id="resultsCount"></div>
-</div>
-
-
-    <section class="carousel">
-      <div class="slides">
-        <div class="slide">
-          <img
-            src="https://i.pinimg.com/736x/2f/3d/0b/2f3d0bc8d1ef0458842eda799f021baf.jpg"
-            alt=""
-          />
-          <div class="caption">
-            <h2>Shopping</h2>
-            <p>Beneficier de 10% de reduction sur notre site</p>
+            <button id="clearSearch" aria-label="Clear search">✕</button>
           </div>
+
+          <div id="resultsCount"></div>
         </div>
 
-        <div class="slide">
-          <img
-            src="https://i.pinimg.com/736x/d2/02/40/d202405b27f0f500b19b5d3fd84cd70a.jpg"
-            alt=""
-          />
-          <div class="caption">
-            <h2>Arrivage</h2>
-            <p>Trendy fashion for everyone</p>
-          </div>
-        </div>
+        <section class="carousel">
+          <div class="slides">
+            <div class="slide">
+              <img
+                src="https://i.pinimg.com/736x/2f/3d/0b/2f3d0bc8d1ef0458842eda799f021baf.jpg"
+                alt=""
+              />
+              <div class="caption">
+                <h2>Shopping</h2>
+                <p>Beneficier de 10% de reduction sur notre site</p>
+              </div>
+            </div>
 
-        <div class="slide">
-          <img
-            src="https://i.pinimg.com/736x/8f/39/1c/8f391c4a604b7164a4040aeed5495b33.jpg"
-            alt=""
-          />
-          <div class="caption">
-            <h2>Beauté & Skincare</h2>
-            <p>La peau parle. Offrez-lui ce qui la fait briller.</p>
-          </div>
-        </div>
+            <div class="slide">
+              <img
+                src="https://i.pinimg.com/736x/d2/02/40/d202405b27f0f500b19b5d3fd84cd70a.jpg"
+                alt=""
+              />
+              <div class="caption">
+                <h2>Arrivage</h2>
+                <p>Trendy fashion for everyone</p>
+              </div>
+            </div>
 
-        <div class="slide">
-          <img
-            src="https://i.pinimg.com/736x/a9/c8/5f/a9c85fea6da4512692ae9916c215c640.jpg"
-            alt=""
-          />
-          <div class="caption">
-            <h2>Beauté & Skincare</h2>
-            <p>La peau parle. Offrez-lui ce qui la fait briller.</p>
+            <div class="slide">
+              <img
+                src="https://i.pinimg.com/736x/8f/39/1c/8f391c4a604b7164a4040aeed5495b33.jpg"
+                alt=""
+              />
+              <div class="caption">
+                <h2>Beauté & Skincare</h2>
+                <p>La peau parle. Offrez-lui ce qui la fait briller.</p>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img
+                src="https://i.pinimg.com/736x/a9/c8/5f/a9c85fea6da4512692ae9916c215c640.jpg"
+                alt=""
+              />
+              <div class="caption">
+                <h2>Beauté & Skincare</h2>
+                <p>La peau parle. Offrez-lui ce qui la fait briller.</p>
+              </div>
+            </div>
           </div>
-        </div>
+
+          <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </section>
       </div>
 
-      <div class="dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </section>
-    </div>
-
-      <h2 style="
-      font-size: x-large;
-      margin: 10px 0 0 20px;
-      font-family: monospace;">
-      Nos deals
+      <h2
+        style="
+          font-size: x-large;
+          margin: 10px 0 0 20px;
+          font-family: monospace;
+        "
+      >
+        Nos deals
       </h2>
 
-      <section class="products" id="productsContainer">
-        
-      </section>
+      <section class="products" id="productsContainer"></section>
 
       <footer>
-        <i class="fa fa-home" style="cursor: pointer;">
+        <i class="fa fa-home" style="cursor: pointer">
           <p>Home</p>
         </i>
-        <i class="fa fa-shopping-bag"  onclick="location.href = 'cart.html'" style="cursor: pointer;">
+        <i
+          class="fa fa-shopping-bag"
+          onclick="location.href = 'cart.html'"
+          style="cursor: pointer"
+        >
           <p>cart</p>
         </i>
-        <i class="fa fa-comments" onclick="showMenu()" style="cursor: pointer;">
+        <i class="fa fa-comments" onclick="showMenu()" style="cursor: pointer">
           <p>Chat</p>
         </i>
       </footer>
