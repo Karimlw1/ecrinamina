@@ -98,6 +98,26 @@ input.addEventListener("blur", () => {
     }
 });
 
+//* dark mode toggle  *//
+
+function toggleDarkMode() {
+    const body = document.body;
+    const i = document.querySelector(".fa");
+    const html = document.documentElement;
+    const p = document.querySelector(".category p");
+    body.classList.toggle("dark-mode");
+    i.classList.toggle("dark-mode");
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const lightModeToggle = document.getElementById("lightModeToggle");
+    if (darkModeToggle.checked) {
+        darkModeToggle.checked = false;
+        lightModeToggle.checked = true;
+    } else {
+        darkModeToggle.checked = true;
+        lightModeToggle.checked = false;
+    }
+}
+
 
 
 //* display products */
@@ -123,22 +143,3 @@ fetch("./api/products")
         });
     });
 
-//* dark mode toggle  *//
-
-function toggleDarkMode() {
-    const body = document.body;
-    const i = document.querySelector(".fa");
-    const html = document.documentElement;
-    const p = document.querySelector(".category p");
-    body.classList.toggle("dark-mode");
-    i.classList.toggle("dark-mode");
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    const lightModeToggle = document.getElementById("lightModeToggle");
-    if (darkModeToggle.checked) {
-        darkModeToggle.checked = false;
-        lightModeToggle.checked = true;
-    } else {
-        darkModeToggle.checked = true;
-        lightModeToggle.checked = false;
-    }
-}
