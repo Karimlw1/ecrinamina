@@ -41,6 +41,17 @@
     align-content: center;
 
 }
+.fa-moon:before {
+    content: "\f186";
+    display: flex;
+    justify-content: end;
+    margin-right: 3px;
+}
+.fa-solid, .fas {
+    display: block;
+    font-weight: 900;
+    width: 26px;
+}
 .info {
      padding: 10px;
      flex: 1;
