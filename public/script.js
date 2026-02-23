@@ -105,7 +105,7 @@ const body = document.body;
 const storedMode = localStorage.getItem("mode");
 const navbar = document.querySelector(".navbar");
 const category = document.querySelector(".category");
-const p = document.querySelector(".p");
+const p = document.p || document.querySelector("p");
 
 const products = document.querySelector(".products");
 const footer = document.footer || document.querySelector("footer");
@@ -122,6 +122,7 @@ darkModeToggle.addEventListener("click", () => {
     navbar.classList.add("dark-mode");
     category.classList.remove("light-mode");
     category.classList.add("dark-mode");
+    p.classList.remove("light-mode");
     p.classList.add("dark-mode");
     products.classList.remove("light-mode");
     products.classList.add("dark-mode");
