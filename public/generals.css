@@ -59,8 +59,8 @@
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
 }
 
-.dark-mode .fa-solid, .dark-mode .fas {
-    color: #e0e0e0;
+.dark-mode{
+    color: #fff;
 }
 .light-mode .fa-solid, .light-mode .fas {
     color: #333;

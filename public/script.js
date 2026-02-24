@@ -134,7 +134,7 @@ darkModeToggle.addEventListener("click", () => {
     });
     footer.classList.remove("light-mode");
     footer.classList.add("dark-mode");
-    lightModeToggle.classList.remove("active1");
+    
     darkModeToggle.classList.add("active1");
     localStorage.setItem("mode", "dark");   
 });
@@ -158,9 +158,11 @@ lightModeToggle.addEventListener("click", () => {
     });
     footer.classList.remove("dark-mode");
     footer.classList.add("light-mode");
-    localStorage.setItem("mode", "light");
+
     darkModeToggle.classList.remove("active1");
     lightModeToggle.classList.add("active1");
+    localStorage.setItem("mode", "light");
+    
 });
 
 
