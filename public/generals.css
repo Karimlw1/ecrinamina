@@ -43,6 +43,8 @@
     border-radius: 16px;
     text-align: center;
     align-content: center;
+     font-size: 12px;
+     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
 
 }
 .fa-moon:before {
@@ -50,6 +52,9 @@
     display: flex;
     justify-content: end;
     margin-right: 3px;
+}
+.fa-moon , .fa-sun{
+     font-size: small ;
 }
 .fa-solid, .fas {
     display: block;
