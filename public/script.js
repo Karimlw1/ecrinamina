@@ -134,7 +134,7 @@ darkModeToggle.addEventListener("click", () => {
     });
     footer.classList.remove("light-mode");
     footer.classList.add("dark-mode");
-    
+    lightModeToggle.classList.remove("active1");
     darkModeToggle.classList.add("active1");
     localStorage.setItem("mode", "dark");   
 });
