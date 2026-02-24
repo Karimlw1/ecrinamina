@@ -27,17 +27,13 @@
 .light-mode {
      background-color: rgb(255, 255, 255);
      color: rgb(0, 0, 0);
-     box-shadow: 0 0 10px rgb(177 169 169 / 76%);
+     
 }
 .dark-mode {
      background-color: #121212;
-     box-shadow: 0 0 10px rgb(239 239 239 / 60%);
      color: #e0e0e0;
 }
-#lightModeToggle {
-    color: gold;
-    background-color: #797979;
-}
+
 .active1{
     content: "\f185";
     color: gold;
