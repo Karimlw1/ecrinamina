@@ -65,7 +65,8 @@
 #pTrie {
     margin-left: 30px;
     font-size: 18px;
-    color: #555151;
+    color: #243d91;
+    font-weight: bolder;
 }
 
 p #trieMessage {
@@ -206,7 +207,6 @@ p i.fas {
     :root {
         --fa-style-family-brands: "Font Awesome 6 Brands";
         --fa-font-brands: normal 400 1em / 1 "Font Awesome 6 Brands";
-        background-color: rgb(0, 0, 0);
         width: 100%;
 
     }

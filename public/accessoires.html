@@ -81,53 +81,58 @@
 
     <p id="pTrie">Trier : <strong id="trieMessage">Tout les article</strong></p>
 
-    <section class="products" id="productsContainer">
-
-    </section>
+    <section class="products" id="productsContainer"></section>
 
     <footer>
-      <p>
-        © <span id="year"></span> My Dressing by Amida.<br />All rights
-        reserved.
-      </p>
+      <i class="fa fa-home" style="cursor: pointer">
+        <p>Home</p>
+      </i>
+      <i
+        class="fa fa-shopping-bag"
+        onclick="location.href = 'cart.html'"
+        style="cursor: pointer"
+      >
+        <p>cart</p>
+      </i>
+      <i class="fa fa-comments" onclick="showMenu()" style="cursor: pointer">
+        <p>Chat</p>
+      </i>
     </footer>
     <script>
-      
-function getCategoryClasses(product) {
-  const classes = [];
+      function getCategoryClasses(product) {
+        const classes = [];
 
-  // Add main category
-  if (product.category) {
-    classes.push(product.category.toLowerCase());
-  }
+        // Add main category
+        if (product.category) {
+          classes.push(product.category.toLowerCase());
+        }
 
-  if (product.type) {
-    classes.push(product.type.toLowerCase())
-  }
+        if (product.type) {
+          classes.push(product.type.toLowerCase());
+        }
 
-  if (product.options?.size) {
-    product.options.size.forEach(size => {
-      classes.push(size.toLowerCase());
-    });
-  }
+        if (product.options?.size) {
+          product.options.size.forEach((size) => {
+            classes.push(size.toLowerCase());
+          });
+        }
 
-  if (product.options?.color) {
-    product.options.color.forEach(color => {
-      classes.push(color.toLowerCase());
-    });
-  }
+        if (product.options?.color) {
+          product.options.color.forEach((color) => {
+            classes.push(color.toLowerCase());
+          });
+        }
 
-  return classes.join(" "); // <- this is OK here
-}
-
+        return classes.join(" "); // <- this is OK here
+      }
 
       fetch("/api/products")
-        .then(res => res.json())
-        .then(products => {
+        .then((res) => res.json())
+        .then((products) => {
           const container = document.getElementById("productsContainer");
           Object.values(products)
-            .filter(p => p.category === "Accessoire") // filtrage par page
-            .forEach(p => {
+            .filter((p) => p.category === "Accessoire") // filtrage par page
+            .forEach((p) => {
               const div = document.createElement("div");
               div.className = `product details ${getCategoryClasses(p)}`;
               div.dataset.id = p.id;
@@ -140,25 +145,24 @@ function getCategoryClasses(product) {
               `;
               container.appendChild(div);
             });
-            const categories = {
-                  haut: document.querySelectorAll(".haut"),
-                  bas: document.querySelectorAll(".bas"),
-                  chaussure: document.querySelectorAll(".chaussure"),
-                  accessoires: document.querySelectorAll(".accessoire"),
-                  abaya: document.querySelectorAll(".abaya"),
-                  complet: document.querySelectorAll(".complet"),
-                  habitmuslim: document.querySelectorAll(".habitmuslim"),
-                  maquillage: document.querySelectorAll(".maquillage"),
-                  skincare: document.querySelectorAll(".skincare"),
-                  fragrance: document.querySelectorAll(".fragrance"),
-                  haircare: document.querySelectorAll(".haircare"),
-                  lunette: document.querySelectorAll(".lunettes"),
-                  montre: document.querySelectorAll(".montre"),
-                  sac: document.querySelectorAll(".sac"),
-                  bracha: document.querySelectorAll(".bracha"),
-                  phone: document.querySelectorAll(".phone"),
-
-                };
+          const categories = {
+            haut: document.querySelectorAll(".haut"),
+            bas: document.querySelectorAll(".bas"),
+            chaussure: document.querySelectorAll(".chaussure"),
+            accessoires: document.querySelectorAll(".accessoire"),
+            abaya: document.querySelectorAll(".abaya"),
+            complet: document.querySelectorAll(".complet"),
+            habitmuslim: document.querySelectorAll(".habitmuslim"),
+            maquillage: document.querySelectorAll(".maquillage"),
+            skincare: document.querySelectorAll(".skincare"),
+            fragrance: document.querySelectorAll(".fragrance"),
+            haircare: document.querySelectorAll(".haircare"),
+            lunette: document.querySelectorAll(".lunettes"),
+            montre: document.querySelectorAll(".montre"),
+            sac: document.querySelectorAll(".sac"),
+            bracha: document.querySelectorAll(".bracha"),
+            phone: document.querySelectorAll(".phone"),
+          };
         });
     </script>
     <script src="filter.js"></script>

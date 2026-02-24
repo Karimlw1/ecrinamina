@@ -82,10 +82,19 @@
     <section class="products" id="productsContainer"></section>
 
     <footer>
-      <p>
-        © <span id="year"></span> My Dressing by Amida.<br />All rights
-        reserved.
-      </p>
+      <i class="fa fa-home" style="cursor: pointer">
+        <p>Home</p>
+      </i>
+      <i
+        class="fa fa-shopping-bag"
+        onclick="location.href = 'cart.html'"
+        style="cursor: pointer"
+      >
+        <p>cart</p>
+      </i>
+      <i class="fa fa-comments" onclick="showMenu()" style="cursor: pointer">
+        <p>Chat</p>
+      </i>
     </footer>
     <script>
       function getCategoryClasses(product) {
