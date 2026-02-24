@@ -37,7 +37,7 @@
    content: "\f185";
     color: #cda66a;
     background-color: #1e1e1e;
-    width: 49%;
+    width: 30px;
     display: block;
     height: 29px;
     border-radius: 59%;
@@ -45,7 +45,8 @@
     align-content: center;
     font-size: 19px;
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
-    margin-right: -10px;
+    position: relative;
+    left: 12px;
 
 }
 .fa.fa-sun.active1{
@@ -60,7 +61,7 @@
     align-content: center;
     font-size: 19px;
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
-    margin-right: 7px;
+    margin-right: 12px;
 
 }
 .fa-moon:before {
