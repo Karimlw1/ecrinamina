@@ -16,9 +16,11 @@
     box-shadow: 1px 9px 8px 0px rgba(0, 0, 0, 0.06);
 }
 
-.navbar h3 {
-    text-align: center;
+.navbar h3 { 
     font-family: 'Cormorant Garamond', serif;
+    position: relative;
+    top: 41px;
+    color: #f1e49e85;
 }
 
 .menu {
