@@ -9,7 +9,6 @@ const category = document.querySelectorAll(".category");
 const p = document.querySelectorAll("p");
 
 const products = document.querySelectorAll(".products");
-const footer =  document.querySelector("footer");
 if (storedMode === "dark") {
     body.classList.add("dark-mode");
     darkModeToggle.classList.add("active1");
@@ -33,8 +32,6 @@ darkModeToggle.addEventListener("click", () => {
         el.classList.remove("light-mode");
         el.classList.add("dark-mode");
     });
-    footer.classList.remove("light-mode");
-    footer.classList.add("dark-mode");
     lightModeToggle.classList.remove("active1");
     darkModeToggle.classList.add("active1");
     localStorage.setItem("mode", "dark");   
@@ -57,9 +54,6 @@ lightModeToggle.addEventListener("click", () => {
         el.classList.remove("dark-mode");
         el.classList.add("light-mode");
     });
-    footer.classList.remove("dark-mode");
-    footer.classList.add("light-mode");
-
     darkModeToggle.classList.remove("active1");
     lightModeToggle.classList.add("active1");
     localStorage.setItem("mode", "light");

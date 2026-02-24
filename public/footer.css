@@ -1,5 +1,5 @@
 footer {
-    display: flex;
+   display: flex;
     height: 80px;
     width: 700px;
     position: fixed;
@@ -7,13 +7,14 @@ footer {
     right: 0;
     bottom: 0;
     box-shadow: 1px 5px 15px rgba(0, 0, 3, 0.8);
-    background-color: var(--primary);
     align-content: center;
     justify-content: space-evenly;
     align-items: center;
     gap: 20px;
     text-align: center;
     justify-self: center;
+    backdrop-filter: blur(27px);
+    filter: hue-rotate(45deg)
 }
 
 @media (max-width : 700px) {
