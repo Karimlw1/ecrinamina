@@ -105,10 +105,10 @@ const body = document.body;
 const storedMode = localStorage.getItem("mode");
 const navbar = document.querySelector(".navbar");
 const category = document.querySelectorAll(".category");
-const p = document.p || document.querySelectorAll("p");
+const p = document.querySelectorAll("p");
 
 const products = document.querySelectorAll(".products");
-const footer = document.footer || document.querySelector("footer");
+const footer =  document.querySelector("footer");
 if (storedMode === "dark") {
     body.classList.add("dark-mode");
     darkModeToggle.classList.add("active1");
@@ -120,12 +120,18 @@ darkModeToggle.addEventListener("click", () => {
     body.classList.add("dark-mode");
     navbar.classList.remove("light-mode");
     navbar.classList.add("dark-mode");
-    category.classList.remove("light-mode");
-    category.classList.add("dark-mode");
-    p.classList.remove("light-mode");
-    p.classList.add("dark-mode");
-    products.classList.remove("light-mode");
-    products.classList.add("dark-mode");
+    category.forEach(el => {
+    el.classList.remove("light-mode");
+    el.classList.add("dark-mode");
+    });
+    p.forEach(el => {
+        el.classList.remove("light-mode");
+        el.classList.add("dark-mode");
+    });
+    products.forEach(el => {
+        el.classList.remove("light-mode");
+        el.classList.add("dark-mode");
+    });
     footer.classList.remove("light-mode");
     footer.classList.add("dark-mode");
     lightModeToggle.classList.remove("active1");
@@ -138,12 +144,18 @@ lightModeToggle.addEventListener("click", () => {
     body.classList.add("light-mode");
     navbar.classList.remove("dark-mode");
     navbar.classList.add("light-mode");
-    category.classList.remove("dark-mode");
-    category.classList.add("light-mode");
-    p.classList.remove("dark-mode");
-    p.classList.add("light-mode");
-    products.classList.remove("dark-mode");
-    products.classList.add("light-mode");
+    category.forEach(el => {
+        el.classList.remove("dark-mode");
+        el.classList.add("light-mode");
+    });
+    p.forEach(el => {
+        el.classList.remove("dark-mode");
+        el.classList.add("light-mode");
+    });
+    products.forEach(el => {
+        el.classList.remove("dark-mode");
+        el.classList.add("light-mode");
+    });
     footer.classList.remove("dark-mode");
     footer.classList.add("light-mode");
     localStorage.setItem("mode", "light");
