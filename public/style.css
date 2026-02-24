@@ -70,11 +70,13 @@
     color: rgb(21, 89, 116);
     display: ruby-text;
     font-variant-caps: small-caps;
-    background-color: transparent;
+    
 }
 
 .caption p {
     font-size: 20px;
+    background-color: transparent;
+    color: white;
 }
 
 
