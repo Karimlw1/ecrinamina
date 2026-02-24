@@ -49,9 +49,7 @@
 }
 .fa-moon:before {
     content: "\f186";
-    display: flex;
-    justify-content: end;
-    margin-right: 3px;
+   
 }
 .fa-moon , .fa-sun{
      font-size: small ;
