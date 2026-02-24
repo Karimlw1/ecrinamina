@@ -16,6 +16,9 @@ footer {
     backdrop-filter: blur(27px);
     filter: hue-rotate(45deg)
 }
+footer p{
+    background-color: transparent;
+}
 
 @media (max-width : 700px) {
     footer {
