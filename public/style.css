@@ -1,11 +1,13 @@
 .dark-mode {
-    background-color: var(--bg);
+    background-color: black;
     color: white;
 }
 .light-mode {
-    background-color: var(--bg);
+    background-color: white;
     color: black;
 }
+
+
 /* CAROUSEL */
 .divCarousel {
     display: flex;
