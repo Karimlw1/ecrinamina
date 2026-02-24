@@ -13,6 +13,7 @@
     z-index: 10;
     pointer-events: auto;
     border-radius: 50%;
+    box-shadow: 1px 9px 8px 0px rgba(0, 0, 0, 0.06);
 }
 
 .navbar h3 {
