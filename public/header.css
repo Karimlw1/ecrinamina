@@ -1,6 +1,6 @@
 .navbar {
    height: 60px;
-    background: url("https://i.pinimg.com/736x/e9/a7/aa/e9a7aac218228e1c3053c5cd65f0a09e.jpg");
+    background: url("public/images/ecrinLogo.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top;
@@ -12,6 +12,7 @@
     position: relative;
     z-index: 10;
     pointer-events: auto;
+    border-radius: 50%;
 }
 
 .navbar h3 {
