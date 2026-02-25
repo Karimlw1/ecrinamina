@@ -121,6 +121,7 @@ button {
     color: rgb(0 0 0);
     box-shadow: inset 0px 2px 20px rgb(63 63 63 / 89%);
     font-family: cursive;
+    height: 45px;
  }
 
 .products {
