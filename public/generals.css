@@ -99,17 +99,18 @@
 
 
 .price {
-     color: rgb(0 0 0);
-     font-weight: bold;
-     margin: 6px 18px;
-     border-radius: 20px;
-     padding: 3px;
-     backdrop-filter: blur(45px);
+     color: rgb(53 44 44);
+    font-weight: bold;
+    margin: 6px 18px;
+    border-radius: 20px;
+    padding: 3px;
+    backdrop-filter: blur(45px);
+    font-family: fantasy;
 
  }
 
 button {
-    border: 1px solid rgb(255 255 255);
+     border: 1px solid rgb(255 255 255);
     padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
@@ -119,6 +120,7 @@ button {
     backdrop-filter: blur(21px);
     color: rgb(0 0 0);
     box-shadow: inset 0px 2px 20px rgb(63 63 63 / 89%);
+    font-family: system-ui;
  }
 
 .products {
