@@ -202,11 +202,12 @@ a i {
     width: 76px;
     display: flex;
     flex-direction: row;
-    gap: 0px;
+    gap: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     padding: 1px 10px;
     transition: all 0.3s ease;
     padding: 1px 10px;
     transition: all 0.3s ease;
-    align-items: center;update
+    align-items: center;
+    justify-content: center;
 }

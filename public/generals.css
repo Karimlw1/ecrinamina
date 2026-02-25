@@ -46,7 +46,7 @@
     font-size: 19px;
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
     position: relative;
-    left: 12px;
+    left: 6px;
 
 }
 .fa.fa-sun.active1{
@@ -61,7 +61,7 @@
     align-content: center;
     font-size: 19px;
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.4s;
-    margin-right: 12px;
+    margin-right: -1px;
 
 }
 .fa-moon:before {
