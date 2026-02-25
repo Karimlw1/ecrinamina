@@ -2,8 +2,16 @@
     background-color: black;
     color: white;
 }
+p.dark-mode {
+    background-color: transparent;
+    color: white;
+}
 .light-mode {
     background-color: white;
+    color: black;
+}
+p.light-mode {
+    background-color: transparent;
     color: black;
 }
 

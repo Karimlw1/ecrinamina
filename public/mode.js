@@ -24,10 +24,10 @@ darkModeToggle.addEventListener("click", () => {
     el.classList.remove("light-mode");
     el.classList.add("dark-mode");
     });
-    p.forEach(el => {
-        el.classList.remove("light-mode");
-        el.classList.add("dark-mode");
-    });
+        p.forEach(el => {
+            el.classList.remove("light-mode");
+            el.classList.add("dark-mode");
+        });
     products.forEach(el => {
         el.classList.remove("light-mode");
         el.classList.add("dark-mode");
