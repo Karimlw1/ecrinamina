@@ -3,25 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="images/MDamida-logo.png" />
-    <link rel="shortcut icon" href="images/MDamida-logo.png" type="image/png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <title>Produit</title>
 
-    <title>Details du produit</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       /* RESET */
@@ -32,253 +19,196 @@
       }
 
       body {
-        font-family: "Cormorant Garamond", serif;
-        background: #f4f1eb;
-        color: #1a1a1a;
-        line-height: 1.6;
+        font-family: "Inter", sans-serif;
+        background: #111;
+        color: #fff;
+        overflow-x: hidden;
       }
 
-      /* NAVBAR */
+      /* NAV */
       .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 25px 50px;
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        padding: 18px 40px;
-        background: #faf8f4;
-        border-bottom: 1px solid #e8e2d9;
+        align-items: center;
+        z-index: 1000;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
       }
 
       .navbar h3 {
-        font-weight: 600;
-        letter-spacing: 4px;
-        font-size: 18px;
-      }
-
-      .menu {
-        font-size: 20px;
-        cursor: pointer;
-        color: #333;
+        font-family: "Playfair Display", serif;
+        letter-spacing: 6px;
+        font-weight: 500;
       }
 
       .cart {
-        font-size: 20px;
-        position: relative;
         cursor: pointer;
+        position: relative;
       }
 
       .badge {
-        background: #bfa46f;
-        color: #fff;
-        font-size: 11px;
-        padding: 3px 7px;
-        border-radius: 50%;
         position: absolute;
-        top: -8px;
+        top: -10px;
         right: -12px;
+        background: #d4af37;
+        color: #000;
+        font-size: 10px;
+        padding: 4px 7px;
+        border-radius: 50%;
       }
 
-      /* PRODUCT CONTAINER */
-      .product-page {
-        max-width: 1100px;
-        margin: 70px auto;
-        padding: 60px;
-        background: #ffffff;
-        border-radius: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
-      }
-
-      /* IMAGE */
-      .carousel {
+      /* HERO SECTION */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
       }
 
       #mainImage {
-        width: 100%;
-        height: 520px;
-        object-fit: cover;
-        border-radius: 16px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-      }
-
-      .thumbs {
-        display: flex;
-        gap: 12px;
-        margin-top: 18px;
-      }
-
-      .thumbs img {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-        border-radius: 10px;
-        cursor: pointer;
-        opacity: 0.5;
-        border: 1px solid transparent;
-        transition: all 0.4s ease;
-      }
-
-      .thumbs img.active {
-        opacity: 1;
-        border-color: #bfa46f;
-      }
-
-      /* CAROUSEL NAV */
-      .nav {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.7);
-        border: none;
-        padding: 12px 14px;
-        cursor: pointer;
-        border-radius: 50%;
-        backdrop-filter: blur(6px);
-        transition: all 0.3s ease;
-      }
-
-      .nav:hover {
-        background: #bfa46f;
-        color: #fff;
-      }
-
-      .prev {
-        left: 15px;
-      }
-      .next {
-        right: 15px;
-      }
-
-      /* PRODUCT INFO */
-      .product-info h2 {
-        font-size: 34px;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-
-      .product-info p {
-        font-size: 13px;
-        color: #8c857b;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 18px;
-      }
-
-      .product-info h3 {
-        font-size: 28px;
-        margin-bottom: 35px;
-        color: #bfa46f;
-      }
-
-      /* PRODUCT ID */
-      #product-id {
-        font-size: 14px;
-        margin-bottom: 30px;
-        color: #999;
-        letter-spacing: 1px;
-      }
-
-      /* OPTIONS */
-      #options,
-      #lieuDeLIvraison {
-        margin-bottom: 35px;
-      }
-
-      #options label,
-      #lieuDeLIvraison label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 1px;
-      }
-
-      #options select,
-      #lieuDeLIvraison select {
         width: 100%;
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid #e5ded4;
-        background: #faf8f4;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.6);
+      }
+
+      /* PRODUCT FLOAT CARD */
+      .product-card {
+        position: relative;
+        background: #fff;
+        color: #111;
+        width: 450px;
+        padding: 50px;
+        border-radius: 25px;
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+        z-index: 2;
+      }
+
+      .product-card h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 38px;
+        margin-bottom: 10px;
+      }
+
+      .product-card .category {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 25px;
+      }
+
+      .product-card .price {
+        font-size: 28px;
+        margin-bottom: 30px;
+        color: #d4af37;
+      }
+
+      /* SELECTS */
+      select {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        border: 1px solid #ddd;
         font-size: 14px;
-        transition: all 0.3s ease;
       }
 
-      #options select:focus,
-      #lieuDeLIvraison select:focus {
-        outline: none;
-        border-color: #bfa46f;
-        box-shadow: 0 0 0 2px rgba(191, 164, 111, 0.2);
-      }
-
-      /* ADD TO CART BUTTON */
+      /* BUTTON */
       #addToCart {
         width: 100%;
         padding: 16px;
         border: none;
-        border-radius: 14px;
-        background: #1a1a1a;
+        border-radius: 50px;
+        background: #111;
         color: #fff;
-        font-size: 15px;
+        font-size: 14px;
         letter-spacing: 3px;
         cursor: pointer;
-        transition: all 0.4s ease;
+        transition: 0.3s ease;
       }
 
       #addToCart:hover {
-        background: #bfa46f;
-        color: #1a1a1a;
-        transform: translateY(-2px);
+        background: #d4af37;
+        color: #111;
+      }
+
+      /* THUMBNAILS VERTICAL */
+      .thumbs {
+        position: absolute;
+        left: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 3;
+      }
+
+      .thumbs img {
+        width: 70px;
+        height: 90px;
+        object-fit: cover;
+        cursor: pointer;
+        opacity: 0.5;
+        border-radius: 10px;
+        transition: 0.3s;
+      }
+
+      .thumbs img.active {
+        opacity: 1;
+        transform: scale(1.1);
       }
 
       /* RESPONSIVE */
-      @media (max-width: 768px) {
-        .product-page {
-          grid-template-columns: 1fr;
+      @media (max-width: 900px) {
+        .product-card {
+          width: 90%;
           padding: 30px;
         }
 
-        #mainImage {
-          height: 400px;
+        .thumbs {
+          display: none;
+        }
+
+        .navbar {
+          padding: 20px;
         }
       }
     </style>
   </head>
+
   <body>
     <header class="navbar">
-      <div class="menu" onclick="history.back()">←</div>
-      <h3><strong>PRODUIT</strong></h3>
-      <div
-        class="cart"
-        onclick="location.href = 'cart.html'"
-        style="cursor: pointer"
-      >
+      <div onclick="history.back()" style="cursor: pointer">←</div>
+      <h3>PRODUCT</h3>
+      <div class="cart" onclick="location.href = 'cart.html'">
         🛒 <span class="badge" id="cartCount"></span>
       </div>
     </header>
-    <div class="product-page">
-      <div class="carousel">
-        <img id="mainImage" />
-        <div class="thumbs" id="thumbs"></div>
-        <button class="nav prev">❮</button>
-        <button class="nav next">❯</button>
-      </div>
 
-      <div class="product-info">
+    <section class="hero">
+      <img id="mainImage" />
+
+      <div class="thumbs" id="thumbs"></div>
+
+      <div class="product-card">
         <h2 id="name"></h2>
-        <p id="category"></p>
-        <h3 id="price"></h3>
+        <div class="category" id="category"></div>
+        <div class="price" id="price"></div>
 
-        <p id="product-id"></p>
         <div id="options"></div>
         <div id="lieuDeLIvraison"></div>
-        <button id="addToCart">Ajouter au panier</button>
-      </div>
-    </div>
 
-    <footer></footer>
+        <button id="addToCart">ADD TO CART</button>
+      </div>
+    </section>
+
     <script src="mode.js"></script>
     <script src="cart.js"></script>
     <script src="product.js"></script>
