@@ -193,7 +193,7 @@ a i {
     align-items: center;
     justify-content: center;
     gap: 20px;
-    
+
 }
 .mode{
     background-color: #5f5f5f;
@@ -208,4 +208,5 @@ a i {
     transition: all 0.3s ease;
     padding: 1px 10px;
     transition: all 0.3s ease;
+    align-items: center;update
 }
