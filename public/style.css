@@ -303,6 +303,13 @@ p.light-mode {
     width: 100%;
 }
 
+.category:nth-child(6) {
+    background: url("https://i.pinimg.com/736x/3c/bb/51/3cbb51764da10a5ae6bc10f9bdcb80b1.jpg");
+    background-size: contain;
+    background-repeat: round;
+    width: 100%;
+}
+
 
 .category p {
     font-size: 16px;
