@@ -42,6 +42,7 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         position: sticky;
         top: 0;
+        z-index: 1;
       }
 
       /* PRODUCT CONTAINER */
@@ -185,7 +186,7 @@
         opacity: 0.6;
         margin-top: 8px;
       }
-      .select {
+      select {
         display: block;
         width: 100%;
         padding: 8px;
@@ -228,10 +229,11 @@
         <p id="product-id"></p>
         <div id="options"></div>
         <div id="lieuDeLIvraison"></div>
-        <button id="addToCart">Ajouter au panier</button>
       </div>
     </div>
-
+    <div class="addToCartDiv">
+      <button id="addToCart">Ajouter au panier</button>
+    </div>
     <footer></footer>
     <script src="mode.js"></script>
     <script src="cart.js"></script>
