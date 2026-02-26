@@ -24,225 +24,163 @@
     <title>Details du produit</title>
 
     <style>
-      /* RESET */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       body {
+        margin: 0;
         font-family: "Cormorant Garamond", serif;
-        background: #f4f1eb;
-        color: #1a1a1a;
-        line-height: 1.6;
+        background: linear-gradient(135deg, #1c1c1c, #2c2c2c);
+        color: #fff;
       }
 
-      /* NAVBAR */
+      /* NAVBAR GLASS */
       .navbar {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        padding: 18px 40px;
-        background: #faf8f4;
-        border-bottom: 1px solid #e8e2d9;
-      }
-
-      .navbar h3 {
-        font-weight: 600;
-        letter-spacing: 4px;
-        font-size: 18px;
-      }
-
-      .menu {
-        font-size: 20px;
-        cursor: pointer;
-        color: #333;
-      }
-
-      .cart {
-        font-size: 20px;
-        position: relative;
-        cursor: pointer;
-      }
-
-      .badge {
-        background: #bfa46f;
-        color: #fff;
-        font-size: 11px;
-        padding: 3px 7px;
-        border-radius: 50%;
-        position: absolute;
-        top: -8px;
-        right: -12px;
+        align-items: center;
+        padding: 15px 20px;
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        position: sticky;
+        top: 0;
       }
 
       /* PRODUCT CONTAINER */
       .product-page {
-        max-width: 1100px;
-        margin: 70px auto;
-        padding: 60px;
-        background: #ffffff;
-        border-radius: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
-      }
-
-      /* IMAGE */
-      .carousel {
-        position: relative;
-      }
-
-      #mainImage {
-        width: 100%;
-        height: 520px;
-        object-fit: cover;
-        border-radius: 16px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-      }
-
-      .thumbs {
         display: flex;
-        gap: 12px;
-        margin-top: 18px;
+        flex-wrap: wrap;
+        gap: 40px;
+        padding: 40px;
       }
 
-      .thumbs img {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-        border-radius: 10px;
+      /* GLASS CARD */
+      .product-info {
+        flex: 1;
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      /* GLASS BUTTON */
+      #addToCart {
+        margin-top: 20px;
+        padding: 12px 28px;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        color: #fff;
         cursor: pointer;
-        opacity: 0.5;
-        border: 1px solid transparent;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
       }
 
-      .thumbs img.active {
-        opacity: 1;
-        border-color: #bfa46f;
+      #addToCart:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
       }
-
-      /* CAROUSEL NAV */
       .nav {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.7);
-        border: none;
-        padding: 12px 14px;
-        cursor: pointer;
+        padding: 12px 18px;
         border-radius: 50%;
-        backdrop-filter: blur(6px);
-        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        color: white;
+        cursor: pointer;
       }
 
       .nav:hover {
-        background: #bfa46f;
-        color: #fff;
+        background: rgba(255, 255, 255, 0.3);
+      }
+      /* ===== CAROUSEL IMAGE GLASS FRAME ===== */
+      .carousel {
+        position: relative;
+        flex: 1;
+        padding: 20px;
+        border-radius: 30px;
+        backdrop-filter: blur(25px);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
       }
 
-      .prev {
-        left: 15px;
-      }
-      .next {
-        right: 15px;
-      }
-
-      /* PRODUCT INFO */
-      .product-info h2 {
-        font-size: 34px;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-
-      .product-info p {
-        font-size: 13px;
-        color: #8c857b;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 18px;
-      }
-
-      .product-info h3 {
-        font-size: 28px;
-        margin-bottom: 35px;
-        color: #bfa46f;
-      }
-
-      /* PRODUCT ID */
-      #product-id {
-        font-size: 14px;
-        margin-bottom: 30px;
-        color: #999;
-        letter-spacing: 1px;
-      }
-
-      /* OPTIONS */
-      #options,
-      #lieuDeLIvraison {
-        margin-bottom: 35px;
-      }
-
-      #options label,
-      #lieuDeLIvraison label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 1px;
-      }
-
-      #options select,
-      #lieuDeLIvraison select {
+      #mainImage {
         width: 100%;
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid #e5ded4;
-        background: #faf8f4;
-        font-size: 14px;
-        transition: all 0.3s ease;
+        border-radius: 20px;
+        object-fit: cover;
+        transition:
+          transform 0.6s ease,
+          filter 0.6s ease;
+        filter: brightness(0.95) contrast(1.05);
       }
 
-      #options select:focus,
-      #lieuDeLIvraison select:focus {
-        outline: none;
-        border-color: #bfa46f;
-        box-shadow: 0 0 0 2px rgba(191, 164, 111, 0.2);
+      #mainImage:hover {
+        transform: scale(1.04);
+        filter: brightness(1.05);
       }
 
-      /* ADD TO CART BUTTON */
-      #addToCart {
-        width: 100%;
-        padding: 16px;
-        border: none;
-        border-radius: 14px;
-        background: #1a1a1a;
-        color: #fff;
-        font-size: 15px;
-        letter-spacing: 3px;
+      /* ===== THUMBNAILS ===== */
+      .thumbs img {
+        width: 70px;
+        height: 70px;
+        border-radius: 12px;
+        object-fit: cover;
+        margin: 8px;
         cursor: pointer;
-        transition: all 0.4s ease;
+        opacity: 0.7;
+        transition: 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
-      #addToCart:hover {
-        background: #bfa46f;
-        color: #1a1a1a;
-        transform: translateY(-2px);
+      .thumbs img:hover {
+        opacity: 1;
+        transform: scale(1.08);
+        backdrop-filter: blur(8px);
       }
 
-      /* RESPONSIVE */
-      @media (max-width: 768px) {
-        .product-page {
-          grid-template-columns: 1fr;
-          padding: 17px;
-        }
+      /* ===== PRODUCT TITLE ===== */
+      .product-info h2 {
+        font-size: 2.2rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        background: linear-gradient(90deg, #ffffff, #d4d4d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-        #mainImage {
-          height: 400px;
-        }
+      /* ===== CATEGORY TEXT ===== */
+      .product-info p {
+        font-size: 1rem;
+        opacity: 0.8;
+        letter-spacing: 0.5px;
+        margin: 6px 0;
+      }
+
+      /* ===== PRICE STYLE ===== */
+      .product-info h3 {
+        font-size: 1.8rem;
+        margin-top: 15px;
+        font-weight: 600;
+        color: #ffffff;
+        padding: 10px 20px;
+        display: inline-block;
+        border-radius: 50px;
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* ===== PRODUCT ID SMALL STYLE ===== */
+      #product-id {
+        font-size: 0.85rem;
+        opacity: 0.6;
+        margin-top: 8px;
       }
     </style>
   </head>
