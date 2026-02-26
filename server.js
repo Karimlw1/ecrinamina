@@ -12,26 +12,25 @@ const { Octokit } = require("@octokit/rest");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// -------------------
+
 // GitHub setup
-// -------------------
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = "karimlw1";
 const REPO = "ecrinamina";
 const BRANCH = "main";
 
-// -------------------
+
 // Cloudinary setup
-// -------------------
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// -------------------
+
 // Middleware
-// -------------------
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -52,9 +51,9 @@ function isAdmin(req, res, next) {
   next();
 }
 
-// -------------------
+
 // ROUTES
-// -------------------
+
 
 // Upload image to Cloudinary
 app.post("/admin/upload-image", isAdmin, upload.single("image"), async (req, res) => {
@@ -307,7 +306,7 @@ app.get("/order/:id", (req, res) => {
 // Serve home
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
 
-// -------------------
+
 // Start server
-// -------------------
+
 app.listen(PORT, () => console.log(`🚀 live Serveur sur http://localhost:${PORT}`));
