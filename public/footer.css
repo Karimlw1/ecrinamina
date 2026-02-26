@@ -5,7 +5,7 @@ footer {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -1px;
     box-shadow: 1px 5px 15px rgba(0, 0, 3, 0.8);
     align-content: center;
     justify-content: space-evenly;
@@ -13,8 +13,8 @@ footer {
     gap: 20px;
     text-align: center;
     justify-self: center;
-    backdrop-filter: blur(27px);
-    filter: hue-rotate(45deg)
+    backdrop-filter: blur(17px);
+    filter: grayscale(60);
 }
 footer p{
     background-color: transparent;

@@ -50,7 +50,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 40px;
-        padding: 40px;
+        padding: 40px 40px 100px 40px;
       }
 
       /* GLASS CARD */
@@ -67,11 +67,11 @@
       /* GLASS BUTTON */
       #addToCart {
         margin-top: 20px;
-        padding: 12px 28px;
+        padding: 19px 97px;
         border-radius: 50px;
         border: 1px solid rgba(255, 255, 255, 0.4);
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
+        background: rgb(0 0 0 / 51%);
+        backdrop-filter: blur(1px);
         color: #fff;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -197,6 +197,15 @@
         background-color: #f9f9f95c;
         color: #000000;
         box-shadow: inset 2px 1px 9px 0px rgb(255 255 255 / 72%);
+      }
+      .addToCartDiv {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        backdrop-filter: blur(2px);
+        justify-content: center;
+        padding: 0 0 16px 0;
       }
     </style>
   </head>
