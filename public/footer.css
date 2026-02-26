@@ -1,6 +1,6 @@
 footer {
-   display: flex;
-    height: 80px;
+    display: flex;
+    height: 66px;
     width: 700px;
     position: fixed;
     left: 0;
@@ -13,8 +13,7 @@ footer {
     gap: 20px;
     text-align: center;
     justify-self: center;
-    backdrop-filter: blur(17px);
-    filter: grayscale(60);
+    backdrop-filter: blur(10px);
 }
 footer p{
     background-color: transparent;
