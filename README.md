@@ -1,4 +1,4 @@
-My Dressing by Amida
+Ecrin d'art d'amina
 
 Application e-commerce simple développée avec Node.js et Express, incluant un panneau d’administration pour la gestion des produits, l’upload d’images via Cloudinary, la sauvegarde locale des données et la synchronisation avec GitHub. Le projet est déployable sur Render.
 
@@ -207,4 +207,4 @@ Auteur
 Projet développé par karim 
 Intégration et backend par Karim
 
-Cliente: AMIDA 
+Cliente: AMINA
