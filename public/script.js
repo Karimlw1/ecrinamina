@@ -103,21 +103,14 @@ const productsContainer = document.getElementById("productsContainer");
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 function toggleWishlist(productId) {
     let index = wishlist.indexOf(productId);
-    
     if (index === -1) {
-        // Add item
         wishlist.push(productId);
-
-        if (wishlist.length > 30) {
-            wishlist.shift();
-        }
-        updateWishlistUI();
-    } else {
-        // Remove item
-        wishlist.splice(index, 1);
-        updateWishlistUI();
     }
-
+    if (wishlist.length > 30) {
+        wishlist.shift(); // remove oldest if more than 20
+    } else {
+        wishlist.splice(index, 1);
+    }
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     document.querySelectorAll(".wishlist i").forEach(i => {
         i.classList.toggle("fa-solid", wishlist.includes(parseInt(i.dataset.id)));
@@ -130,7 +123,7 @@ function toggleWishlist(productId) {
             i.classList.add("fa-regular");
             i.classList.remove("fa-solid");
         }
-        updateWishlistUI();
+    
     });
 
 }
@@ -138,8 +131,13 @@ function updateWishlistUI() {
     document.querySelectorAll(".wishlist i").forEach(i => {
         let id = parseInt(i.dataset.id);
 
-        i.classList.toggle("fa-solid", wishlist.includes(id));
-        i.classList.toggle("fa-regular", !wishlist.includes(id));
+        if (wishlist.includes(id)) {
+            i.classList.add("fa-solid");
+            i.classList.remove("fa-regular");
+        } else {
+            i.classList.add("fa-regular");
+            i.classList.remove("fa-solid");
+        }
     });
 }
 
@@ -163,4 +161,6 @@ fetch("./api/products")
             productsContainer.appendChild(div);
         });
     });
+
+updateWishlistUI();
 
