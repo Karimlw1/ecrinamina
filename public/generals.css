@@ -180,14 +180,19 @@ button {
      /* soft fallback while loading */
 }
 button.wishlist{
-     position: relative;
+    position: relative;
     z-index: 1;
-    top: 19px;
-    background: rebeccapurple;
-    height: 0px;
+    top: 45px;
+    background: #ffffff00;
+    backdrop-filter: blur(0px);
+    
+    height: 27px;
     align-self: end;
-    margin-top: -5px;
+    margin-top: -33px;
     margin-right: 18px;
+    padding: 7px;
+    z-index: 100;
+    cursor: pointer;
 }
 
 .product:hover {
