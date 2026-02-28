@@ -277,12 +277,12 @@ app.get("/order/:id", (req, res) => {
     total += item.price * (item.qty || 1);
     html += `
     <body>
-    <a href="mydressingbyamida.onrender.com">
+    <a href="ecrinamina.onrender.com">
     <button class="back">
       Retour au Site 
     </button>
     </a>
-       <a href="https://mydressingbyamida.onrender.com/product.html?id=${item.id}">
+       <a href="https://ecrinamina.onrender.com/product.html?id=${item.id}">
       <div class="cart-item">
         <img src="${item.image}" alt="${item.name}" />
         <div class="cart-item-details">
