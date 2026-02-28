@@ -142,25 +142,49 @@ function updateWishlistUI() {
 }
 
 fetch("./api/products")
-    .then(res => res.json())
-    .then(products => {
-        Object.values(products).forEach(product => {
-            const div = document.createElement("div");
-            div.className = "product details";
-            div.dataset.id = product.id;
-            div.innerHTML = `
-        <button class="wishlist"><i class="fa fa-heart" data-id="${product.id}"></i></button>
-        <img src="${product.image}" alt="${product.name}" />
-        <div class="info">
-          <div class="price">$${product.price}</div>
-          <button class="details-bttn" onclick="location.href='product.html?id=${product.id}'">
-            En vente
-          </button>
-        </div>
-      `;
-            productsContainer.appendChild(div);
-        });
-    });
+  .then(res => res.json())
+  .then(productsObject => {
 
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Convert object → array
+    const productsArray = Object.values(productsObject);
+
+    // Shuffle the array
+    const shuffledProducts = shuffleArray(productsArray);
+
+    renderProducts(shuffledProducts);
+  });
+
+
+function renderProducts(productsArray) {
+
+  productsContainer.innerHTML = "";
+
+  productsArray.forEach(product => {
+    const div = document.createElement("div");
+    div.className = "product details";
+    div.dataset.id = product.id;
+
+    div.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" />
+      <div class="info">
+        <div class="price">$${product.price}</div>
+        <button class="details-bttn"
+          onclick="location.href='product.html?id=${product.id}'">
+          En vente
+        </button>
+      </div>
+    `;
+
+    productsContainer.appendChild(div);
+  });
+}
 updateWishlistUI();
 
