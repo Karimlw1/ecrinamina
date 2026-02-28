@@ -178,16 +178,18 @@ document.addEventListener("DOMContentLoaded", function () {
       div.className = "product";
       div.dataset.id = product.id;
 
-      div.innerHTML = `
         if(product.isNew) {
-          <span class="new">Nouveau</span>
+          div.innerHTML += '<span class="new">Nouveau</span>';
         }
         if(product.isRunningLow) {
-          <span class="running-low">Bientôt épuisé</span>
+          div.innerHTML += '<span class="running-low">Bientôt épuisé</span>';
         }
         if (product.epuised) {
-          <span class="epuised">Épuisé</span>
+          div.innerHTML += '<span class="epuised">Épuisé</span>';
         }
+        
+
+      div.innerHTML = `
         <button class="wishlist-btn" data-id="${product.id}">
           <i class="fa ${wishlist.includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
         </button>
