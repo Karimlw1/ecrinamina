@@ -176,13 +176,13 @@ button {
      /* soft fallback while loading */
 }
 .wishlist-btn{
-     position: relative;
-    top: 49px;
+position: relative;
+    top: 50px;
     background: #ffffff00;
     backdrop-filter: blur(0px);
-    height: 31px;
+    height: 32px;
     align-self: end;
-    margin-top: -45px;
+    margin-top: -34px;
     margin-right: 18px;
     padding: 8px 9px;
     display: flex;
