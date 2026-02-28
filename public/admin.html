@@ -218,6 +218,48 @@
         <button id="deleteBtn">Supprimer</button>
       </div>
 
+      <h3>modifier la disponibilite d'un produit</h3>
+      <div style="display: flex; gap: 10px; margin-bottom: 20px">
+        <input id="modifyProductId" placeholder="ID du produit à modifier" />
+        <input
+          id="modifyAvailability"
+          placeholder="Disponibilité (true/false)"
+        />
+        <button id="modifyBtn">Modifier</button>
+      </div>
+
+      <h3>modifier le prix d'un produit</h3>
+      <div style="display: flex; gap: 10px; margin-bottom: 20px">
+        <input
+          id="modifyProductPriceId"
+          placeholder="ID du produit à modifier"
+        />
+        <input id="modifyProductPrice" placeholder="Nouveau prix" />
+        <button id="modifyPriceBtn">Modifier le prix</button>
+      </div>
+      <h3>modifier le nom d'un produit</h3>
+      <div style="display: flex; gap: 10px; margin-bottom: 20px">
+        <input
+          id="modifyProductNameId"
+          placeholder="ID du produit à modifier"
+        />
+        <input id="modifyProductName" placeholder="Nouveau nom" />
+        <button id="modifyNameBtn">Modifier le nom</button>
+      </div>
+
+      <h3>Autres actions</h3>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap">
+        <button onclick="location.href = 'orders.html'">
+          Voir les commandes
+        </button>
+        <button onclick="location.href = 'index.html'">Voir le site</button>
+        <span id="productCount"
+          >nombre de produits existants:
+          <p id="npe"></p
+        ></span>
+      </div>
+
       <br />
       <br />
       <button id="downloadProducts">Télécharger products.json</button>
@@ -419,6 +461,124 @@
           alert("Erreur lors de la suppression");
         }
       };
+      // modifier la disponibilité d'un produit
+      document.getElementById("modifyBtn").onclick = async () => {
+        const id = document.getElementById("modifyProductId").value.trim();
+        const availability = document
+          .getElementById("modifyAvailability")
+          .value.trim()
+          .toLowerCase();
+
+        if (!id || !availability) {
+          return alert("Veuillez remplir tous les champs");
+        }
+
+        if (!["true", "false"].includes(availability)) {
+          return alert("La disponibilité doit être 'true' ou 'false'");
+        }
+
+        try {
+          const res = await fetch(`/admin/modify-product/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify({ available: availability === "true" }),
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            alert(data.message);
+            location.reload();
+          } else {
+            alert("Erreur: " + (data.error || "Inconnu"));
+          }
+        } catch (err) {
+          console.error("Erreur modification:", err);
+          alert("Erreur lors de la modification");
+        }
+      };
+      // modifier le prix d'un produit
+      document.getElementById("modifyPriceBtn").onclick = async () => {
+        const id = document.getElementById("modifyProductPriceId").value.trim();
+        const price = document
+          .getElementById("modifyProductPrice")
+          .value.trim();
+
+        if (!id || !price) {
+          return alert("Veuillez remplir tous les champs");
+        }
+
+        if (isNaN(price)) {
+          return alert("Le prix doit être un nombre");
+        }
+
+        try {
+          const res = await fetch(`/admin/modify-product/${id}/price`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify({ price: Number(price) }),
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            alert(data.message);
+            location.reload();
+          } else {
+            alert("Erreur: " + (data.error || "Inconnu"));
+          }
+        } catch (err) {
+          console.error("Erreur modification:", err);
+          alert("Erreur lors de la modification");
+        }
+      };
+      // modifier le nom d'un produit
+      document.getElementById("modifyNameBtn").onclick = async () => {
+        const id = document.getElementById("modifyProductNameId").value.trim();
+        const name = document.getElementById("modifyProductName").value.trim();
+
+        if (!id || !name) {
+          return alert("Veuillez remplir tous les champs");
+        }
+
+        try {
+          const res = await fetch(`/admin/modify-product/${id}/name`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify({ name }),
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            alert(data.message);
+            location.reload();
+          } else {
+            alert("Erreur: " + (data.error || "Inconnu"));
+          }
+        } catch (err) {
+          console.error("Erreur modification:", err);
+          alert("Erreur lors de la modification");
+        }
+      };
+      // nombre de produits existants
+      fetch("/api/products")
+        .then((res) => res.json())
+        .then((products) => {
+          const npe = document.getElementById("npe");
+          npe.textContent = Object.keys(products).length;
+        })
+        .catch((err) => {
+          console.error("Erreur fetching products:", err);
+          const npe = document.getElementById("npe");
+          npe.textContent = "Erreur";
+        });
     </script>
     <script src="order.js"></script>
   </body>
