@@ -112,7 +112,7 @@ fetch("./api/products")
         <div class="info">
           <div class="price">$${product.price}</div>
           <button class="details-bttn" onclick="location.href='product.html?id=${product.id}'">
-            En Stock
+            En vente
           </button>
         </div>
       `;
