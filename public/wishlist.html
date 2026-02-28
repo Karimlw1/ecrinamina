@@ -1,5 +1,75 @@
 <!doctype html>
 <html lang="en">
+  <style>
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      color: antiquewhite;
+    }
+
+    .wishlist-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      padding-top: 59px;
+      padding-bottom: 100px;
+      justify-content: center;
+      align-content: center;
+      background: linear-gradient(100deg, #000000db, #413b3bd6);
+    }
+    .wishlist-item {
+      width: 200px;
+      padding: 10px;
+      border-radius: 16px;
+      background-color: #f9f9f95c;
+      box-shadow: inset 2px 1px 9px 0px rgb(255 255 255 / 72%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .wishlist-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .wishlist-item h3 {
+      margin: 10px 0 5px 0;
+      font-size: 18px;
+      text-align: center;
+    }
+    .wishlist-item p {
+      margin: 0;
+      font-size: 16px;
+      color: #477739;
+    }
+    .wishlist-item button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 20px;
+      background-color: #ff00008a;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .wishlist-item button:hover {
+      background-color: #576752;
+    }
+    .fa-heart-solid {
+      color: #ff0000;
+      text-shadow: 0 0 5px #ad1515;
+      transition: all 0.3s ease;
+    }
+  </style>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -67,74 +137,5 @@
     <script src="mode.js"></script>
     <script src="wishlist.js"></script>
     <script src="cart.js"></script>
-    <style>
-      .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-        backdrop-filter: blur(12px);
-        background: rgba(255, 255, 255, 0.08);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        color: antiquewhite;
-      }
-
-      .wishlist-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding: 20px;
-        padding-top: 59px;
-        justify-content: center;
-        align-content: center;
-        background: linear-gradient(100deg, #000000db, #413b3bd6);
-      }
-      .wishlist-item {
-        width: 200px;
-        padding: 10px;
-        border-radius: 16px;
-        background-color: #f9f9f95c;
-        box-shadow: inset 2px 1px 9px 0px rgb(255 255 255 / 72%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .wishlist-item img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-      }
-      .wishlist-item h3 {
-        margin: 10px 0 5px 0;
-        font-size: 18px;
-        text-align: center;
-      }
-      .wishlist-item p {
-        margin: 0;
-        font-size: 16px;
-        color: #477739;
-      }
-      .wishlist-item button {
-        margin-top: 10px;
-        padding: 8px 12px;
-        border: none;
-        border-radius: 20px;
-        background-color: #ff00008a;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      .wishlist-item button:hover {
-        background-color: #576752;
-      }
-      .fa-heart-solid {
-        color: #ff0000;
-        text-shadow: 0 0 5px #ad1515;
-        transition: all 0.3s ease;
-      }
-    </style>
   </body>
 </html>
