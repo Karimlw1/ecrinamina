@@ -129,44 +129,130 @@
         return classes.join(" "); // <- this is OK here
       }
 
-      fetch("/api/products")
-        .then((res) => res.json())
-        .then((products) => {
-          const container = document.getElementById("productsContainer");
-          Object.values(products)
-            .filter((p) => p.category === "Maternite") // filtrage par page
-            .forEach((p) => {
-              const div = document.createElement("div");
-              div.className = `product details ${getCategoryClasses(p)}`;
-              div.dataset.id = p.id;
-              div.innerHTML = `
-                <img src="${p.image}" alt="${p.name}" />
-                <div class="info">
-                  <div class="price">$${p.price}</div>
-                  <button onclick="location.href='product.html?id=${p.id}'">Voir produit</button>
-                </div>
-              `;
-              container.appendChild(div);
-            });
-          const categories = {
-            haut: document.querySelectorAll(".haut"),
-            bas: document.querySelectorAll(".bas"),
-            chaussure: document.querySelectorAll(".chaussure"),
-            accessoires: document.querySelectorAll(".accessoire"),
-            abaya: document.querySelectorAll(".abaya"),
-            complet: document.querySelectorAll(".complet"),
-            habitmuslim: document.querySelectorAll(".habitmuslim"),
-            maquillage: document.querySelectorAll(".maquillage"),
-            skincare: document.querySelectorAll(".skincare"),
-            fragrance: document.querySelectorAll(".fragrance"),
-            haircare: document.querySelectorAll(".haircare"),
-            lunette: document.querySelectorAll(".lunettes"),
-            montre: document.querySelectorAll(".montre"),
-            sac: document.querySelectorAll(".sac"),
-            bracha: document.querySelectorAll(".bracha"),
-            phone: document.querySelectorAll(".phone"),
-          };
+      //*  PRODUCTS + WISHLIST
+
+      const productsContainer = document.getElementById("productsContainer");
+
+      // Load wishlist from localStorage
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      // Toggle wishlist (correct logic)
+      function toggleWishlist(productId) {
+        const index = wishlist.indexOf(productId);
+
+        if (index === -1) {
+          wishlist.push(productId); // add
+        } else {
+          wishlist.splice(index, 1); // remove
+        }
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      }
+
+      // Fetch products
+      if (productsContainer) {
+        fetch("./api/products")
+          .then((res) => res.json())
+          .then((productsObject) => {
+            const productsArray = Object.values(productsObject);
+
+            // Shuffle products
+            for (let i = productsArray.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [productsArray[i], productsArray[j]] = [
+                productsArray[j],
+                productsArray[i],
+              ];
+            }
+
+            renderProducts(productsArray);
+
+            const categories = {
+              haut: document.querySelectorAll(".haut"),
+              bas: document.querySelectorAll(".bas"),
+              chaussure: document.querySelectorAll(".chaussure"),
+              accessoires: document.querySelectorAll(".accessoire"),
+              abaya: document.querySelectorAll(".abaya"),
+              complet: document.querySelectorAll(".complet"),
+              habitmuslim: document.querySelectorAll(".habitmuslim"),
+              maquillage: document.querySelectorAll(".maquillage"),
+              skincare: document.querySelectorAll(".skincare"),
+              fragrance: document.querySelectorAll(".fragrance"),
+              haircare: document.querySelectorAll(".haircare"),
+              lunette: document.querySelectorAll(".lunettes"),
+              montre: document.querySelectorAll(".montre"),
+              sac: document.querySelectorAll(".sac"),
+              bracha: document.querySelectorAll(".bracha"),
+              phone: document.querySelectorAll(".phone"),
+            };
+          });
+      }
+
+      // Render products
+      function renderProducts(productsArray) {
+        productsContainer.innerHTML = "";
+        productsArray = productsArray.filter((p) => p.category === "Maternite");
+        productsArray.forEach((p) => {
+          const div = document.createElement("div");
+          div.className = "product";
+          div.dataset.id = p.id;
+
+          if (p.isNew) {
+            div.innerHTML += '<span class="new">Nouveau</span>';
+          }
+          if (p.isRunningLow) {
+            div.innerHTML += '<span class="running-low">Bientôt épuisé</span>';
+          }
+          if (p.epuised) {
+            div.innerHTML += '<span class="epuised">Épuisé</span>';
+          }
+
+          div.innerHTML = `
+        <button class="wishlist-btn" data-id="${p.id}">
+          <i class="fa ${wishlist.includes(p.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
+        </button>
+
+        <img src="${p.image}" alt="${p.name}" />
+
+        <div class="info">
+          <div class="price">$${p.price}</div>
+          <button class="voir" onclick="window.location.href='product.html?id=${p.id}'">Voir</button>
+        </div>
+      `;
+          productsContainer.appendChild(div);
         });
+
+        attachWishlistEvents();
+      }
+
+      // Heart click
+      function attachWishlistEvents() {
+        document.querySelectorAll(".wishlist-btn").forEach((button) => {
+          button.addEventListener("click", function (e) {
+            e.stopPropagation(); // VERY IMPORTANT
+
+            const productId = this.dataset.id;
+
+            toggleWishlist(productId);
+
+            const icon = this.querySelector("i");
+
+            if (wishlist.includes(productId)) {
+              icon.classList.remove("fa-regular");
+              icon.classList.add("fa-solid");
+              icon.style.color = "#ff0000";
+              icon.style.textShadow = "0 0 5px #ff0000";
+              icon.style.transition = "all 0.3s ease";
+            } else {
+              icon.classList.remove("fa-solid");
+              icon.classList.add("fa-regular");
+              icon.style.color = "";
+              icon.style.textShadow = "";
+              icon.style.transition = "all 0.3s ease";
+            }
+          });
+        });
+      }
     </script>
     <script src="mode.js"></script>
     <script src="filter.js"></script>
