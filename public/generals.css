@@ -166,10 +166,6 @@ button {
      box-shadow: 0 10px 25px rgba(134, 134, 134, 0.15);
 }
 
-.product button {
-     pointer-events: none;
-}
-
 
 .product img {
      width: 100%;
