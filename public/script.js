@@ -113,9 +113,9 @@ function toggleWishlist(productId) {
     }
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     document.querySelectorAll(".wishlist i").forEach(i => {
-        i.classList.toggle("fa-solid", wishlist.includes(parseInt(i.dataset.id)));
-        i.classList.toggle("fa-regular", !wishlist.includes(parseInt(i.dataset.id)));
-        let id = parseInt(parseInt(i.dataset.id));
+        i.classList.toggle("fa-solid", wishlist.includes(i.dataset.id));
+        i.classList.toggle("fa-regular", !wishlist.includes(i.dataset.id));
+        let id = i.dataset.id;
         if (wishlist.includes(id)) {
             i.classList.add("fa-solid");
             i.classList.remove("fa-regular");
