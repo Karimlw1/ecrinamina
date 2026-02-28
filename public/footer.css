@@ -1,6 +1,7 @@
 footer {
     display: flex;
-    height: 66px;
+    height: 80px;
+    border-radius: 20px 20px 0 0;
     width: 683px;
     position: fixed;
     left: 0;
@@ -15,7 +16,7 @@ footer {
     justify-self: center;
     backdrop-filter: blur(10px);
     color: cornsilk;
-    text-shadow: -5px -1px 20px #ffffffb0;
+    text-shadow: -5px -1px 20px #000000b0;
 }
 footer p{
     background-color: transparent;

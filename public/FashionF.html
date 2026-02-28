@@ -170,6 +170,8 @@
       // Fetch products
       if (productsContainer) {
         fetch("./api/products")
+          .filter((p) => p.category === "Femme")
+
           .then((res) => res.json())
           .then((productsObject) => {
             const productsArray = Object.values(productsObject);
@@ -210,31 +212,31 @@
       function renderProducts(productsArray) {
         productsContainer.innerHTML = "";
 
-        productsArray.forEach((product) => {
+        productsArray.forEach((p) => {
           const div = document.createElement("div");
           div.className = "product";
-          div.dataset.id = product.id;
+          div.dataset.id = p.id;
 
-          if (product.isNew) {
+          if (p.isNew) {
             div.innerHTML += '<span class="new">Nouveau</span>';
           }
-          if (product.isRunningLow) {
+          if (p.isRunningLow) {
             div.innerHTML += '<span class="running-low">Bientôt épuisé</span>';
           }
-          if (product.epuised) {
+          if (p.epuised) {
             div.innerHTML += '<span class="epuised">Épuisé</span>';
           }
 
           div.innerHTML = `
-        <button class="wishlist-btn" data-id="${product.id}">
-          <i class="fa ${wishlist.includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
+        <button class="wishlist-btn" data-id="${p.id}">
+          <i class="fa ${wishlist.includes(p.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
         </button>
 
-        <img src="${product.image}" alt="${product.name}" />
+        <img src="${p.image}" alt="${p.name}" />
 
         <div class="info">
-          <div class="price">$${product.price}</div>
-          <button class="voir" onclick="window.location.href='product.html?id=${product.id}'">Voir</button>
+          <div class="price">$${p.price}</div>
+          <button class="voir" onclick="window.location.href='product.html?id=${p.id}'">Voir</button>
         </div>
       `;
           productsContainer.appendChild(div);

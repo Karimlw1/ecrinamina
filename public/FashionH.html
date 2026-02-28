@@ -141,6 +141,7 @@
         .then((res) => res.json())
         .then((products) => {
           const container = document.getElementById("productsContainer");
+
           Object.values(products)
             .filter((p) => p.category === "Homme") // filtrage par page
             .forEach((p) => {
