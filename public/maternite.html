@@ -40,13 +40,30 @@
     <header class="navbar">
       <div class="menu" onclick="history.back()">←</div>
 
+      <img
+        src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png"
+        alt="logo"
+        style="
+          z-index: 0;
+          width: 170px;
+          margin-top: 21px;
+          display: flex;
+          justify-self: center;
+          position: absolute;
+          left: 51%;
+          right: 50%;
+        "
+        loading="lazy"
+      />
       <h3><strong>MATERNITE</strong></h3>
+
       <div
         class="cart"
         onclick="location.href = 'cart.html'"
         style="cursor: pointer"
       >
-        🛒 <span class="badge" id="cartCount"></span>
+        <i class="fa fa-shopping-bag"></i>
+        <span class="badge" id="cartCount"></span>
       </div>
     </header>
 

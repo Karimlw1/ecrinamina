@@ -79,6 +79,7 @@ function exitMenu() {
     Body.style.display = 'block';
 }
 
+
 //*hide placeholder search 
 
 const input = document.getElementById("SearchInput");
@@ -99,6 +100,48 @@ input.addEventListener("blur", () => {
 });
 //* display products */
 const productsContainer = document.getElementById("productsContainer");
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+function toggleWishlist(productId) {
+    let index = wishlist.indexOf(productId);
+    
+    if (index === -1) {
+        // Add item
+        wishlist.push(productId);
+
+        if (wishlist.length > 30) {
+            wishlist.shift();
+        }
+        updateWishlistUI();
+    } else {
+        // Remove item
+        wishlist.splice(index, 1);
+        updateWishlistUI();
+    }
+
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    document.querySelectorAll(".wishlist i").forEach(i => {
+        i.classList.toggle("fa-solid", wishlist.includes(parseInt(i.dataset.id)));
+        i.classList.toggle("fa-regular", !wishlist.includes(parseInt(i.dataset.id)));
+        let id = parseInt(parseInt(i.dataset.id));
+        if (wishlist.includes(id)) {
+            i.classList.add("fa-solid");
+            i.classList.remove("fa-regular");
+        } else {
+            i.classList.add("fa-regular");
+            i.classList.remove("fa-solid");
+        }
+        updateWishlistUI();
+    });
+
+}
+function updateWishlistUI() {
+    document.querySelectorAll(".wishlist i").forEach(i => {
+        let id = parseInt(i.dataset.id);
+
+        i.classList.toggle("fa-solid", wishlist.includes(id));
+        i.classList.toggle("fa-regular", !wishlist.includes(id));
+    });
+}
 
 fetch("./api/products")
     .then(res => res.json())
@@ -108,6 +151,7 @@ fetch("./api/products")
             div.className = "product details";
             div.dataset.id = product.id;
             div.innerHTML = `
+        <button class="wishlist"><i class="fa fa-heart" data-id="${product.id}"></i></button>
         <img src="${product.image}" alt="${product.name}" />
         <div class="info">
           <div class="price">$${product.price}</div>
