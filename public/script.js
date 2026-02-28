@@ -1,190 +1,233 @@
-const slides = document.querySelector('.slides');
-const slideItems = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
+document.addEventListener("DOMContentLoaded", function () {
 
-let index = 0;
+  /* =========================
+     SLIDER
+  ========================= */
 
-// update slide position
-function update() {
-    slides.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach(d => d.classList.remove('active'));
-    dots[index].classList.add('active');
-}
+  const slides = document.querySelector('.slides');
+  const slideItems = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
 
-// auto
-let auto = setInterval(() => {
-    index = (index + 1) % slideItems.length;
-    update();
-}, 3500);
+  if (slides && slideItems.length > 0) {
 
-// dots
-dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-        index = i;
-        update();
-        restartAuto();
-    });
-});
+    let index = 0;
 
-// touch
-let startX = 0;
+    function updateSlide() {
+      slides.style.transform = `translateX(-${index * 100}%)`;
 
-slides.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-});
+      dots.forEach(dot => dot.classList.remove("active"));
+      if (dots[index]) dots[index].classList.add("active");
+    }
 
-slides.addEventListener('touchend', e => {
-    let diff = e.changedTouches[0].clientX - startX;
-
-    if (diff < -50 && index < slideItems.length - 1) index++;
-    if (diff > 50 && index > 0) index--;
-
-    update();
-    restartAuto();
-});
-
-function restartAuto() {
-    clearInterval(auto);
-    auto = setInterval(() => {
+    function startAuto() {
+      return setInterval(() => {
         index = (index + 1) % slideItems.length;
-        update();
-    }, 3500);
-}
-
-/* reveal */
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-        }
-        else {
-            entry.target.classList.remove("visible");
-        }
-    });
-});
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-const Body = document.querySelector(".Body");
-
-function showMenu() {
-    const menuContent = document.querySelector(".socials");
-    menuContent.classList.toggle("visible");
-    Body.style.display = 'none';
-}
-
-function exitMenu() {
-    const menu2 = document.querySelector(".socials");
-    menu2.classList.remove("visible");
-    Body.style.display = 'block';
-}
-
-
-//*hide placeholder search 
-
-const input = document.getElementById("SearchInput");
-const fakePlaceholder = document.querySelector(".fake-placeholder");
-
-input.addEventListener("input", () => {
-    fakePlaceholder.style.display = input.value ? "none" : "block";
-});
-
-input.addEventListener("focus", () => {
-    fakePlaceholder.style.display = "none";
-});
-
-input.addEventListener("blur", () => {
-    if (!input.value) {
-        fakePlaceholder.style.display = "block";
+        updateSlide();
+      }, 3500);
     }
-});
-//* display products */
-const productsContainer = document.getElementById("productsContainer");
-let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-function toggleWishlist(productId) {
-    let index = wishlist.indexOf(productId);
-    if (index === -1) {
-        wishlist.push(productId);
+
+    let auto = startAuto();
+
+    function restartAuto() {
+      clearInterval(auto);
+      auto = startAuto();
     }
-    if (wishlist.length > 30) {
-        wishlist.shift(); // remove oldest if more than 20
-    } else {
-        wishlist.splice(index, 1);
-    }
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-    document.querySelectorAll(".wishlist i").forEach(i => {
-        i.classList.toggle("fa-solid", wishlist.includes(i.dataset.id));
-        i.classList.toggle("fa-regular", !wishlist.includes(i.dataset.id));
-        let id = i.dataset.id;
-        if (wishlist.includes(id)) {
-            i.classList.add("fa-solid");
-            i.classList.remove("fa-regular");
-        } else {
-            i.classList.add("fa-regular");
-            i.classList.remove("fa-solid");
-        }
-    
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", function () {
+        index = i;
+        updateSlide();
+        restartAuto();
+      });
     });
 
-}
-function updateWishlistUI() {
-    document.querySelectorAll(".wishlist i").forEach(i => {
-        let id = parseInt(i.dataset.id);
+    let startX = 0;
 
-        if (wishlist.includes(id)) {
-            i.classList.add("fa-solid");
-            i.classList.remove("fa-regular");
-        } else {
-            i.classList.add("fa-regular");
-            i.classList.remove("fa-solid");
-        }
+    slides.addEventListener("touchstart", function (e) {
+      startX = e.touches[0].clientX;
     });
-}
 
-fetch("./api/products")
-  .then(res => res.json())
-  .then(productsObject => {
+    slides.addEventListener("touchend", function (e) {
+      let diff = e.changedTouches[0].clientX - startX;
 
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+      if (diff < -50) {
+        index = (index + 1) % slideItems.length;
       }
-      return array;
+
+      if (diff > 50) {
+        index = (index - 1 + slideItems.length) % slideItems.length;
+      }
+
+      updateSlide();
+      restartAuto();
+    });
+  }
+
+
+  /* =========================
+     REVEAL ANIMATION
+  ========================= */
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  });
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+
+  /* =========================
+     MENU
+  ========================= */
+
+  const Body = document.querySelector(".Body");
+
+  window.showMenu = function () {
+    const menu = document.querySelector(".socials");
+    if (menu) menu.classList.add("visible");
+    if (Body) Body.style.display = "none";
+  };
+
+  window.exitMenu = function () {
+    const menu = document.querySelector(".socials");
+    if (menu) menu.classList.remove("visible");
+    if (Body) Body.style.display = "block";
+  };
+
+
+  /* =========================
+     SEARCH PLACEHOLDER
+  ========================= */
+
+  const input = document.getElementById("SearchInput");
+  const fakePlaceholder = document.querySelector(".fake-placeholder");
+
+  if (input && fakePlaceholder) {
+
+    function updatePlaceholder() {
+      if (input.value) {
+        fakePlaceholder.style.display = "none";
+      } else {
+        fakePlaceholder.style.display = "block";
+      }
     }
 
-    // Convert object → array
-    const productsArray = Object.values(productsObject);
-
-    // Shuffle the array
-    const shuffledProducts = shuffleArray(productsArray);
-
-    renderProducts(shuffledProducts);
-  });
+    input.addEventListener("input", updatePlaceholder);
+    input.addEventListener("focus", () => fakePlaceholder.style.display = "none");
+    input.addEventListener("blur", updatePlaceholder);
+  }
 
 
-function renderProducts(productsArray) {
+  /* =========================
+     PRODUCTS + WISHLIST
+  ========================= */
 
-  productsContainer.innerHTML = "";
+  const productsContainer = document.getElementById("productsContainer");
 
-  productsArray.forEach(product => {
-    const div = document.createElement("div");
-    div.className = "product details";
-    div.dataset.id = product.id;
+  // Load wishlist from localStorage
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
-    div.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" />
-      <div class="info">
-        <div class="price">$${product.price}</div>
-        <button class="details-bttn"
-          onclick="location.href='product.html?id=${product.id}'">
-          En vente
+  // Toggle wishlist (correct logic)
+  function toggleWishlist(productId) {
+
+    const index = wishlist.indexOf(productId);
+
+    if (index === -1) {
+      wishlist.push(productId);   // add
+    } else {
+      wishlist.splice(index, 1);  // remove
+    }
+
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }
+
+
+  // Fetch products
+  if (productsContainer) {
+
+    fetch("./api/products")
+      .then(res => res.json())
+      .then(productsObject => {
+
+        const productsArray = Object.values(productsObject);
+
+        // Shuffle products
+        for (let i = productsArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [productsArray[i], productsArray[j]] = [productsArray[j], productsArray[i]];
+        }
+
+        renderProducts(productsArray);
+      });
+  }
+
+
+  // Render products
+  function renderProducts(productsArray) {
+
+    productsContainer.innerHTML = "";
+
+    productsArray.forEach(product => {
+
+      const div = document.createElement("div");
+      div.className = "product";
+      div.dataset.id = product.id;
+
+      div.innerHTML = `
+        <button class="wishlist-btn" data-id="${product.id}">
+          <i class="fa ${wishlist.includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
         </button>
-      </div>
-    `;
 
-    productsContainer.appendChild(div);
-  });
-}
-updateWishlistUI();
+        <img src="${product.image}" alt="${product.name}" />
 
+        <div class="info">
+          <div class="price">$${product.price}</div>
+        </div>
+      `;
+
+      // Click on product card → open product page
+      div.addEventListener("click", function () {
+        window.location.href = `product.html?id=${product.id}`;
+      });
+
+      productsContainer.appendChild(div);
+    });
+
+    attachWishlistEvents();
+  }
+
+
+  // Heart click
+  function attachWishlistEvents() {
+
+    document.querySelectorAll(".wishlist-btn").forEach(button => {
+
+      button.addEventListener("click", function (e) {
+
+        e.stopPropagation(); // VERY IMPORTANT
+
+        const productId = this.dataset.id;
+
+        toggleWishlist(productId);
+
+        const icon = this.querySelector("i");
+
+        if (wishlist.includes(productId)) {
+          icon.classList.remove("fa-regular");
+          icon.classList.add("fa-solid");
+        } else {
+          icon.classList.remove("fa-solid");
+          icon.classList.add("fa-regular");
+        }
+
+      });
+
+    });
+  }
+
+});
