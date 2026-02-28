@@ -226,9 +226,15 @@ document.addEventListener("DOMContentLoaded", function () {
         if (wishlist.includes(productId)) {
           icon.classList.remove("fa-regular");
           icon.classList.add("fa-solid");
+          icon.style.color = "#ff0000";
+          icon.style.textShadow = "0 0 5px #ff0000";
+          icon.style.transition = "all 0.3s ease";
         } else {
           icon.classList.remove("fa-solid");
           icon.classList.add("fa-regular");
+            icon.style.color = "";
+            icon.style.textShadow = "";
+            icon.style.transition = "all 0.3s ease";
         }
 
       });
