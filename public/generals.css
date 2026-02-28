@@ -177,7 +177,6 @@ button {
 }
 .wishlist-btn{
      position: relative;
-    z-index: 2;
     top: 49px;
     background: #ffffff00;
     backdrop-filter: blur(0px);

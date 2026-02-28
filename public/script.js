@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* =========================
-     SLIDER
-  ========================= */
+  //*  SLIDER
+
 
   const slides = document.querySelector('.slides');
   const slideItems = document.querySelectorAll('.slide');
@@ -64,9 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================
-     REVEAL ANIMATION
-  ========================= */
+  //*  REVEAL ANIMATION
+
 
   const observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
@@ -81,9 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 
-  /* =========================
-     MENU
-  ========================= */
+  //*  MENU
+
 
   const Body = document.querySelector(".Body");
 
@@ -100,9 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
 
-  /* =========================
-     SEARCH PLACEHOLDER
-  ========================= */
+  //*  SEARCH PLACEHOLDER
+
 
   const input = document.getElementById("SearchInput");
   const fakePlaceholder = document.querySelector(".fake-placeholder");
@@ -123,9 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================
-     PRODUCTS + WISHLIST
-  ========================= */
+  //*  PRODUCTS + WISHLIST
+
 
   const productsContainer = document.getElementById("productsContainer");
 
