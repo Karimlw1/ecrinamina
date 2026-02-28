@@ -179,13 +179,12 @@ button {
      background-color: #f2f2f2;
      /* soft fallback while loading */
 }
-button.wishlist{
-    position: relative;
-    z-index: 1;
-    top: 45px;
+.wishlist-btn{
+    position: absolute;
+    z-index: 2;
+    top: 10px;
     background: #ffffff00;
     backdrop-filter: blur(0px);
-    
     height: 27px;
     align-self: end;
     margin-top: -33px;

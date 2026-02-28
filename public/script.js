@@ -179,6 +179,15 @@ document.addEventListener("DOMContentLoaded", function () {
       div.dataset.id = product.id;
 
       div.innerHTML = `
+        if(product.isNew) {
+          <span class="new">Nouveau</span>
+        }
+        if(product.isRunningLow) {
+          <span class="running-low">Bientôt épuisé</span>
+        }
+        if (product.epuised) {
+          <span class="epuised">Épuisé</span>
+        }
         <button class="wishlist-btn" data-id="${product.id}">
           <i class="fa ${wishlist.includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
         </button>
@@ -187,14 +196,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         <div class="info">
           <div class="price">$${product.price}</div>
+          <button class="voir" onclick="window.location.href='product.html?id=${product.id}'">Voir</button>
         </div>
       `;
-
-      // Click on product card → open product page
-      div.addEventListener("click", function () {
-        window.location.href = `product.html?id=${product.id}`;
-      });
-
       productsContainer.appendChild(div);
     });
 
