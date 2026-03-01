@@ -75,12 +75,14 @@ function getCategories() {
 // ===============================
 // 4. Show total stock
 // ===============================
-
+function defaultMessage() {
+  trieMessage.textContent = "Tous les produits : " + document.querySelectorAll(".product").length + " articles disponibles";
+}
 function showTotalStock() {
   const totalProducts = document.querySelectorAll(".product").length;
   trieMessage.textContent = "Total : " + totalProducts + " articles disponibles";
   if (totalProducts === 0) {
-    trieMessage.textContent = "Aucun article disponible";
+   defaultMessage();
   }
 }
 
@@ -109,6 +111,7 @@ function filterCategory(categoryName) {
     trieMessage.textContent =
       categoryName + " : " + selectedProducts.length + " articles";
   }
+  showTotalStock();
 }
 
 // ===============================
