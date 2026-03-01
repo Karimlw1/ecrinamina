@@ -246,6 +246,5 @@ function formatMessage(selected) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  refreshCategoryStockUI();
   showTotalStock();
 });
