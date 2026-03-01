@@ -12,7 +12,7 @@ const boxes = {
   haut: document.getElementById("haut"),
   bas: document.getElementById("bas"),
   chaussure: document.getElementById("chaussure"),
-  accessoires: document.getElementById("accessoire"),
+  accessoire: document.getElementById("accessoire"),
   abaya: document.getElementById("abaya"),
   robe: document.getElementById("robe"),
   lingerie: document.getElementById("lingerie"),
@@ -46,7 +46,7 @@ function getCategories() {
     haut: document.querySelectorAll(".haut"),
     bas: document.querySelectorAll(".bas"),
     chaussure: document.querySelectorAll(".chaussure"),
-    accessoires: document.querySelectorAll(".accessoire"),
+    accessoire: document.querySelectorAll(".accessoire"),
     abaya: document.querySelectorAll(".abaya"),
     robe: document.querySelectorAll(".robe"),
     lingerie: document.querySelectorAll(".lingerie"),
@@ -154,15 +154,6 @@ function removeEmptyMessage() {
   if (msg) msg.remove();
 }
 
-function emptyStockMessage() {
-  removeEmptyMessage();
-  const message = document.createElement("p");
-  message.id = "emptyStock";
-  message.textContent = `Aucun article disponible dans ${this.id}`;
-  message.style.color = "red";
-  message.style.marginTop = "10px";
-  pTrie.appendChild(message);
-}
 function refreshCategoryStockUI() {
   const categories = getCategories();
   Object.keys(categories).forEach(name => {
@@ -178,13 +169,6 @@ function refreshCategoryStockUI() {
       newBadge.textContent = count;
       box.appendChild(newBadge);
     }
-    if (count === 0) {
-      box.classList.add("empty-category");
-      box.onclick = emptyStockMessage;
-    } else {
-      box.classList.remove("empty-category");
-      box.onclick = null;
-    }
   });
 }
 
@@ -193,58 +177,3 @@ function refreshCategoryStockUI() {
 // 8. Disable empty categories
 // ===============================
 
-// ===============================
-// 9. Format the message text
-// ===============================
-function formatMessage(selected) {
-  const names = {
-    haut: "Haut",
-    bas: "Bas",
-    chaussure: "Chaussures",
-    accessoires: "Accessoires",
-    abaya: "Abayas",
-    robe: "Robe",
-    lingerie: "Lingerie",
-    complet: "Complets",
-    habitmuslim: "Habit Muslim",
-    maquillage: "Maquillage",
-    skincare: "Skin Care",
-    fragrance: "Parfums",
-    haircare: "Hair Care",
-    lunette: "Lunettes",
-    montre: "Montres",
-    sac: "Sacs",
-    bracha: "Bracelets & Chaînettes",
-    phone: "Téléphones",
-    pijama: "Pijamas",
-    Mailles: "Mailles",
-    tenuesdeceremonie: "Tenues de Cérémonie",
-    allaitement: "Allaitement",
-    ensembledenuit: "Ensemble de Nuit",
-    shooting: "Shooting",
-    Gourde: "Gourdes",
-
-  };
-
-  const translatedNames = selected.map(name => names[name]);
-  const categories = getCategories();
-
-  let total = 0;
-  selected.forEach(name => {
-    total += categories[name].length;
-  });
-
-  if (translatedNames.length === 1) {
-    return `${translatedNames[0]} seulement, ${total} articles`;
-  }
-
-  if (translatedNames.length === 2) {
-    return `${translatedNames[0]} et ${translatedNames[1]} seulement, ${total} articles`;
-  }
-
-  return `${translatedNames.join(", ")} seulement, ${total} articles`;
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  showTotalStock();
-});
