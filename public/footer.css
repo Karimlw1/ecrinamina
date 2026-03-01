@@ -15,7 +15,6 @@ footer {
     text-align: center;
     justify-self: center;
     backdrop-filter: blur(10px);
-    color: cornsilk;
     text-shadow: -5px -1px 20px #000000b0;
 }
 footer p{
