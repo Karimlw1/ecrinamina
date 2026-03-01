@@ -154,7 +154,7 @@
   "Produit17": {
     "id": "Produit17",
     "name": "Montre-bracelet en bois avec 22mm de longueur de bande",
-    "category": "Accessoire",
+    "category": "Femme",
     "type": "accessoire",
     "price": 60,
     "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1770471365/mydressing_products/piyofsur5jp39oyz8ner.jpg",
@@ -183,7 +183,7 @@
   "Produit18": {
     "id": "Produit18",
     "name": "Basket dÃÂ©contractÃÂ© en cuir de vachette de premiÃÂ¨re qualitÃÂ©",
-    "category": "Accessoire",
+    "category": "Homme",
     "type": "chaussure",
     "price": 70,
     "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1770471792/mydressing_products/rd4leqx1aundcc5fwtjh.jpg",
@@ -430,7 +430,7 @@
   "Produit25": {
     "id": "Produit25",
     "name": "Talons aiguilles en dentelle epais et bout pointu",
-    "category": "Accessoire",
+    "category": "Femme",
     "type": "chaussure",
     "price": 80,
     "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1770970587/mydressing_products/aqa0zodtwekkkyne4d8p.jpg",
@@ -465,7 +465,7 @@
   "Produit26": {
     "id": "Produit26",
     "name": "Talons hauts noirs ,bouts pointus",
-    "category": "Accessoire",
+    "category": "Femme",
     "type": "chaussure",
     "price": 60,
     "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1770970760/mydressing_products/hztnje5wdelysk8yjvmm.jpg",
@@ -502,8 +502,8 @@
   "Produit27": {
     "id": "Produit27",
     "name": "Sac fourre-tout en cuir veritable pour femmes",
-    "category": "Accessoire",
-    "type": "Sac",
+    "category": "Femme",
+    "type": "accessoire",
     "price": 60,
     "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1771096424/mydressing_products/ahcbbooq4crnyqfjhmjk.jpg",
     "images": [
@@ -533,8 +533,8 @@
   "Produit28": {
     "id": "Produit28",
     "name": "Sac bandoulière en cuir veritable pour femme",
-    "category": "Accessoire",
-    "type": "Sac",
+    "category": "Femme",
+    "type": "accessoire",
     "price": 50,
     "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1771096680/mydressing_products/egul1knuceminyqrwdly.jpg",
     "images": [

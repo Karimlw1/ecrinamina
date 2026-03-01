@@ -3,60 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="stylegift.css" />
     <link rel="stylesheet" href="style2.css" />
     <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="generals.css" />
     <link rel="stylesheet" href="footer.css" />
+
+    <link rel="icon" type="image/png" href="images/MDamida-logo.png" />
+    <link rel="shortcut icon" href="images/MDamida-logo.png" type="image/png" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <style>
-      .maternite-section {
-        border-bottom: solid 1px #e7e7e7;
-        padding-bottom: 60px;
-        background: url(https://i.pinimg.com/1200x/39/65/c3/3965c3214167f0259cc34cb97f12a712.jpg);
-        background-size: cover;
-        color: #6d6767;
-        border-radius: 0 0 5px 5px;
-      }
-      p {
-        text-align: justify;
-        margin: 60px;
-      }
-      h3 {
-        user-select: none;
-        cursor: default;
-      }
-      h2 {
-        text-align: center;
-        color: rgb(107, 94, 60);
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>EAA Maternité</title>
   </head>
+
   <body>
     <header class="navbar">
       <div class="menu" onclick="history.back()">←</div>
 
-      <img
-        src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png"
-        alt="logo"
-        style="
-          z-index: 0;
-          width: 170px;
-          margin-top: 21px;
-          display: flex;
-          justify-self: center;
-          position: absolute;
-          left: 51%;
-          right: 50%;
-        "
-        loading="lazy"
-      />
-      <h3><strong>MATERNITE</strong></h3>
-
+      <h3><strong>Maternité</strong></h3>
       <div
         class="cart"
         onclick="location.href = 'cart.html'"
@@ -67,29 +36,113 @@
       </div>
     </header>
 
-    <section class="maternite-section">
-      <h2>Article et Coffrets Maternité</h2>
+    <div class="categories">
+      <div class="flex">
+        <div class="category" id="allaitement" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/0d/31/9f/0d319fe012771d55203f94934a62448b.jpg"
+            alt=""
+          />
+          <p>Allaitement</p>
+        </div>
 
-      <div class="product-grid" id="materniteProducts"></div>
+        <div class="category" id="haut" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/f8/45/45/f845450f907b2aa6aa05357a66664c60.jpg"
+            alt=""
+          />
+          <p>Haut</p>
+        </div>
+        <div class="category" id="bas" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/f8/45/45/f845450f907b2aa6aa05357a66664c60.jpg"
+            alt=""
+          />
+          <p>Bas</p>
+        </div>
 
-      <div class="gift-custom">
-        <p>
-          Vous ne savez pas quoi choisir ? Décrivez-nous la famille, nous nous
-          occupons du reste.
-        </p>
-        <a href="materniteRecommander.html" style="text-decoration: none">
-          <button style="margin-left: 10px">
-            Demander un cadeau recommandé
-          </button>
-        </a>
+        <div class="category" id="skincare" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/0d/31/9f/0d319fe012771d55203f94934a62448b.jpg"
+            alt=""
+          />
+          <p>Maille</p>
+        </div>
+
+        <div class="category" id="fragrance" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/1200x/60/e6/9e/60e69e948803f9e44bc18d02fbe4df7c.jpg"
+            alt=""
+          />
+          <p>Chaussures</p>
+        </div>
+        <div class="category" id="accessoire" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/1200x/52/9d/ce/529dcef9fb09292f0de374c9a2e9b9e7.jpg"
+            alt=""
+          />
+          <p>Accessoire</p>
+        </div>
+        <div class="category" id="tenuedeceremonie" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Tenue de cérémonie</p>
+        </div>
+        <div class="category" id="sac" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Sac</p>
+        </div>
+
+        <div class="category" id="robe" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Robe</p>
+        </div>
+
+        <div class="category" id="ensembledenuit" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Ensemble de nuit</p>
+        </div>
+        <div class="category" id="shooting" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Shooting</p>
+        </div>
+        <div class="category" id="complet" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Complet</p>
+        </div>
       </div>
-    </section>
+    </div>
+    <p id="pTrie">Trier : <strong id="trieMessage"> </strong></p>
+    <p id="articlesDisponible"></p>
+
     <section class="products" id="productsContainer"></section>
 
     <footer>
       <i class="fa fa-home" style="cursor: pointer">
         <p>Home</p>
       </i>
+      <i
+        class="fa fa-heart"
+        onclick="location.href = 'wishlist.html'"
+        style="cursor: pointer"
+      ></i>
       <i
         class="fa fa-shopping-bag"
         onclick="location.href = 'cart.html'"
@@ -171,12 +224,16 @@
               haut: document.querySelectorAll(".haut"),
               bas: document.querySelectorAll(".bas"),
               complet: document.querySelectorAll(".complet"),
+              chaussure: document.querySelectorAll(".chaussure"),
               accessoire: document.querySelectorAll(".accessoire"),
               sac: document.querySelectorAll(".sac"),
-              hautsextensibles: document.querySelectorAll(".hautsextensibles"),
+
               bodies: document.querySelectorAll(".bodies"),
+
               pijama: document.querySelectorAll(".pijama"),
+
               robe: document.querySelectorAll(".robe"),
+
               mailles: document.querySelectorAll(".mailles"),
               tenuesdeceremonie:
                 document.querySelectorAll(".tenuesdeceremonie"),
