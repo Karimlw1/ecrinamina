@@ -113,7 +113,7 @@ function filterCategory(categoryName) {
 // ===============================
 let activeButton = null;
 
-categories.forEach(name => {
+Object.keys(boxes).forEach(name => {
   const button = document.getElementById(name);
   if (!button) return;
 
@@ -204,7 +204,7 @@ function formatMessage(selected) {
     accessoires: "Accessoires",
     abaya: "Abayas",
     robe: "Robe",
-    abaya:"Lingerie",
+    lingerie: "Lingerie",
     complet: "Complets",
     habitmuslim: "Habit Muslim",
     maquillage: "Maquillage",
