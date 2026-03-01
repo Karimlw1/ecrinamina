@@ -27,6 +27,14 @@ const boxes = {
   sac: document.getElementById("sac"),
   bracha: document.getElementById("bracha"),
   phone: document.getElementById("phone"),
+  pijama: document.getElementById("pijama"),
+  Mailles: document.getElementById("mailles"),
+  tenuesdeceremonie: document.getElementById("tenuesdeceremonie"),
+  Gourde: document.getElementById("gourde"),
+  allaitement: document.getElementById("allaitement"),
+  ensembledenuit: document.getElementById("ensembledenuit"),
+  shooting: document.getElementById("shooting"),
+
 };
 
 // ===============================
@@ -53,6 +61,14 @@ function getCategories() {
     sac: document.querySelectorAll(".sac"),
     bracha: document.querySelectorAll(".bracha"),
     phone: document.querySelectorAll(".phone"),
+    pijama: document.querySelectorAll(".pijama"),
+    Mailles: document.querySelectorAll(".mailles"),
+    tenuesdeceremonie: document.querySelectorAll(".tenuesdeceremonie"),
+    allaitement: document.querySelectorAll(".allaitement"),
+    ensembledenuit: document.querySelectorAll(".ensembledenuit"),
+    shooting: document.querySelectorAll(".shooting"),  
+    Gourde: document.querySelectorAll(".gourde"),
+
   };
 }
 
@@ -187,6 +203,14 @@ function formatMessage(selected) {
     sac: "Sacs",
     bracha: "Bracelets & Chaînettes",
     phone: "Téléphones",
+    pijama: "Pijamas",
+    Mailles: "Mailles",
+    tenuesdeceremonie: "Tenues de Cérémonie",
+    allaitement: "Allaitement",
+    ensembledenuit: "Ensemble de Nuit",
+    shooting: "Shooting",
+    Gourde: "Gourdes",
+    
   };
 
   const translatedNames = selected.map(name => names[name]);
