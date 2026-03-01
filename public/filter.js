@@ -175,6 +175,31 @@ function emptyStockMessage() {
   message.style.marginTop = "10px";
   pTrie.appendChild(message);
 }
+function refreshCategoryStockUI() {
+  const categories = getCategories();
+  Object.keys(categories).forEach(name => {
+    const count = categories[name].length;
+    const box = boxes[name];
+    if (!box) return;
+    const badge = box.querySelector(".badge");
+    if (badge) {
+      badge.textContent = count;
+    } else {
+      const newBadge = document.createElement("span");
+      newBadge.className = "badge";
+      newBadge.textContent = count;
+      box.appendChild(newBadge);
+    }
+    if (count === 0) {
+      box.classList.add("empty-category");
+      box.onclick = emptyStockMessage;
+    } else {
+      box.classList.remove("empty-category");
+      box.onclick = null;
+    }
+  });
+}
+
 
 // ===============================
 // 8. Disable empty categories
@@ -210,7 +235,7 @@ function formatMessage(selected) {
     ensembledenuit: "Ensemble de Nuit",
     shooting: "Shooting",
     Gourde: "Gourdes",
-    
+
   };
 
   const translatedNames = selected.map(name => names[name]);
