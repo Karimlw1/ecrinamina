@@ -111,7 +111,7 @@ function filterCategory(categoryName) {
     trieMessage.textContent =
       categoryName + " : " + selectedProducts.length + " articles";
   }
-  if(!selectedProducts || selectedProducts.length === 0){
+  if(!selectedProducts){
     defaultMessage();
   }
 }
