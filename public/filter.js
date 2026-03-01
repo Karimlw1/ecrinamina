@@ -111,9 +111,7 @@ function filterCategory(categoryName) {
     trieMessage.textContent =
       categoryName + " : " + selectedProducts.length + " articles";
   }
-  if(selectedProducts.length < 0){
-    defaultMessage();
-  }
+
 }
 
 // ===============================
@@ -142,6 +140,7 @@ Object.keys(boxes).forEach(name => {
     } else {
       activeButton = null;
       showAllProducts();
+      showTotalStock();
     }
   });
 });
