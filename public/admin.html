@@ -282,6 +282,7 @@
       const sizesInput = document.getElementById("sizes");
       const colorsInput = document.getElementById("colors");
       const villesInput = document.getElementById("villes");
+      const ADMIN_KEY = "1234"; // remplace par ta vraie clé ADMIN_KEY
 
       document.getElementById("downloadProducts").onclick = async () => {
         const res = await fetch("/admin/download-products", {
@@ -584,6 +585,5 @@
           npe.textContent = "Erreur";
         });
     </script>
-    <script src="order.js"></script>
   </body>
 </html>
