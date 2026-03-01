@@ -111,7 +111,9 @@ function filterCategory(categoryName) {
     trieMessage.textContent =
       categoryName + " : " + selectedProducts.length + " articles";
   }
-  showTotalStock();
+  if(!selectedProducts || selectedProducts.length === 0){
+    defaultMessage();
+  }
 }
 
 // ===============================
