@@ -18,14 +18,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <title>MD femme</title>
+    <title>EAA Enfant</title>
   </head>
 
   <body>
     <header class="navbar">
       <div class="menu" onclick="history.back()">←</div>
 
-      <h3><strong>COSMETIQUE</strong></h3>
+      <h3><strong>ENFANT</strong></h3>
       <div
         class="cart"
         onclick="location.href = 'cart.html'"
@@ -38,40 +38,77 @@
 
     <div class="categories">
       <div class="flex">
-        <div class="category" id="maquillage" style="cursor: pointer">
+        <div class="category" id="pijama" style="cursor: pointer">
           <img
             src="https://i.pinimg.com/736x/f8/45/45/f845450f907b2aa6aa05357a66664c60.jpg"
             alt=""
           />
-          <p>Maquillage</p>
+          <p>Pijama</p>
         </div>
+
+        <div class="category" id="haut" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/f8/45/45/f845450f907b2aa6aa05357a66664c60.jpg"
+            alt=""
+          />
+          <p>Haut</p>
+        </div>
+        <div class="category" id="bas" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/f8/45/45/f845450f907b2aa6aa05357a66664c60.jpg"
+            alt=""
+          />
+          <p>Bas</p>
+        </div>
+
         <div class="category" id="skincare" style="cursor: pointer">
           <img
             src="https://i.pinimg.com/736x/0d/31/9f/0d319fe012771d55203f94934a62448b.jpg"
             alt=""
           />
-          <p>Skincare</p>
+          <p>Maille</p>
         </div>
         <div class="category" id="fragrance" style="cursor: pointer">
           <img
             src="https://i.pinimg.com/1200x/60/e6/9e/60e69e948803f9e44bc18d02fbe4df7c.jpg"
             alt=""
           />
-          <p>Fragrances</p>
+          <p>Chaussures</p>
         </div>
         <div class="category" id="haircare" style="cursor: pointer">
           <img
             src="https://i.pinimg.com/1200x/52/9d/ce/529dcef9fb09292f0de374c9a2e9b9e7.jpg"
             alt=""
           />
-          <p>Haircare</p>
+          <p>Accessoire</p>
         </div>
         <div class="category" id="accessoire" style="cursor: pointer">
           <img
             src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
             alt=""
           />
-          <p>Accessories</p>
+          <p>Robe</p>
+        </div>
+        <div class="category" id="complet" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Complet</p>
+        </div>
+        <div class="category" id="habitmuslim" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Habit muslim</p>
+        </div>
+        <div class="category" id="tenuedeceremonie" style="cursor: pointer">
+          <img
+            src="https://i.pinimg.com/736x/90/66/9d/90669df004a2c05ec964b65b31349ef8.jpg"
+            alt=""
+          />
+          <p>Tenue de cérémonie</p>
         </div>
       </div>
     </div>
@@ -83,6 +120,9 @@
     <footer>
       <i class="fa fa-home" style="cursor: pointer">
         <p>Home</p>
+      </i>
+      <i class="fa fa-heart" style="cursor: pointer">
+        <p>Wishlist</p>
       </i>
       <i
         class="fa fa-shopping-bag"
@@ -166,18 +206,13 @@
               bas: document.querySelectorAll(".bas"),
               chaussure: document.querySelectorAll(".chaussure"),
               accessoires: document.querySelectorAll(".accessoire"),
-              abaya: document.querySelectorAll(".abaya"),
               complet: document.querySelectorAll(".complet"),
               habitmuslim: document.querySelectorAll(".habitmuslim"),
-              maquillage: document.querySelectorAll(".maquillage"),
-              skincare: document.querySelectorAll(".skincare"),
-              fragrance: document.querySelectorAll(".fragrance"),
-              haircare: document.querySelectorAll(".haircare"),
-              lunette: document.querySelectorAll(".lunettes"),
-              montre: document.querySelectorAll(".montre"),
-              sac: document.querySelectorAll(".sac"),
-              bracha: document.querySelectorAll(".bracha"),
-              phone: document.querySelectorAll(".phone"),
+              robe: document.querySelectorAll(".robe"),
+              mailles: document.querySelectorAll(".mailles"),
+              tenuesdeceremonie:
+                document.querySelectorAll(".tenuesdeceremonie"),
+              pijama: document.querySelectorAll(".pijama"),
             };
           });
       }
@@ -185,7 +220,7 @@
       // Render products
       function renderProducts(productsArray) {
         productsContainer.innerHTML = "";
-        productsArray = productsArray.filter((p) => p.category === "Beaute");
+        productsArray = productsArray.filter((p) => p.category === "Enfant");
         productsArray.forEach((p) => {
           const div = document.createElement("div");
           div.className = "product";
