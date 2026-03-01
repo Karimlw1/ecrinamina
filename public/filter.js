@@ -83,70 +83,58 @@ function showTotalStock() {
 // ===============================
 // 5. Update products when clicking category
 // ===============================
-function updateView() {
-  const categories = getCategories();
+function filterCategory(categoryName) {
 
-  // Find selected categories
-  const selectedCategories = Object.keys(categories).filter(name => {
-    return boxes[name] && boxes[name].classList.contains("category-active");
+  const allProducts = document.querySelectorAll(".product");
+  const selectedProducts = document.querySelectorAll("." + categoryName);
+
+  // Hide everything
+  allProducts.forEach(product => {
+    product.style.display = "none";
   });
 
-  // Hide all products first
-  Object.keys(categories).forEach(name => {
-    categories[name].forEach(item => {
-      item.style.display = "none";
-    });
+  // Show selected
+  selectedProducts.forEach(product => {
+    product.style.display = "block";
   });
 
-  // If nothing selected, show everything
-  if (selectedCategories.length === 0) {
-    showAllProducts();
-    showTotalStock();
-    refreshCategoryStockUI()
-    removeEmptyMessage();
-    return;
+  // Update message
+  if (selectedProducts.length === 0) {
+    trieMessage.textContent = "Aucun article disponible";
+  } else {
+    trieMessage.textContent =
+      categoryName + " : " + selectedProducts.length + " articles";
   }
-
-  let hasVisibleProduct = false;
-
-  // Show only selected categories
-  selectedCategories.forEach(name => {
-    categories[name].forEach(item => {
-      item.style.display = "block";
-      hasVisibleProduct = true;
-    });
-  });
-
-  trieMessage.textContent = hasVisibleProduct
-    ? formatMessage(selectedCategories)
-    : "Aucun article disponible";
 }
 
 // ===============================
 // 6. Handle button clicks
 // (only one active at a time)
 // ===============================
-let lastActiveBox = null;
+let activeButton = null;
 
-Object.keys(boxes).forEach(name => {
-  const box = boxes[name];
-  if (!box) return;
+categories.forEach(name => {
+  const button = document.getElementById(name);
+  if (!button) return;
 
-  box.onclick = function () {
-    if (lastActiveBox && lastActiveBox !== box) {
-      lastActiveBox.classList.remove("category-active");
+  button.addEventListener("click", function () {
+
+    // Remove active class from previous
+    if (activeButton && activeButton !== button) {
+      activeButton.classList.remove("category-active");
     }
 
-    box.classList.toggle("category-active");
+    // Toggle current
+    button.classList.toggle("category-active");
 
-    if (box.classList.contains("category-active")) {
-      lastActiveBox = box;
+    if (button.classList.contains("category-active")) {
+      activeButton = button;
+      filterCategory(name);
     } else {
-      lastActiveBox = null;
+      activeButton = null;
+      showAllProducts();
     }
-
-    updateView();
-  };
+  });
 });
 
 // ===============================
