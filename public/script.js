@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //*  SLIDER
 
-
   const slides = document.querySelector('.slides');
   const slideItems = document.querySelectorAll('.slide');
   const dots = document.querySelectorAll('.dot');
@@ -172,19 +171,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const div = document.createElement("div");
       div.className = "product";
       div.dataset.id = product.id;
-
-        if(product.isNew) {
-          div.innerHTML += '<span class="new">Nouveau</span>';
-        }
-        if(product.isRunningLow) {
-          div.innerHTML += '<span class="running-low">Bientôt épuisé</span>';
-        }
-        if (product.epuised) {
-          div.innerHTML += '<span class="epuised">Épuisé</span>';
-        }
-        
-
+ 
       div.innerHTML = `
+            ${product.isNew ? '<span class="new">Nouveau</span>' : ""}
+            ${product.isRunningLow ? '<span class="running-low">Bientôt épuisé</span>' : ""}
+            ${product.epuised ? '<span class="epuised">Épuisé</span>' : ""}
+
         <button class="wishlist-btn" data-id="${product.id}">
           <i class="fa ${wishlist.includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
         </button>
