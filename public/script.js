@@ -162,6 +162,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // Render products
+function isProductNew(product) {
+  return product.newUntil && new Date() <= new Date(product.newUntil);
+}
+
   function renderProducts(productsArray) {
 
     productsContainer.innerHTML = "";
@@ -173,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
       div.dataset.id = product.id;
  
       div.innerHTML = `
-            ${product.isNew ? '<span class="new">Nouveau</span>' : ""}
+            ${isProductNew(p) ? '<span class="new">Nouveau</span>' : ""}
             ${product.isRunningLow ? '<span class="running-low">Bientôt épuisé</span>' : ""}
             ${product.epuised ? '<span class="epuised">Épuisé</span>' : ""}
 
@@ -190,7 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
       productsContainer.appendChild(div);
     });
-
     attachWishlistEvents();
   }
 

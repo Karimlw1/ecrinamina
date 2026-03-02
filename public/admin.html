@@ -318,6 +318,9 @@
           price: Number(priceInput.value),
           image: uploadedImages[0],
           images: uploadedImages,
+          newUntil: new Date(
+            Date.now() + 7 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
           options: {
             size: sizesInput.value
               .split(",")
