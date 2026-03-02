@@ -177,7 +177,7 @@ function isProductNew(product) {
       div.dataset.id = product.id;
  
       div.innerHTML = `
-            ${isProductNew(p) ? '<span class="new">Nouveau</span>' : ""}
+            ${isProductNew(product) ? '<span class="new">Nouveau</span>' : ""}
             ${product.isRunningLow ? '<span class="running-low">Bientôt épuisé</span>' : ""}
             ${product.epuised ? '<span class="epuised">Épuisé</span>' : ""}
 

@@ -560,5 +560,41 @@
         "Goma"
       ]
     }
+  },
+  "FasionHp1": {
+    "id": "FasionHp1",
+    "name": "karim",
+    "category": "Enfant",
+    "type": "haut",
+    "price": 20,
+    "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772462539/ecrinamina_products/dnr7lgiy60jimnqqc92g.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772462539/ecrinamina_products/dnr7lgiy60jimnqqc92g.jpg"
+    ],
+    "newUntil": "2026-03-09T14:42:23.266Z",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "color": [
+        "Noir",
+        "Blanc",
+        "Bleu",
+        "Rouge"
+      ]
+    },
+    "lieuDeLIvraison": {
+      "ville": [
+        "kinshasa",
+        "goma",
+        "lubumbashi",
+        "kampala"
+      ]
+    }
   }
 }
