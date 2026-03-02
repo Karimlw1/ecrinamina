@@ -82,12 +82,12 @@ function sendCartToAdmin() {
     return;
   }
 
-  const phone = "243986007232";
+  const phone = "243976203805";
 
   // 1️⃣ Open a blank window (Safari allows this)
   const popup = window.open("", "_blank");
 
-  const serverUrl = "https://mydressingbyamida.onrender.com";
+  const serverUrl = "https://ecrimamina.onrender.com";
 
   // 2️⃣ Create order
   fetch(`${serverUrl}/create-order`, {
@@ -103,7 +103,7 @@ function sendCartToAdmin() {
       const orderLink = `${serverUrl}/order/${data.orderId}`;
 
       const message =
-        "🛍️ Nouvelle commande My Dressing by Amida\n\n" +
+        "🛍️ Nouvelle commande Ecrin d'art d'amina\n\n" +
         "Voir le panier 👇\n" +
         orderLink;
 
