@@ -162,24 +162,6 @@ function removeEmptyMessage() {
   if (msg) msg.remove();
 }
 
-function refreshCategoryStockUI() {
-  const categories = getCategories();
-  Object.keys(categories).forEach(name => {
-    const count = categories[name].length;
-    const box = boxes[name];
-    if (!box) return;
-    const badge = box.querySelector(".badge");
-    if (badge) {
-      badge.textContent = count;
-    } else {
-      const newBadge = document.createElement("span");
-      newBadge.className = "badge";
-      newBadge.textContent = count;
-      box.appendChild(newBadge);
-    }
-  });
-}
-
 
 // ===============================
 // 8. Disable empty categories
