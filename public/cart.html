@@ -37,7 +37,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1;
-    color: antiquewhite;
+    color: rgb(0, 0, 0);
 }
 
 .navbar h4 {
@@ -45,11 +45,21 @@ body {
   letter-spacing: 1px;
   color: #111;
 }
+div.menu {
+  font-size: 20px;
+  color: #444;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+div.menu:hover {
+  transform: translateY(-3px);
+  color: #000;
+}
 
 /* MAIN CART PANEL */
 
 .cart-container {
-  margin: 120px 20px 40px 20px;
+  margin: 20px 20px 40px 20px;
   padding: 30px;
   border-radius: 30px;
   backdrop-filter: blur(30px);
