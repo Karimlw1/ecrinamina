@@ -563,15 +563,15 @@
   },
   "FasionHp1": {
     "id": "FasionHp1",
-    "name": "karim",
-    "category": "Enfant",
-    "type": "haut",
-    "price": 20,
-    "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772462539/ecrinamina_products/dnr7lgiy60jimnqqc92g.jpg",
+    "name": "coco",
+    "price": 32,
+    "category": "Homme",
+    "type": "Allaitement",
     "images": [
-      "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772462539/ecrinamina_products/dnr7lgiy60jimnqqc92g.jpg"
+      "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772574050/ecrinamina_products/yffepu4d3w7okl2ier3v.heic",
+      "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772574067/ecrinamina_products/cbbxlr3wqvgu0prw8bem.jpg"
     ],
-    "newUntil": "2026-03-09T14:42:23.266Z",
+    "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772574050/ecrinamina_products/yffepu4d3w7okl2ier3v.heic",
     "options": {
       "size": [
         "S",
@@ -587,13 +587,33 @@
         "Bleu",
         "Rouge"
       ]
-    },
-    "lieuDeLIvraison": {
-      "ville": [
-        "kinshasa",
-        "goma",
-        "lubumbashi",
-        "kampala"
+    }
+  },
+  "FasionHp300": {
+    "id": "FasionHp300",
+    "name": "fcc_tutorialhh",
+    "price": 6,
+    "category": "Enfant",
+    "type": "Pijama",
+    "images": [
+      "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772573906/ecrinamina_products/egmzwzbt5igtfvvpdsqh.jpg"
+    ],
+    "isNew": true,
+    "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772573906/ecrinamina_products/egmzwzbt5igtfvvpdsqh.jpg",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "color": [
+        "Noir",
+        "Blanc",
+        "Bleu",
+        "Rouge"
       ]
     }
   }
