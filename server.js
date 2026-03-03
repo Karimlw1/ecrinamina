@@ -106,6 +106,8 @@ app.post("/admin/add-product", isAdmin, async (req, res) => {
   res.json({ success: true });
 });
 
+
+
 // Get products
 app.get("/api/products", (req, res) => {
   const products = JSON.parse(fs.readFileSync(PRODUCTS_FILE, "utf-8"));
@@ -154,6 +156,63 @@ app.delete("/admin/delete-product/:id", isAdmin, async (req, res) => {
 
   res.json({ success: true, message: `Produit ${productId} supprimé ✔` });
 });
+// Modifier la disponibilité d'un produit
+app.put("/admin/modify-product/:id", checkAdmin, (req, res) => {
+  const products = readProducts();
+  const id = req.params.id;
+
+  if (!products[id])
+    return res.json({ success:false, error:"Produit introuvable" });
+
+  products[id].available = req.body.available;
+
+  saveProducts(products);
+
+  res.json({
+    success:true,
+    message:"Disponibilité modifiée"
+  });
+});
+
+//modifier le prix d'un produit
+app.put("/admin/modify-product/:id/price", checkAdmin, (req, res) => {
+  const products = readProducts();
+  const id = req.params.id;
+
+  if (!products[id])
+    return res.json({ success:false, error:"Produit introuvable" });
+
+  products[id].price = Number(req.body.price);
+
+  saveProducts(products);
+
+  res.json({ success:true, message:"Prix modifié" });
+});
+
+//modifier le prix d'un produit
+
+app.put("/admin/modify-product/:id/price", checkAdmin, (req, res) => {
+  const products = readProducts();
+  const id = req.params.id;
+
+  if (!products[id])
+    return res.json({ success:false, error:"Produit introuvable" });
+
+  products[id].price = Number(req.body.price);
+
+  saveProducts(products);
+
+  res.json({ success:true, message:"Prix modifié" });
+});
+
+
+// Télécharger orders.json depuis Render
+app.get("/admin/download-orders", isAdmin, (req, res) => {
+  res.download(ORDERS_FILE, "orders.json", (err) => {
+    if (err) console.error("Erreur téléchargement:", err);
+  });
+});
+
 
 
 // Télécharger products.json depuis Render
