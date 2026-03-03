@@ -23,6 +23,9 @@ function checkAdmin(req, res, next) {
   if (req.headers["x-admin-key"] !== process.env.ADMIN_KEY) {
     return res.status(403).json({ error: "Accès refusé / you are not admin" });
   }
+  next();
+  
+}    
 
 // Cloudinary setup
 
