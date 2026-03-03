@@ -250,6 +250,12 @@
             </div>
 
             <script>
+              const idInput = document.getElementById("id");
+              const nameInput = document.getElementById("name");
+              const priceInput = document.getElementById("price");
+              const categorySelect = document.getElementById("category");
+              const typeSelect = document.getElementById("type");
+
               const ADMIN_KEY = "1234";
               const uploadedImages = [];
               const preview = document.getElementById("preview");
@@ -294,7 +300,7 @@
               function trim(str) {
                     return str.trim();
                   }
-                  
+
               document.getElementById("saveProduct").onclick =
                 async function () {
                   this.classList.add("loading");
