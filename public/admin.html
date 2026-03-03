@@ -260,10 +260,10 @@
           Voir les commandes
         </button>
         <button onclick="location.href = 'index.html'">Voir le site</button>
-        <span id="productCount"
-          >nombre de produits existants:
-          <p id="npe"></p
-        ></span>
+        <div id="productCount">
+          nombre de produits existants:
+          <span id="npe"></span>
+        </div>
       </div>
 
       <br />
@@ -577,7 +577,12 @@
       };
       // nombre de produits existants
       fetch("/api/products")
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Erreur serveur");
+          }
+          return res.json();
+        })
         .then((products) => {
           const npe = document.getElementById("npe");
           npe.textContent = Object.keys(products).length;
