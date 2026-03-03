@@ -31,7 +31,7 @@ document.getElementById("giftForm").addEventListener("submit", e => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.target));
-  const phone = "256788064469";
+  const phone = "+243976203805";
 
   const urgent = data.urgent
     ? "⚠ DEMANDE URGENTE\n"

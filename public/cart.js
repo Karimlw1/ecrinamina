@@ -46,7 +46,7 @@ function addToCart(product) {
       image: product.image,
       size: product.size || null,
       color: product.color || null,
-      ville: product.ville || null,
+      ville: product.ville.value || null,
       qty: 1
     });
   }

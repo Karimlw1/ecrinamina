@@ -38,11 +38,11 @@ function initProduct() {
 
 function renderProduct() {
   const optionsContainer = document.getElementById("options");
-  const lieuDeLIvraisonContainer = document.getElementById("lieuDeLIvraison");
+  const lieuDeLIvraisonContainer = document.getElementById("lieuDeLIvraison").value || alert("Veuillez entrer un lieu de livraison");
 
   if (product.options?.size) {
     optionsContainer.innerHTML += `
-      <label>Cliquer pour Choisir la Taille :</label>
+      <label>Taille :</label>
       <select id="size">
         ${product.options.size.map(s => `<option>${s}</option>`).join("")}
       </select>
@@ -51,20 +51,21 @@ function renderProduct() {
 
   if (product.options?.color) {
     optionsContainer.innerHTML += `
-      <label>Cliquer pour Choisir la Couleur :</label>
+      <label>Couleur :</label>
       <select id="color">
         ${product.options.color.map(c => `<option>${c}</option>`).join("")}
       </select>
     `;
   }
 
-
-  if (product.lieuDeLIvraison?.ville) {
     lieuDeLIvraisonContainer.innerHTML += `
-      <label>Cliquer pour choisir le lieu de livraison :</label>
-      <select id="ville" required>
-        ${product.lieuDeLIvraison.ville.map(v => `<option value="${v}">${v}</option>`).join("")}
-      </select>
+      <label>Entrer lieu de livraison :</label>
+        ${product.lieuDeLIvraison.localisation.map(v => `<input type="text" value="${v}" required>${v}</input>`).join("")} 
+    `;
+  if (!product.lieuDeLIvraison.localisation || product.lieuDeLIvraison.localisation.length === 0) {
+    lieuDeLIvraisonContainer.innerHTML += `
+      <label>Entrer lieu de livraison :</label>
+      <input type="text" id="customLocalisation" required />
     `;
   }
 
@@ -133,9 +134,9 @@ function renderProduct() {
   document.getElementById("addToCart").addEventListener("click", () => {
     const size = document.getElementById("size")?.value || null;
     const color = document.getElementById("color")?.value || null;
-    const ville = document.getElementById("ville")?.value?.trim() || null;
+    const localisation = document.getElementById("localisation")?.value?.trim() || null;
 
-    if (!ville) {
+    if (!localisation) {
       alert("Veuillez choisir un lieu de livraison");
       return;
     }
@@ -148,8 +149,7 @@ function renderProduct() {
       image: images[currentIndex],
       size,
       color,
-      ville
-    });
+      localisation   });
 
     alert("Produit ajouté au panier ✔");
   });
