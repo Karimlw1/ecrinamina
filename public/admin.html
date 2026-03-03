@@ -310,11 +310,11 @@
 
 
                   const product = {
-                    id: id.value.trim(),
-                    name: name.value.trim(),
-                    category: category.value,
-                    type: type.value,
-                    price: Number(price.value),
+                    id: idInput.value.trim(),
+                    name: nameInput.value.trim(),
+                    price: Number(priceInput.value),
+                    category: categorySelect.value,
+                    type: typeSelect.value,
                     images: uploadedImages,
                     image: uploadedImages[0],
                     newUntil:
