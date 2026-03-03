@@ -24,7 +24,7 @@ function checkAdmin(req, res, next) {
     return res.status(403).json({ error: "Accès refusé / you are not admin" });
   }
   next();
-  
+
 }    
 
 // Cloudinary setup
@@ -61,6 +61,13 @@ function isAdmin(req, res, next) {
 
 // ROUTES
 
+function readProducts() {
+  return JSON.parse(fs.readFileSync(PRODUCTS_FILE, "utf-8"));
+}
+
+function saveProducts(products) {
+  fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2));
+}
 
 // Upload image to Cloudinary
 app.post("/admin/upload-image", isAdmin, upload.single("image"), async (req, res) => {
@@ -195,23 +202,24 @@ app.put("/admin/modify-product/:id/price", checkAdmin, (req, res) => {
 
   res.json({ success:true, message:"Prix modifié" });
 });
-
-//modifier le prix d'un produit
-
-app.put("/admin/modify-product/:id/price", checkAdmin, (req, res) => {
+// Modifier le nom d'un produit
+app.put("/admin/modify-product/:id/name", checkAdmin, (req, res) => {
   const products = readProducts();
   const id = req.params.id;
 
-  if (!products[id])
-    return res.json({ success:false, error:"Produit introuvable" });
+  if (!products[id]) {
+    return res.json({ success: false, error: "Produit introuvable" });
+  }
 
-  products[id].price = Number(req.body.price);
+  products[id].name = req.body.name;
 
   saveProducts(products);
 
-  res.json({ success:true, message:"Prix modifié" });
+  res.json({
+    success: true,
+    message: "Nom modifié ✔"
+  });
 });
-
 
 // Télécharger orders.json depuis Render
 app.get("/admin/download-orders", isAdmin, (req, res) => {

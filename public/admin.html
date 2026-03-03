@@ -312,7 +312,7 @@
                         .map((c) => c.trim())
                         .filter(Boolean),
                     },
-                    lieuDeLivraison: {
+                    lieuDeLIvraison: {
                       ville: villes.value
                         .split(",")
                         .map((v) => v.trim())
@@ -433,7 +433,7 @@
                   showStatus("deleteStatus", e.message, "error");
                 }
               };
-
+              
               safeFetch("/api/products")
                 .then((products) => {
                   document.getElementById("npe").textContent =
