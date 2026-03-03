@@ -208,6 +208,6 @@ a i {
     transition: all 0.3s ease;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     right: 62px;
 }
