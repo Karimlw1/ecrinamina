@@ -4,33 +4,54 @@ let product = null;
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
+const loader = document.getElementById("productLoader");
+const toast = document.getElementById("toast");
+
+function showToast(message, isError = false) {
+  if (!toast) {
+    alert(message);
+    return;
+  }
+  toast.textContent = message;
+  toast.className = "toast show";
+  if (isError) toast.classList.add("error");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+function toggleLoader(show) {
+  if (!loader) return;
+  loader.style.display = show ? "flex" : "none";
+}
+
+toggleLoader(true);
+
 fetch("/api/products")
   .then(res => res.json())
   .then(data => {
     PRODUCTS = data;
     initProduct();
-    refreshCategoryStockUI();
   })
   .catch(err => {
     console.error("Erreur chargement produits:", err);
+    showToast("Erreur de chargement produit", true);
+  })
+  .finally(() => {
+    toggleLoader(false);
   });
 
 function initProduct() {
   if (!id) {
-    console.log("ID produit manquant dans l'URL");
+    showToast("ID produit manquant dans l'URL", true);
     return;
   }
 
   product = PRODUCTS[id];
 
   if (!product) {
-    console.log("ID demandé:", id);
-    console.log("Tous les produits:", PRODUCTS);
-    alert("Produit introuvable");
+    showToast("Produit introuvable", true);
     return;
   }
 
-  // Injecter id si absent
   if (!product.id) {
     product.id = id;
   }
@@ -40,112 +61,141 @@ function initProduct() {
 
 function renderProduct() {
   const optionsContainer = document.getElementById("options");
-  const lieuDeLIvraisonContainer = document.getElementById("lieuDeLIvraison");
+  const livraisonContainer = document.getElementById("lieuDeLIvraison");
 
-  // Nettoyage pour éviter doublons
+  if (!optionsContainer || !livraisonContainer) return;
+
   optionsContainer.innerHTML = "";
-  lieuDeLIvraisonContainer.innerHTML = "";
+  livraisonContainer.innerHTML = "";
 
-  /* =========================
-     OPTIONS (TAILLE / COULEUR)
-  ========================== */
+  /* OPTIONS */
 
   if (product.options?.size?.length) {
-    optionsContainer.innerHTML += `
-      <label>Taille :</label>
-      <select id="size">
-        ${product.options.size
-          .map(s => `<option value="${s}">${s}</option>`)
-          .join("")}
-      </select>
-    `;
+    const sizeSelect = document.createElement("select");
+    sizeSelect.id = "size";
+
+    product.options.size.forEach(s => {
+      const option = document.createElement("option");
+      option.value = s;
+      option.textContent = s;
+      sizeSelect.appendChild(option);
+    });
+
+    const label = document.createElement("label");
+    label.textContent = "Taille :";
+
+    optionsContainer.appendChild(label);
+    optionsContainer.appendChild(sizeSelect);
   }
 
   if (product.options?.color?.length) {
-    optionsContainer.innerHTML += `
-      <label>Couleur :</label>
-      <select id="color">
-        ${product.options.color
-          .map(c => `<option value="${c}">${c}</option>`)
-          .join("")}
-      </select>
-    `;
+    const colorSelect = document.createElement("select");
+    colorSelect.id = "color";
+
+    product.options.color.forEach(c => {
+      const option = document.createElement("option");
+      option.value = c;
+      option.textContent = c;
+      colorSelect.appendChild(option);
+    });
+
+    const label = document.createElement("label");
+    label.textContent = "Couleur :";
+
+    optionsContainer.appendChild(label);
+    optionsContainer.appendChild(colorSelect);
   }
 
-  /* =========================
-     LOCALISATION (LIVRAISON)
-  ========================== */
+  /* LIVRAISON */
 
-  lieuDeLIvraisonContainer.innerHTML = `
-    <label>Entrer lieu de livraison :</label>
-    <input 
-      type="text" 
-      id="localisation" 
-      placeholder="Votre adresse"
-      required
-    >
-  `;
+  const livraisonLabel = document.createElement("label");
+  livraisonLabel.textContent = "Entrer lieu de livraison :";
 
-  /* =========================
-     INFOS PRODUIT
-  ========================== */
+  const livraisonInput = document.createElement("input");
+  livraisonInput.type = "text";
+  livraisonInput.id = "localisation";
+  livraisonInput.placeholder = "Votre adresse";
+  livraisonInput.required = true;
+
+  livraisonContainer.appendChild(livraisonLabel);
+  livraisonContainer.appendChild(livraisonInput);
+
+  /* INFOS PRODUIT */
 
   document.getElementById("name").textContent = product.name || "";
   document.getElementById("price").textContent = (product.price || 0) + "$";
   document.getElementById("category").textContent = product.category || "";
   document.getElementById("product-id").textContent = `ID: ${product.id}`;
 
-  /* =========================
-     CAROUSEL
-  ========================== */
+  if (product.available === false) {
+    document.getElementById("addToCart").disabled = true;
+    showToast("Produit actuellement indisponible", true);
+  }
 
+  setupCarousel();
+  setupAddToCart();
+}
+
+function setupCarousel() {
   const mainImage = document.getElementById("mainImage");
-  const thumbs = document.getElementById("thumbs");
+  const thumbsContainer = document.getElementById("thumbs");
+
+  if (!mainImage || !thumbsContainer) return;
 
   let currentIndex = 0;
   const images = product.images?.length
     ? product.images
-    : [product.image];
+    : product.image
+    ? [product.image]
+    : [];
 
-  if (!images || !images.length) return;
+  if (!images.length) return;
 
   mainImage.src = images[0];
+  mainImage.style.transition = "opacity 0.3s ease";
 
-  thumbs.innerHTML = images.map((img, index) => `
-    <img 
-      src="${img}" 
-      data-index="${index}" 
-      class="${index === 0 ? "active" : ""}"
-    >
-  `).join("");
+  thumbsContainer.innerHTML = "";
+
+  images.forEach((img, index) => {
+    const thumb = document.createElement("img");
+    thumb.src = img;
+    thumb.dataset.index = index;
+    if (index === 0) thumb.classList.add("active");
+
+    thumb.addEventListener("click", () => {
+      currentIndex = index;
+      updateImage();
+    });
+
+    thumbsContainer.appendChild(thumb);
+  });
 
   function updateImage() {
-    mainImage.src = images[currentIndex];
-    document.querySelectorAll(".thumbs img").forEach((thumb, i) => {
+    mainImage.style.opacity = 0;
+    setTimeout(() => {
+      mainImage.src = images[currentIndex];
+      mainImage.style.opacity = 1;
+    }, 150);
+
+    document.querySelectorAll("#thumbs img").forEach((thumb, i) => {
       thumb.classList.toggle("active", i === currentIndex);
     });
   }
 
-  document.querySelectorAll(".thumbs img").forEach(img => {
-    img.addEventListener("click", () => {
-      currentIndex = Number(img.dataset.index);
+  const nextBtn = document.querySelector(".next");
+  const prevBtn = document.querySelector(".prev");
+
+  if (nextBtn)
+    nextBtn.onclick = () => {
+      currentIndex = (currentIndex + 1) % images.length;
       updateImage();
-    });
-  });
+    };
 
-  document.querySelector(".next").addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateImage();
-  });
-
-  document.querySelector(".prev").addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateImage();
-  });
-
-  /* =========================
-     SWIPE MOBILE
-  ========================== */
+  if (prevBtn)
+    prevBtn.onclick = () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateImage();
+    };
 
   let startX = 0;
 
@@ -166,36 +216,35 @@ function renderProduct() {
 
     updateImage();
   });
+}
 
-  /* =========================
-     ADD TO CART
-  ========================== */
+function setupAddToCart() {
+  const button = document.getElementById("addToCart");
+  if (!button) return;
 
-  document
-    .getElementById("addToCart")
-    .addEventListener("click", () => {
+  button.onclick = () => {
+    const size = document.getElementById("size")?.value || null;
+    const color = document.getElementById("color")?.value || null;
+    const localisation =
+      document.getElementById("localisation")?.value.trim();
 
-      const size = document.getElementById("size")?.value || null;
-      const color = document.getElementById("color")?.value || null;
-      const localisation =
-        document.getElementById("localisation")?.value.trim();
+    if (!localisation) {
+      showToast("Veuillez entrer votre lieu de livraison", true);
+      return;
+    }
 
-      if (!localisation) {
-        alert("Veuillez entrer votre lieu de livraison");
-        return;
-      }
-
-      addToCart({
-        id: product.id,
-        name: product.name,
-        category: product.category,
-        price: product.price,
-        image: images[currentIndex],
-        size,
-        color,
-        localisation
-      });
-
-      alert("Produit ajouté au panier ✔");
+    addToCart({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      price: product.price,
+      image: product.images?.[0] || product.image,
+      size,
+      color,
+      localisation
     });
+
+    button.classList.add("added");
+    showToast("Produit ajouté au panier ✔");
+  };
 }
