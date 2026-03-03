@@ -1,483 +1,490 @@
 <!doctype html>
 <html lang="fr">
-      <head>
+<head>
 <meta charset="UTF-8" />
 <title>Admin – Ecrin d'art d'amina</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-        <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0"
-            />
-            <link
-              href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-              rel="stylesheet"
-            />
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-            <style>
-              * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-              }
-              body {
-                font-family: "Inter", sans-serif;
-                background: linear-gradient(135deg, #f6f7fb, #e9ecf5);
-                color: #2c2c2c;
-              }
-              .admin {
-                max-width: 1100px;
-                margin: 40px 4%;
-                padding: 40px;
-                background: #fff;
-                border-radius: 20px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-              }
-              h2 {
-                margin-bottom: 25px;
-                font-size: 28px;
-              }
-              .section {
-                margin-bottom: 40px;
-                padding: 25px;
-                border-radius: 16px;
-                background: #fafafa;
-                border: 1px solid #eee;
-              }
-              .section h3 {
-                margin-bottom: 15px;
-              }
+body {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #f1f5f9;
+  min-height: 100vh;
+}
 
-              .grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 15px;
-              }
-              input,
-              select {
-                padding: 12px;
-                border-radius: 10px;
-                border: 1px solid #ddd;
-                background: #fff;
-                margin: 10px;
-              }
-              input:focus,
-              select:focus {
-                outline: none;
-                border-color: #000;
-              }
+.admin {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 40px;
+}
 
-              button {
-                padding: 12px 20px;
-                border: none;
-                border-radius: 10px;
-                background: #487d46;
-                color: #fff;
-                cursor: pointer;
-                transition: 0.2s;
-              }
-              button:hover {
-                opacity: 0.85;
-              }
-              button.loading {
-                opacity: 0.6;
-                pointer-events: none;
-              }
+h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
 
-              .preview {
-                display: flex;
-                gap: 10px;
-                flex-wrap: wrap;
-                margin-top: 10px;
-              }
-              .preview img {
-                width: 90px;
-                height: 90px;
-                object-fit: cover;
-                border-radius: 8px;
-              }
+.section {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: 0.3s ease;
+}
 
-              .status {
-                margin-top: 10px;
-                font-size: 14px;
-                font-weight: 600;
-              }
-              .success {
-                color: green;
-              }
-              .error {
-                color: red;
-              }
+.section:hover {
+  transform: translateY(-3px);
+}
 
-              .counter-box {
-                padding: 10px;
-                background: #ff0000;
-                color: #ffffff;
-                border-radius: 8px;
-                display: inline-block;
-                margin-top: 10px;
-                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
-              }
-              @media (max-width: 768px) {
-                .grid {
-                  grid-template-columns: 1fr;
-                }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="admin">
-              <h2>Admin Dashboard</h2>
+.section h3 {
+  margin-bottom: 20px;
+  font-weight: 600;
+}
 
-              <div class="section">
-                <h3>Ajouter un produit</h3>
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
 
-                <div class="grid">
-                  <input id="id" placeholder="ID produit" />
-                  <input id="name" placeholder="Nom du produit" />
-                  <input id="price" type="number" placeholder="Prix" />
+input,
+select {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.07);
+  color: white;
+  outline: none;
+  transition: 0.2s;
+}
 
-                  <select id="category">
-                    <option value="">Choisir la page</option>
-                    <option value="Homme">Homme</option>
-                    <option value="Femme">Femme</option>
-                    <option value="Enfant">Enfant</option>
-                    <option value="Cadeau">Cadeau</option>
-                    <option value="Maternite">Maternite</option>
-                    <option value="CadeauSpecial">Cadeau Special</option>
-                    <option value="Sport">Sport</option>
-                  </select>
+input:focus,
+select:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+}
 
-                  <select id="type">
-                    <option value="">Type de produit</option>
-                    <option value="haut">Haut</option>
-                    <option value="bas">Bas</option>
-                    <option value="chaussure">Chaussure</option>
-                    <option value="accessoire">Accessoire</option>
-                    <option value="lingerie">Lingerie</option>
-                    <option value="robe">Robe</option>
-                    <option value="habitmuslim">Habit Muslim</option>
-                    <option value="complet">Complet</option>
-                    <option value="maquillage">maquillage</option>
-                    <option value="fragrance">fragrance</option>
-                    <option value="haircare">haircare</option>
-                    <option value="Lunettes">Lunettes</option>
-                    <option value="Sac">Sac</option>
-                    <option value="bracha">bracha</option>
-                    <option value="Phone">Phone</option>
-                    <option value="Pijama">Pijama</option>
-                    <option value="Mailles">Mailles</option>
-                    <option value="Tenuesdeceremonie">
-                      Tenues de Cérémonie
-                    </option>
-                    <option value="Allaitement">Allaitement</option>
-                    <option value="Ensembledenuit">Ensemble de Nuit</option>
-                    <option value="Shooting">Shooting</option>
-                    <option value="Gourde">Gourde</option>
-                  </select>
+button {
+  padding: 14px 22px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: white;
+  transition: 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
-                  <input id="sizes" placeholder="Tailles (S,M,L)" />
-                  <input id="colors" placeholder="Couleurs" />
-                  <input id="villes" placeholder="Villes" />
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(14,165,233,0.4);
+}
 
-                  <input
-                    id="newDays"
-                    type="number"
-                    placeholder="Durée NEW (jours)"
-                    value="7"
-                  />
-                </div>
+button.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
 
-                <br />
-                <input type="file" id="imageInput" multiple />
-                <button id="uploadBtn">Uploader images</button>
-                <div class="preview" id="preview"></div>
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
 
-                <br />
-                <button id="saveProduct">Enregistrer</button>
-                <div id="saveStatus" class="status"></div>
-              </div>
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
-              <div class="section">
-                <h3>Modifier disponibilité</h3>
-                <input id="modifyProductId" placeholder="ID" />
-                <select id="modifyAvailability">
-                  <option value="">Choisir</option>
-                  <option value="true">Disponible</option>
-                  <option value="false">Indisponible</option>
-                </select>
-                <button id="modifyBtn">Modifier</button>
-                <div id="modifyStatus" class="status"></div>
-              </div>
+.preview {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
 
-              <div class="section">
-                <h3>Modifier prix</h3>
-                <input id="modifyProductPriceId" placeholder="ID" />
-                <input
-                  id="modifyProductPrice"
-                  type="number"
-                  placeholder="Nouveau prix"
-                />
-                <button id="modifyPriceBtn">Modifier</button>
-                <div id="priceStatus" class="status"></div>
-              </div>
+.preview img {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+}
 
-              <div class="section">
-                <h3>Modifier nom</h3>
-                <input id="modifyProductNameId" placeholder="ID" />
-                <input id="modifyProductName" placeholder="Nouveau nom" />
-                <button id="modifyNameBtn">Modifier</button>
-                <div id="nameStatus" class="status"></div>
-              </div>
+.counter-box {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg,#ef4444,#dc2626);
+  font-weight: 700;
+}
 
-              <div class="section">
-                <h3>Supprimer produit</h3>
-                <input id="deleteProductId" placeholder="ID" />
-                <button id="deleteBtn">Supprimer</button>
-                <div id="deleteStatus" class="status"></div>
-              </div>
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  background: #16a34a;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.3s ease;
+  z-index: 9999;
+}
 
-              <div class="counter-box">
-                Produits existants : <span id="npe" style="font-weight: bold; font-weight: bold;
-    color: #000000;
-    padding: 5px;
-    background: white;
-    border-radius: 10px;
-    font: caption;">...</span>
-              </div>
-              <div class="telecharger-products.json">
-                <button id="downloadProducts">Télécharger products.json</button> </div>
-              </div>
-            </div>
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-            <script>
-              const idInput = document.getElementById("id");
-              const nameInput = document.getElementById("name");
-              const priceInput = document.getElementById("price");
-              const categorySelect = document.getElementById("category");
-              const typeSelect = document.getElementById("type");
+.toast.error {
+  background: #dc2626;
+}
 
-              const ADMIN_KEY = "1234";
-              const uploadedImages = [];
-              const preview = document.getElementById("preview");
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: 999;
+}
 
-              function showStatus(id, message, type = "success") {
-                const el = document.getElementById(id);
-                el.textContent = message;
-                el.className = "status " + type;
-              }
+.overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
 
-              async function safeFetch(url, options) {
-                const res = await fetch(url, options);
-                const text = await res.text();
-                try {
-                  return JSON.parse(text);
-                } catch {
-                  console.error("Server returned:", text);
-                  throw new Error("Réponse serveur invalide");
-                }
-              } 
+.overlay .spinner {
+  width: 50px;
+  height: 50px;
+  border-width: 5px;
+}
 
+@media(max-width:768px){
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
 
-              document.getElementById("uploadBtn").onclick = async () => {
-                const files = document.getElementById("imageInput").files;
-                for (let file of files) {
-                  const formData = new FormData();
-                  formData.append("image", file);
-                  const data = await safeFetch("/admin/upload-image", {
-                    method: "POST",
-                    headers: { "x-admin-key": ADMIN_KEY },
-                    body: formData,
-                  });
-                  if (data.imageUrl) {
-                    uploadedImages.push(data.imageUrl);
-                    const img = document.createElement("img");
-                    img.src = data.imageUrl;
-                    preview.appendChild(img);
-                  }
-                }
-              };
+<body>
 
-              function trim(str) {
-                    return str.trim();
-                  }
+<div class="overlay" id="overlay">
+  <div class="spinner"></div>
+</div>
 
-              document.getElementById("saveProduct").onclick =
-                async function () {
-                  this.classList.add("loading");
+<div class="toast" id="toast"></div>
 
-                  const newDays =
-                    Number(document.getElementById("newDays").value) || 0;
+<div class="admin">
+<h2>Admin Dashboard</h2>
 
+<div class="section">
+<h3>Ajouter un produit</h3>
 
-                  const product = {
-                    id: idInput.value.trim(),
-                    name: nameInput.value.trim(),
-                    price: Number(priceInput.value),
-                    category: categorySelect.value,
-                    type: typeSelect.value,
-                    images: uploadedImages,
-                    image: uploadedImages[0],
-                    newUntil:
-                      newDays > 0
-                        ? new Date(
-                            Date.now() + newDays * 86400000,
-                          ).toISOString()
-                        : null,
-                    options: {
-                      size: sizes.value
-                        .split(",")
-                        .map((s) => s.trim())
-                        .filter(Boolean),
-                      color: colors.value
-                        .split(",")
-                        .map((c) => c.trim())
-                        .filter(Boolean),
-                    },
-                    lieuDeLIvraison: {
-                      ville: villes.value
-                        .split(",")
-                        .map((v) => v.trim())
-                        .filter(Boolean),
-                    },
-                  };
+<div class="grid">
+<input id="id" placeholder="ID produit" />
+<input id="name" placeholder="Nom du produit" />
+<input id="price" type="number" placeholder="Prix" />
+<select id="category">
+<option value="">Choisir la page</option>
+<option value="Homme">Homme</option>
+<option value="Femme">Femme</option>
+<option value="Enfant">Enfant</option>
+<option value="Cadeau">Cadeau</option>
+<option value="Maternite">Maternite</option>
+<option value="CadeauSpecial">Cadeau Special</option>
+<option value="Sport">Sport</option>
+</select>
+<select id="type">
+<option value="">Type de produit</option>
+<option value="haut">Haut</option>
+<option value="bas">Bas</option>
+<option value="chaussure">Chaussure</option>
+<option value="accessoire">Accessoire</option>
+<option value="lingerie">Lingerie</option>
+<option value="robe">Robe</option>
+<option value="habitmuslim">Habit Muslim</option>
+<option value="complet">Complet</option>
+<option value="maquillage">maquillage</option>
+<option value="fragrance">fragrance</option>
+<option value="haircare">haircare</option>
+<option value="Lunettes">Lunettes</option>
+<option value="Sac">Sac</option>
+</select>
+<input id="sizes" placeholder="Tailles (S,M,L)" />
+<input id="colors" placeholder="Couleurs" />
+<input id="villes" placeholder="Villes" />
+<input id="newDays" type="number" value="7" />
+</div>
 
-                  try {
-                    const data = await safeFetch("/admin/add-product", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                        "x-admin-key": ADMIN_KEY,
-                      },
-                      body: JSON.stringify(product),
-                    });
+<br/>
+<input type="file" id="imageInput" multiple />
+<button id="uploadBtn"><span class="btn-text">Uploader images</span></button>
 
-                    if (data.success) {
-                      showStatus("saveStatus", "Produit ajouté ✔");
-                    } else {
-                      showStatus("saveStatus", "Erreur serveur", "error");
-                    }
-                  } catch (e) {
-                    showStatus("saveStatus", e.message, "error");
-                  }
+<div class="preview" id="preview"></div>
 
-                  this.classList.remove("loading");
-                };
+<br/>
+<button id="saveProduct"><span class="btn-text">Enregistrer</span></button>
+</div>
 
-              document.getElementById("modifyBtn").onclick = async () => {
-                try {
-                  const data = await safeFetch(
-                    `/admin/modify-product/${modifyProductId.value}`,
-                    {
-                      method: "PUT",
-                      headers: {
-                        "Content-Type": "application/json",
-                        "x-admin-key": ADMIN_KEY,
-                      },
-                      body: JSON.stringify({
-                        available: modifyAvailability.value === "true",
-                      }),
-                    },
-                  );
-                  showStatus(
-                    "modifyStatus",
-                    data.success ? "Modifié ✔" : "Erreur",
-                    "error",
-                  );
-                } catch (e) {
-                  showStatus("modifyStatus", e.message, "error");
-                }
-              };
+<div class="section">
+<h3>Modifier disponibilité</h3>
+<input id="modifyProductId" placeholder="ID"/>
+<select id="modifyAvailability">
+<option value="">Choisir</option>
+<option value="true">Disponible</option>
+<option value="false">Indisponible</option>
+</select>
+<button id="modifyBtn"><span class="btn-text">Modifier</span></button>
+</div>
 
-              document.getElementById("modifyPriceBtn").onclick = async () => {
-                try {
-                  const data = await safeFetch(
-                    `/admin/modify-product/${modifyProductPriceId.value}/price`,
-                    {
-                      method: "PUT",
-                      headers: {
-                        "Content-Type": "application/json",
-                        "x-admin-key": ADMIN_KEY,
-                      },
-                      body: JSON.stringify({
-                        price: Number(modifyProductPrice.value),
-                      }),
-                    },
-                  );
-                  showStatus(
-                    "priceStatus",
-                    data.success ? "Prix modifié ✔" : "Erreur",
-                    "error",
-                  );
-                } catch (e) {
-                  showStatus("priceStatus", e.message, "error");
-                }
-              };
+<div class="section">
+<h3>Modifier prix</h3>
+<input id="modifyProductPriceId" placeholder="ID"/>
+<input id="modifyProductPrice" type="number" placeholder="Nouveau prix"/>
+<button id="modifyPriceBtn"><span class="btn-text">Modifier</span></button>
+</div>
 
-              document.getElementById("modifyNameBtn").onclick = async () => {
-                try {
-                  const data = await safeFetch(
-                    `/admin/modify-product/${modifyProductNameId.value}/name`,
-                    {
-                      method: "PUT",
-                      headers: {
-                        "Content-Type": "application/json",
-                        "x-admin-key": ADMIN_KEY,
-                      },
-                      body: JSON.stringify({ name: modifyProductName.value }),
-                    },
-                  );
-                  showStatus(
-                    "nameStatus",
-                    data.success ? "Nom modifié ✔" : "Erreur",
-                    "error",
-                  );
-                } catch (e) {
-                  showStatus("nameStatus", e.message, "error");
-                }
-              };
+<div class="section">
+<h3>Modifier nom</h3>
+<input id="modifyProductNameId" placeholder="ID"/>
+<input id="modifyProductName" placeholder="Nouveau nom"/>
+<button id="modifyNameBtn"><span class="btn-text">Modifier</span></button>
+</div>
 
-              document.getElementById("deleteBtn").onclick = async () => {
-                try {
-                  const data = await safeFetch(
-                    `/admin/delete-product/${deleteProductId.value}`,
-                    {
-                      method: "DELETE",
-                      headers: { "x-admin-key": ADMIN_KEY },
-                    },
-                  );
-                  showStatus(
-                    "deleteStatus",
-                    data.success ? "Supprimé ✔" : "Erreur",
-                    "error",
-                  );
-                } catch (e) {
-                  showStatus("deleteStatus", e.message, "error");
-                }
-              };
-              
-              safeFetch("/api/products")
-                .then((products) => {
-                  document.getElementById("npe").textContent =
-                    Object.keys(products).length;
-                })
-                .catch(() => {
-                  document.getElementById("npe").textContent = "Erreur";
-                });
-              
-                document.getElementById("downloadProducts").onclick = async () => { const res = await
-                   fetch("/admin/download-products", { headers: 
-                    { "x-admin-key": "1234" },
-                  });
-                    if (!res.ok)
-                     return alert("Erreur 😢");
-                      const blob = await res.blob();
-                 const url = window.URL.createObjectURL(blob);
-                  const a = document.createElement("a"); a.href = url;
-                  a.download = "products.json"; a.click(); };
-            </script>
-          </body>
-        </html>
-      </div>
-    </div>
-  </body>
+<div class="section">
+<h3>Supprimer produit</h3>
+<input id="deleteProductId" placeholder="ID"/>
+<button id="deleteBtn"><span class="btn-text">Supprimer</span></button>
+</div>
+
+<div class="counter-box">
+Produits existants : <span id="npe">...</span>
+</div>
+
+<br/>
+<button id="downloadProducts"><span class="btn-text">Télécharger products.json</span></button>
+
+</div>
+
+<script>
+const ADMIN_KEY = "1234";
+const overlay = document.getElementById("overlay");
+const toast = document.getElementById("toast");
+
+function showToast(message, isError = false){
+  toast.textContent = message;
+  toast.className = "toast show";
+  if(isError) toast.classList.add("error");
+  setTimeout(()=> toast.classList.remove("show"),3000);
+}
+
+function setLoading(button, loading, text){
+  const span = button.querySelector(".btn-text");
+  if(loading){
+    button.classList.add("loading");
+    span.innerHTML = '<span class="spinner"></span> ' + text;
+  } else {
+    button.classList.remove("loading");
+    span.textContent = text;
+  }
+}
+
+function toggleOverlay(show){
+  overlay.classList.toggle("active", show);
+}
+
+async function safeFetch(url, options){
+  const res = await fetch(url, options);
+  const text = await res.text();
+  try { return JSON.parse(text); }
+  catch { throw new Error("Réponse serveur invalide"); }
+}
+
+document.getElementById("uploadBtn").onclick = async function(){
+  setLoading(this,true,"Upload...");
+  const files = document.getElementById("imageInput").files;
+  const preview = document.getElementById("preview");
+  for(const file of files){
+    const formData = new FormData();
+    formData.append("image",file);
+    const data = await safeFetch("/admin/upload-image",{
+      method:"POST",
+      headers:{"x-admin-key":ADMIN_KEY},
+      body:formData
+    });
+    if(data.imageUrl){
+      const img=document.createElement("img");
+      img.src=data.imageUrl;
+      preview.appendChild(img);
+    }
+  }
+  setLoading(this,false,"Uploader images");
+};
+
+document.getElementById("saveProduct").onclick = async function(){
+  setLoading(this,true,"Enregistrement...");
+  toggleOverlay(true);
+
+  try{
+    const product={
+      id:document.getElementById("id").value.trim(),
+      name:document.getElementById("name").value.trim(),
+      price:Number(document.getElementById("price").value),
+      category:document.getElementById("category").value,
+      type:document.getElementById("type").value
+    };
+
+    if(!product.id || !product.name || !product.price){
+      showToast("Champs obligatoires manquants",true);
+      return;
+    }
+
+    const data=await safeFetch("/admin/add-product",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "x-admin-key":ADMIN_KEY
+      },
+      body:JSON.stringify(product)
+    });
+
+    if(data.success){
+      showToast("Produit ajouté avec succès");
+      document.querySelectorAll("input").forEach(i=>i.value="");
+    } else {
+      showToast("Erreur serveur",true);
+    }
+  } catch(e){
+    showToast(e.message,true);
+  }
+
+  toggleOverlay(false);
+  setLoading(this,false,"Enregistrer");
+};
+
+document.getElementById("modifyBtn").onclick = async function(){
+  setLoading(this,true,"Modification...");
+  try{
+    const data=await safeFetch(`/admin/modify-product/${modifyProductId.value}`,{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        "x-admin-key":ADMIN_KEY
+      },
+      body:JSON.stringify({
+        available:modifyAvailability.value==="true"
+      })
+    });
+    data.success ? showToast("Disponibilité modifiée") : showToast("Erreur",true);
+  } catch(e){
+    showToast(e.message,true);
+  }
+  setLoading(this,false,"Modifier");
+};
+
+document.getElementById("modifyPriceBtn").onclick = async function(){
+  setLoading(this,true,"Modification...");
+  try{
+    const data=await safeFetch(`/admin/modify-product/${modifyProductPriceId.value}/price`,{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        "x-admin-key":ADMIN_KEY
+      },
+      body:JSON.stringify({
+        price:Number(modifyProductPrice.value)
+      })
+    });
+    data.success ? showToast("Prix modifié") : showToast("Erreur",true);
+  } catch(e){
+    showToast(e.message,true);
+  }
+  setLoading(this,false,"Modifier");
+};
+
+document.getElementById("modifyNameBtn").onclick = async function(){
+  setLoading(this,true,"Modification...");
+  try{
+    const data=await safeFetch(`/admin/modify-product/${modifyProductNameId.value}/name`,{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        "x-admin-key":ADMIN_KEY
+      },
+      body:JSON.stringify({
+        name:modifyProductName.value
+      })
+    });
+    data.success ? showToast("Nom modifié") : showToast("Erreur",true);
+  } catch(e){
+    showToast(e.message,true);
+  }
+  setLoading(this,false,"Modifier");
+};
+
+document.getElementById("deleteBtn").onclick = async function(){
+  if(!confirm("Confirmer la suppression ?")) return;
+  setLoading(this,true,"Suppression...");
+  try{
+    const data=await safeFetch(`/admin/delete-product/${deleteProductId.value}`,{
+      method:"DELETE",
+      headers:{"x-admin-key":ADMIN_KEY}
+    });
+    data.success ? showToast("Produit supprimé") : showToast("Erreur",true);
+  } catch(e){
+    showToast(e.message,true);
+  }
+  setLoading(this,false,"Supprimer");
+};
+
+document.getElementById("downloadProducts").onclick = async function(){
+  setLoading(this,true,"Téléchargement...");
+  toggleOverlay(true);
+  const res=await fetch("/admin/download-products",{
+    headers:{"x-admin-key":ADMIN_KEY}
+  });
+  const blob=await res.blob();
+  const url=window.URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="products.json";
+  a.click();
+  toggleOverlay(false);
+  setLoading(this,false,"Télécharger products.json");
+};
+
+safeFetch("/api/products")
+.then(products=>{
+  document.getElementById("npe").textContent=Object.keys(products).length;
+})
+.catch(()=>{
+  document.getElementById("npe").textContent="Erreur";
+});
+</script>
+
+</body>
 </html>
