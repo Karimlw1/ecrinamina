@@ -224,10 +224,14 @@ position: relative;
 .fa, .fa-brands, .fa-classic, .fa-regular, .fa-sharp, .fa-solid, .fab, .far, .fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    display: var(--fa-display, inline-block);
+    display: flex;
+    flex-direction: column;
     font-style: normal;
     font-variant: normal;
     line-height: 1;
     text-rendering: auto;
-    font-size: large;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
 }
