@@ -62,12 +62,6 @@ function renderProduct() {
       <label>Entrer lieu de livraison :</label>
         ${product.lieuDeLIvraison.localisation.map(v => `<input type="text" value="${v}" required>${v}</input>`).join("")} 
     `;
-  if (!product.lieuDeLIvraison.localisation || product.lieuDeLIvraison.localisation.length === 0) {
-    lieuDeLIvraisonContainer.innerHTML += `
-      <label>Entrer lieu de livraison :</label>
-      <input type="text" id="customLocalisation" required />
-    `;
-  }
 
   document.getElementById("name").textContent = product.name;
   document.getElementById("price").textContent = product.price + "$";
