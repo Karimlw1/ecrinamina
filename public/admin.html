@@ -384,6 +384,31 @@
             price: Number(document.getElementById("price").value),
             category: document.getElementById("category").value,
             type: document.getElementById("type").value,
+
+            images: Array.from(
+              document.getElementById("preview").querySelectorAll("img"),
+            ).map((img) => img.src),
+
+            image:
+              Array.from(
+                document.getElementById("preview").querySelectorAll("img"),
+              )[0]?.src || null,
+
+            options: {
+              size: document
+                .getElementById("sizes")
+                .value.trim()
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean),
+
+              color: document
+                .getElementById("colors")
+                .value.trim()
+                .split(",")
+                .map((c) => c.trim())
+                .filter(Boolean),
+            },
           };
 
           if (!product.id || !product.name || !product.price) {
@@ -403,6 +428,7 @@
           if (data.success) {
             showToast("Produit ajouté avec succès");
             document.querySelectorAll("input").forEach((i) => (i.value = ""));
+            document.getElementById("preview").innerHTML = "";
           } else {
             showToast("Erreur serveur", true);
           }
