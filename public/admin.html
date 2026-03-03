@@ -1,490 +1,533 @@
 <!doctype html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<title>Admin – Ecrin d'art d'amina</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin – Ecrin d'art d'amina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-body {
-  font-family: "Inter", sans-serif;
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  color: #f1f5f9;
-  min-height: 100vh;
-}
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        color: #f1f5f9;
+        min-height: 100vh;
+      }
 
-.admin {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 40px;
-}
+      .admin {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 40px;
+      }
 
-h2 {
-  font-size: 32px;
-  margin-bottom: 30px;
-  font-weight: 700;
-}
+      h2 {
+        font-size: 32px;
+        margin-bottom: 30px;
+        font-weight: 700;
+      }
 
-.section {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  padding: 30px;
-  border-radius: 20px;
-  margin-bottom: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: 0.3s ease;
-}
+      .section {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: 0.3s ease;
+      }
 
-.section:hover {
-  transform: translateY(-3px);
-}
+      .section:hover {
+        transform: translateY(-3px);
+      }
 
-.section h3 {
-  margin-bottom: 20px;
-  font-weight: 600;
-}
+      .section h3 {
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
 
-input,
-select {
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.07);
-  color: white;
-  outline: none;
-  transition: 0.2s;
-}
+      input,
+      select {
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.07);
+        color: white;
+        outline: none;
+        transition: 0.2s;
+      }
 
-input:focus,
-select:focus {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
-}
+      input:focus,
+      select:focus {
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+      }
 
-button {
-  padding: 14px 22px;
-  border-radius: 12px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-  color: white;
-  transition: 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
+      button {
+        padding: 14px 22px;
+        border-radius: 12px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        color: white;
+        transition: 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(14,165,233,0.4);
-}
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4);
+      }
 
-button.loading {
-  pointer-events: none;
-  opacity: 0.8;
-}
+      button.loading {
+        pointer-events: none;
+        opacity: 0.8;
+      }
 
-.spinner {
-  width: 18px;
-  height: 18px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top: 3px solid white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
+      .spinner {
+        width: 18px;
+        height: 18px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-.preview {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-}
+      .preview {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
 
-.preview img {
-  width: 90px;
-  height: 90px;
-  border-radius: 12px;
-  object-fit: cover;
-}
+      .preview img {
+        width: 90px;
+        height: 90px;
+        border-radius: 12px;
+        object-fit: cover;
+      }
 
-.counter-box {
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 16px;
-  background: linear-gradient(135deg,#ef4444,#dc2626);
-  font-weight: 700;
-}
+      .counter-box {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        font-weight: 700;
+      }
 
-.toast {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 15px 20px;
-  border-radius: 12px;
-  background: #16a34a;
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: 0.3s ease;
-  z-index: 9999;
-}
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 12px;
+        background: #16a34a;
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: 0.3s ease;
+        z-index: 9999;
+      }
 
-.toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-.toast.error {
-  background: #dc2626;
-}
+      .toast.error {
+        background: #dc2626;
+      }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.3s;
-  z-index: 999;
-}
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.3s;
+        z-index: 999;
+      }
 
-.overlay.active {
-  visibility: visible;
-  opacity: 1;
-}
+      .overlay.active {
+        visibility: visible;
+        opacity: 1;
+      }
 
-.overlay .spinner {
-  width: 50px;
-  height: 50px;
-  border-width: 5px;
-}
+      .overlay .spinner {
+        width: 50px;
+        height: 50px;
+        border-width: 5px;
+      }
 
-@media(max-width:768px){
-  .grid { grid-template-columns: 1fr; }
-}
-</style>
-</head>
+      @media (max-width: 768px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <div class="overlay" id="overlay">
+      <div class="spinner"></div>
+    </div>
 
-<div class="overlay" id="overlay">
-  <div class="spinner"></div>
-</div>
+    <div class="toast" id="toast"></div>
 
-<div class="toast" id="toast"></div>
+    <div class="admin">
+      <h2>Admin Dashboard</h2>
 
-<div class="admin">
-<h2>Admin Dashboard</h2>
+      <div class="section">
+        <h3>Ajouter un produit</h3>
 
-<div class="section">
-<h3>Ajouter un produit</h3>
+        <div class="grid">
+          <input id="id" placeholder="ID produit" />
+          <input id="name" placeholder="Nom du produit" />
+          <input id="price" type="number" placeholder="Prix" />
+          <select id="category">
+            <option value="">Choisir la page</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+            <option value="Enfant">Enfant</option>
+            <option value="Cadeau">Cadeau</option>
+            <option value="Maternite">Maternite</option>
+            <option value="CadeauSpecial">Cadeau Special</option>
+            <option value="Sport">Sport</option>
+          </select>
+          <select id="type">
+            <option value="">Type de produit</option>
+            <option value="haut">Haut</option>
+            <option value="bas">Bas</option>
+            <option value="chaussure">Chaussure</option>
+            <option value="accessoire">Accessoire</option>
+            <option value="lingerie">Lingerie</option>
+            <option value="robe">Robe</option>
+            <option value="habitmuslim">Habit Muslim</option>
+            <option value="complet">Complet</option>
+            <option value="bracha">bracha</option>
+            <option value="Phone">Phone</option>
+            <option value="Pijama">Pijama</option>
+            <option value="Mailles">Mailles</option>
+            <option value="Tenuesdeceremonie">Tenues de Cérémonie</option>
+            <option value="Allaitement">Allaitement</option>
+            <option value="Ensembledenuit">Ensemble de Nuit</option>
+            <option value="Shooting">Shooting</option>
+            <option value="Gourde">Gourde</option>
+            <option value="Sac">Sac</option>
+          </select>
+          <input id="sizes" placeholder="Tailles (S,M,L)" />
+          <input id="colors" placeholder="Couleurs" />
+          <input id="villes" placeholder="Villes" />
+          <input id="newDays" type="number" value="7" />
+        </div>
 
-<div class="grid">
-<input id="id" placeholder="ID produit" />
-<input id="name" placeholder="Nom du produit" />
-<input id="price" type="number" placeholder="Prix" />
-<select id="category">
-<option value="">Choisir la page</option>
-<option value="Homme">Homme</option>
-<option value="Femme">Femme</option>
-<option value="Enfant">Enfant</option>
-<option value="Cadeau">Cadeau</option>
-<option value="Maternite">Maternite</option>
-<option value="CadeauSpecial">Cadeau Special</option>
-<option value="Sport">Sport</option>
-</select>
-<select id="type">
-<option value="">Type de produit</option>
-<option value="haut">Haut</option>
-<option value="bas">Bas</option>
-<option value="chaussure">Chaussure</option>
-<option value="accessoire">Accessoire</option>
-<option value="lingerie">Lingerie</option>
-<option value="robe">Robe</option>
-<option value="habitmuslim">Habit Muslim</option>
-<option value="complet">Complet</option>
-<option value="maquillage">maquillage</option>
-<option value="fragrance">fragrance</option>
-<option value="haircare">haircare</option>
-<option value="Lunettes">Lunettes</option>
-<option value="Sac">Sac</option>
-</select>
-<input id="sizes" placeholder="Tailles (S,M,L)" />
-<input id="colors" placeholder="Couleurs" />
-<input id="villes" placeholder="Villes" />
-<input id="newDays" type="number" value="7" />
-</div>
+        <br />
+        <input type="file" id="imageInput" multiple />
+        <button id="uploadBtn">
+          <span class="btn-text">Uploader images</span>
+        </button>
 
-<br/>
-<input type="file" id="imageInput" multiple />
-<button id="uploadBtn"><span class="btn-text">Uploader images</span></button>
+        <div class="preview" id="preview"></div>
 
-<div class="preview" id="preview"></div>
+        <br />
+        <button id="saveProduct">
+          <span class="btn-text">Enregistrer</span>
+        </button>
+      </div>
 
-<br/>
-<button id="saveProduct"><span class="btn-text">Enregistrer</span></button>
-</div>
+      <div class="section">
+        <h3>Modifier disponibilité</h3>
+        <input id="modifyProductId" placeholder="ID" />
+        <select id="modifyAvailability">
+          <option value="">Choisir</option>
+          <option value="true">Disponible</option>
+          <option value="false">Indisponible</option>
+        </select>
+        <button id="modifyBtn"><span class="btn-text">Modifier</span></button>
+      </div>
 
-<div class="section">
-<h3>Modifier disponibilité</h3>
-<input id="modifyProductId" placeholder="ID"/>
-<select id="modifyAvailability">
-<option value="">Choisir</option>
-<option value="true">Disponible</option>
-<option value="false">Indisponible</option>
-</select>
-<button id="modifyBtn"><span class="btn-text">Modifier</span></button>
-</div>
+      <div class="section">
+        <h3>Modifier prix</h3>
+        <input id="modifyProductPriceId" placeholder="ID" />
+        <input
+          id="modifyProductPrice"
+          type="number"
+          placeholder="Nouveau prix"
+        />
+        <button id="modifyPriceBtn">
+          <span class="btn-text">Modifier</span>
+        </button>
+      </div>
 
-<div class="section">
-<h3>Modifier prix</h3>
-<input id="modifyProductPriceId" placeholder="ID"/>
-<input id="modifyProductPrice" type="number" placeholder="Nouveau prix"/>
-<button id="modifyPriceBtn"><span class="btn-text">Modifier</span></button>
-</div>
+      <div class="section">
+        <h3>Modifier nom</h3>
+        <input id="modifyProductNameId" placeholder="ID" />
+        <input id="modifyProductName" placeholder="Nouveau nom" />
+        <button id="modifyNameBtn">
+          <span class="btn-text">Modifier</span>
+        </button>
+      </div>
 
-<div class="section">
-<h3>Modifier nom</h3>
-<input id="modifyProductNameId" placeholder="ID"/>
-<input id="modifyProductName" placeholder="Nouveau nom"/>
-<button id="modifyNameBtn"><span class="btn-text">Modifier</span></button>
-</div>
+      <div class="section">
+        <h3>Supprimer produit</h3>
+        <input id="deleteProductId" placeholder="ID" />
+        <button id="deleteBtn"><span class="btn-text">Supprimer</span></button>
+      </div>
 
-<div class="section">
-<h3>Supprimer produit</h3>
-<input id="deleteProductId" placeholder="ID"/>
-<button id="deleteBtn"><span class="btn-text">Supprimer</span></button>
-</div>
+      <div class="counter-box">
+        Produits existants : <span id="npe">...</span>
+      </div>
 
-<div class="counter-box">
-Produits existants : <span id="npe">...</span>
-</div>
+      <br />
+      <button id="downloadProducts">
+        <span class="btn-text">Télécharger products.json</span>
+      </button>
+    </div>
 
-<br/>
-<button id="downloadProducts"><span class="btn-text">Télécharger products.json</span></button>
+    <script>
+      const ADMIN_KEY = "1234";
+      const overlay = document.getElementById("overlay");
+      const toast = document.getElementById("toast");
 
-</div>
+      function showToast(message, isError = false) {
+        toast.textContent = message;
+        toast.className = "toast show";
+        if (isError) toast.classList.add("error");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
 
-<script>
-const ADMIN_KEY = "1234";
-const overlay = document.getElementById("overlay");
-const toast = document.getElementById("toast");
+      function setLoading(button, loading, text) {
+        const span = button.querySelector(".btn-text");
+        if (loading) {
+          button.classList.add("loading");
+          span.innerHTML = '<span class="spinner"></span> ' + text;
+        } else {
+          button.classList.remove("loading");
+          span.textContent = text;
+        }
+      }
 
-function showToast(message, isError = false){
-  toast.textContent = message;
-  toast.className = "toast show";
-  if(isError) toast.classList.add("error");
-  setTimeout(()=> toast.classList.remove("show"),3000);
-}
+      function toggleOverlay(show) {
+        overlay.classList.toggle("active", show);
+      }
 
-function setLoading(button, loading, text){
-  const span = button.querySelector(".btn-text");
-  if(loading){
-    button.classList.add("loading");
-    span.innerHTML = '<span class="spinner"></span> ' + text;
-  } else {
-    button.classList.remove("loading");
-    span.textContent = text;
-  }
-}
+      async function safeFetch(url, options) {
+        const res = await fetch(url, options);
+        const text = await res.text();
+        try {
+          return JSON.parse(text);
+        } catch {
+          throw new Error("Réponse serveur invalide");
+        }
+      }
 
-function toggleOverlay(show){
-  overlay.classList.toggle("active", show);
-}
+      document.getElementById("uploadBtn").onclick = async function () {
+        setLoading(this, true, "Upload...");
+        const files = document.getElementById("imageInput").files;
+        const preview = document.getElementById("preview");
+        for (const file of files) {
+          const formData = new FormData();
+          formData.append("image", file);
+          const data = await safeFetch("/admin/upload-image", {
+            method: "POST",
+            headers: { "x-admin-key": ADMIN_KEY },
+            body: formData,
+          });
+          if (data.imageUrl) {
+            const img = document.createElement("img");
+            img.src = data.imageUrl;
+            preview.appendChild(img);
+          }
+        }
+        setLoading(this, false, "Uploader images");
+      };
 
-async function safeFetch(url, options){
-  const res = await fetch(url, options);
-  const text = await res.text();
-  try { return JSON.parse(text); }
-  catch { throw new Error("Réponse serveur invalide"); }
-}
+      document.getElementById("saveProduct").onclick = async function () {
+        setLoading(this, true, "Enregistrement...");
+        toggleOverlay(true);
 
-document.getElementById("uploadBtn").onclick = async function(){
-  setLoading(this,true,"Upload...");
-  const files = document.getElementById("imageInput").files;
-  const preview = document.getElementById("preview");
-  for(const file of files){
-    const formData = new FormData();
-    formData.append("image",file);
-    const data = await safeFetch("/admin/upload-image",{
-      method:"POST",
-      headers:{"x-admin-key":ADMIN_KEY},
-      body:formData
-    });
-    if(data.imageUrl){
-      const img=document.createElement("img");
-      img.src=data.imageUrl;
-      preview.appendChild(img);
-    }
-  }
-  setLoading(this,false,"Uploader images");
-};
+        try {
+          const product = {
+            id: document.getElementById("id").value.trim(),
+            name: document.getElementById("name").value.trim(),
+            price: Number(document.getElementById("price").value),
+            category: document.getElementById("category").value,
+            type: document.getElementById("type").value,
+          };
 
-document.getElementById("saveProduct").onclick = async function(){
-  setLoading(this,true,"Enregistrement...");
-  toggleOverlay(true);
+          if (!product.id || !product.name || !product.price) {
+            showToast("Champs obligatoires manquants", true);
+            return;
+          }
 
-  try{
-    const product={
-      id:document.getElementById("id").value.trim(),
-      name:document.getElementById("name").value.trim(),
-      price:Number(document.getElementById("price").value),
-      category:document.getElementById("category").value,
-      type:document.getElementById("type").value
-    };
+          const data = await safeFetch("/admin/add-product", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify(product),
+          });
 
-    if(!product.id || !product.name || !product.price){
-      showToast("Champs obligatoires manquants",true);
-      return;
-    }
+          if (data.success) {
+            showToast("Produit ajouté avec succès");
+            document.querySelectorAll("input").forEach((i) => (i.value = ""));
+          } else {
+            showToast("Erreur serveur", true);
+          }
+        } catch (e) {
+          showToast(e.message, true);
+        }
 
-    const data=await safeFetch("/admin/add-product",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "x-admin-key":ADMIN_KEY
-      },
-      body:JSON.stringify(product)
-    });
+        toggleOverlay(false);
+        setLoading(this, false, "Enregistrer");
+      };
 
-    if(data.success){
-      showToast("Produit ajouté avec succès");
-      document.querySelectorAll("input").forEach(i=>i.value="");
-    } else {
-      showToast("Erreur serveur",true);
-    }
-  } catch(e){
-    showToast(e.message,true);
-  }
+      document.getElementById("modifyBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+        try {
+          const data = await safeFetch(
+            `/admin/modify-product/${modifyProductId.value}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "x-admin-key": ADMIN_KEY,
+              },
+              body: JSON.stringify({
+                available: modifyAvailability.value === "true",
+              }),
+            },
+          );
+          data.success
+            ? showToast("Disponibilité modifiée")
+            : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+        setLoading(this, false, "Modifier");
+      };
 
-  toggleOverlay(false);
-  setLoading(this,false,"Enregistrer");
-};
+      document.getElementById("modifyPriceBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+        try {
+          const data = await safeFetch(
+            `/admin/modify-product/${modifyProductPriceId.value}/price`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "x-admin-key": ADMIN_KEY,
+              },
+              body: JSON.stringify({
+                price: Number(modifyProductPrice.value),
+              }),
+            },
+          );
+          data.success ? showToast("Prix modifié") : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+        setLoading(this, false, "Modifier");
+      };
 
-document.getElementById("modifyBtn").onclick = async function(){
-  setLoading(this,true,"Modification...");
-  try{
-    const data=await safeFetch(`/admin/modify-product/${modifyProductId.value}`,{
-      method:"PUT",
-      headers:{
-        "Content-Type":"application/json",
-        "x-admin-key":ADMIN_KEY
-      },
-      body:JSON.stringify({
-        available:modifyAvailability.value==="true"
-      })
-    });
-    data.success ? showToast("Disponibilité modifiée") : showToast("Erreur",true);
-  } catch(e){
-    showToast(e.message,true);
-  }
-  setLoading(this,false,"Modifier");
-};
+      document.getElementById("modifyNameBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+        try {
+          const data = await safeFetch(
+            `/admin/modify-product/${modifyProductNameId.value}/name`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "x-admin-key": ADMIN_KEY,
+              },
+              body: JSON.stringify({
+                name: modifyProductName.value,
+              }),
+            },
+          );
+          data.success ? showToast("Nom modifié") : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+        setLoading(this, false, "Modifier");
+      };
 
-document.getElementById("modifyPriceBtn").onclick = async function(){
-  setLoading(this,true,"Modification...");
-  try{
-    const data=await safeFetch(`/admin/modify-product/${modifyProductPriceId.value}/price`,{
-      method:"PUT",
-      headers:{
-        "Content-Type":"application/json",
-        "x-admin-key":ADMIN_KEY
-      },
-      body:JSON.stringify({
-        price:Number(modifyProductPrice.value)
-      })
-    });
-    data.success ? showToast("Prix modifié") : showToast("Erreur",true);
-  } catch(e){
-    showToast(e.message,true);
-  }
-  setLoading(this,false,"Modifier");
-};
+      document.getElementById("deleteBtn").onclick = async function () {
+        if (!confirm("Confirmer la suppression ?")) return;
+        setLoading(this, true, "Suppression...");
+        try {
+          const data = await safeFetch(
+            `/admin/delete-product/${deleteProductId.value}`,
+            {
+              method: "DELETE",
+              headers: { "x-admin-key": ADMIN_KEY },
+            },
+          );
+          data.success
+            ? showToast("Produit supprimé")
+            : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+        setLoading(this, false, "Supprimer");
+      };
 
-document.getElementById("modifyNameBtn").onclick = async function(){
-  setLoading(this,true,"Modification...");
-  try{
-    const data=await safeFetch(`/admin/modify-product/${modifyProductNameId.value}/name`,{
-      method:"PUT",
-      headers:{
-        "Content-Type":"application/json",
-        "x-admin-key":ADMIN_KEY
-      },
-      body:JSON.stringify({
-        name:modifyProductName.value
-      })
-    });
-    data.success ? showToast("Nom modifié") : showToast("Erreur",true);
-  } catch(e){
-    showToast(e.message,true);
-  }
-  setLoading(this,false,"Modifier");
-};
+      document.getElementById("downloadProducts").onclick = async function () {
+        setLoading(this, true, "Téléchargement...");
+        toggleOverlay(true);
+        const res = await fetch("/admin/download-products", {
+          headers: { "x-admin-key": ADMIN_KEY },
+        });
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "products.json";
+        a.click();
+        toggleOverlay(false);
+        setLoading(this, false, "Télécharger products.json");
+      };
 
-document.getElementById("deleteBtn").onclick = async function(){
-  if(!confirm("Confirmer la suppression ?")) return;
-  setLoading(this,true,"Suppression...");
-  try{
-    const data=await safeFetch(`/admin/delete-product/${deleteProductId.value}`,{
-      method:"DELETE",
-      headers:{"x-admin-key":ADMIN_KEY}
-    });
-    data.success ? showToast("Produit supprimé") : showToast("Erreur",true);
-  } catch(e){
-    showToast(e.message,true);
-  }
-  setLoading(this,false,"Supprimer");
-};
-
-document.getElementById("downloadProducts").onclick = async function(){
-  setLoading(this,true,"Téléchargement...");
-  toggleOverlay(true);
-  const res=await fetch("/admin/download-products",{
-    headers:{"x-admin-key":ADMIN_KEY}
-  });
-  const blob=await res.blob();
-  const url=window.URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="products.json";
-  a.click();
-  toggleOverlay(false);
-  setLoading(this,false,"Télécharger products.json");
-};
-
-safeFetch("/api/products")
-.then(products=>{
-  document.getElementById("npe").textContent=Object.keys(products).length;
-})
-.catch(()=>{
-  document.getElementById("npe").textContent="Erreur";
-});
-</script>
-
-</body>
+      safeFetch("/api/products")
+        .then((products) => {
+          document.getElementById("npe").textContent =
+            Object.keys(products).length;
+        })
+        .catch(() => {
+          document.getElementById("npe").textContent = "Erreur";
+        });
+    </script>
+  </body>
 </html>
