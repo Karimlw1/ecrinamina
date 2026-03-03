@@ -405,6 +405,10 @@ p.light-mode {
 
     .slide img {
         height: 370px;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        border-radius: 50px;
 
     }
 
