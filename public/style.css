@@ -398,7 +398,9 @@ p.light-mode {
     }
 
     .carousel {
-        height: 268px;
+        height: 253px;
+        width: 90%;
+        box-sizing: border-box;
     }
 
     .slide img {
