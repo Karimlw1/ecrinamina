@@ -38,7 +38,7 @@ function initProduct() {
 
 function renderProduct() {
   const optionsContainer = document.getElementById("options");
-  const lieuDeLIvraisonContainer = document.getElementById("lieuDeLIvraison").value || alert("Veuillez entrer un lieu de livraison");
+  const lieuDeLIvraisonContainer = document.getElementById("lieuDeLIvraison").value;
 
   if (product.options?.size) {
     optionsContainer.innerHTML += `
@@ -139,7 +139,6 @@ function renderProduct() {
       size,
       color,
       localisation   });
-
     alert("Produit ajouté au panier ✔");
   });
 }
