@@ -130,11 +130,6 @@ function renderProduct() {
     const color = document.getElementById("color")?.value || null;
     const localisation = document.getElementById("localisation")?.value?.trim() || null;
 
-    if (!localisation) {
-      alert("Veuillez choisir un lieu de livraison");
-      return;
-    }
-
     addToCart({
       id: product.id,
       name: product.name,
