@@ -70,7 +70,7 @@
                 padding: 12px 20px;
                 border: none;
                 border-radius: 10px;
-                background: #000;
+                background: #487d46;
                 color: #fff;
                 cursor: pointer;
                 transition: 0.2s;
@@ -244,6 +244,9 @@
     border-radius: 10px;
     font: caption;">...</span>
               </div>
+              <div class="telecharger-products.json">
+                <button id="downloadProducts">Télécharger products.json</button> </div>
+              </div>
             </div>
 
             <script>
@@ -266,7 +269,8 @@
                   console.error("Server returned:", text);
                   throw new Error("Réponse serveur invalide");
                 }
-              }
+              } 
+
 
               document.getElementById("uploadBtn").onclick = async () => {
                 const files = document.getElementById("imageInput").files;
@@ -287,12 +291,17 @@
                 }
               };
 
+              function trim(str) {
+                    return str.trim();
+                  }
+                  
               document.getElementById("saveProduct").onclick =
                 async function () {
                   this.classList.add("loading");
 
                   const newDays =
                     Number(document.getElementById("newDays").value) || 0;
+
 
                   const product = {
                     id: id.value.trim(),
@@ -448,6 +457,17 @@
                 .catch(() => {
                   document.getElementById("npe").textContent = "Erreur";
                 });
+              
+                document.getElementById("downloadProducts").onclick = async () => { const res = await
+                   fetch("/admin/download-products", { headers: 
+                    { "x-admin-key": "1234" },
+                  });
+                    if (!res.ok)
+                     return alert("Erreur 😢");
+                      const blob = await res.blob();
+                 const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement("a"); a.href = url;
+                  a.download = "products.json"; a.click(); };
             </script>
           </body>
         </html>
