@@ -161,6 +161,30 @@
         opacity: 1;
         transform: translateY(0);
       }
+      .preview-item {
+        position: relative;
+      }
+
+      .preview-item img {
+        width: 90px;
+        height: 90px;
+        border-radius: 12px;
+        object-fit: cover;
+      }
+
+      .remove-img {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #dc2626;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        cursor: pointer;
+      }
 
       .toast.error {
         background: #dc2626;
@@ -314,6 +338,30 @@
       </div>
 
       <div class="section">
+        <h3>Modifier badges</h3>
+
+        <input id="badgeProductId" placeholder="ID produit" />
+
+        <select id="modifyStockStatus">
+          <option value="">Statut stock</option>
+          <option value="normal">Normal (supprimer badge stock)</option>
+          <option value="low">Stock faible</option>
+          <option value="out">Épuisé</option>
+          <option value="coming">Bientôt disponible</option>
+        </select>
+
+        <input
+          id="modifyNewDays"
+          type="number"
+          placeholder="Jours Nouveau (0 = supprimer)"
+        />
+
+        <button id="modifyBadgesBtn">
+          <span class="btn-text">Modifier badges</span>
+        </button>
+      </div>
+
+      <div class="section">
         <h3>Supprimer produit</h3>
         <input id="deleteProductId" placeholder="ID" />
         <button id="deleteBtn"><span class="btn-text">Supprimer</span></button>
@@ -379,9 +427,23 @@
             body: formData,
           });
           if (data.imageUrl) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "preview-item";
+
             const img = document.createElement("img");
             img.src = data.imageUrl;
-            preview.appendChild(img);
+
+            const removeBtn = document.createElement("button");
+            removeBtn.className = "remove-img";
+            removeBtn.innerHTML = "×";
+
+            removeBtn.onclick = function () {
+              wrapper.remove();
+            };
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(removeBtn);
+            preview.appendChild(wrapper);
           }
         }
         setLoading(this, false, "Uploader images");
@@ -537,6 +599,53 @@
           showToast(e.message, true);
         }
         setLoading(this, false, "Modifier");
+      };
+
+      document.getElementById("modifyBadgesBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+        try {
+          const productId = document
+            .getElementById("badgeProductId")
+            .value.trim();
+          const stockStatus =
+            document.getElementById("modifyStockStatus").value;
+          const newDays = Number(
+            document.getElementById("modifyNewDays").value,
+          );
+
+          let newUntil = null;
+
+          if (newDays > 0) {
+            const date = new Date();
+            date.setDate(date.getDate() + newDays);
+            newUntil = date.toISOString();
+          }
+
+          const data = await safeFetch(
+            `/admin/modify-product/${productId}/badges`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "x-admin-key": ADMIN_KEY,
+              },
+              body: JSON.stringify({
+                newUntil: newUntil,
+                isRunningLow: stockStatus === "low",
+                epuised: stockStatus === "out",
+                comingSoon: stockStatus === "coming",
+              }),
+            },
+          );
+
+          data.success
+            ? showToast("Badges modifiés")
+            : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+
+        setLoading(this, false, "Modifier badges");
       };
 
       document.getElementById("deleteBtn").onclick = async function () {
