@@ -250,7 +250,20 @@
           <input id="sizes" placeholder="Tailles (S,M,L)" />
           <input id="colors" placeholder="Couleurs" />
           <input id="villes" placeholder="Villes" />
-          <input id="newDays" type="number" value="7" />
+          <select id="stockStatus">
+            <option value="">Statut stock</option>
+            <option value="normal">Normal</option>
+            <option value="low">Stock faible</option>
+            <option value="out">Épuisé</option>
+            <option value="coming">Bientôt disponible</option>
+          </select>
+
+          <input
+            id="newDays"
+            type="number"
+            value="7"
+            placeholder="Jours badge Nouveau"
+          />
         </div>
 
         <br />
@@ -379,6 +392,16 @@
         toggleOverlay(true);
 
         try {
+          const stockStatus = document.getElementById("stockStatus").value;
+          const newDays = Number(document.getElementById("newDays").value);
+
+          let newUntil = null;
+          if (newDays && newDays > 0) {
+            const date = new Date();
+            date.setDate(date.getDate() + newDays);
+            newUntil = date.toISOString();
+          }
+
           const product = {
             id: document.getElementById("id").value.trim(),
             name: document.getElementById("name").value.trim(),
@@ -398,18 +421,22 @@
             options: {
               size: document
                 .getElementById("sizes")
-                .value.trim()
-                .split(",")
+                .value.split(",")
                 .map((s) => s.trim())
                 .filter(Boolean),
 
               color: document
                 .getElementById("colors")
-                .value.trim()
-                .split(",")
+                .value.split(",")
                 .map((c) => c.trim())
                 .filter(Boolean),
             },
+
+            newUntil: newUntil,
+
+            isRunningLow: stockStatus === "low",
+            epuised: stockStatus === "out",
+            comingSoon: stockStatus === "coming",
           };
 
           if (!product.id || !product.name || !product.price) {

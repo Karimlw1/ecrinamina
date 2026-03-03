@@ -159,6 +159,7 @@ button {
     box-shadow: 0px 0px 10px rgb(0 0 0 / 17%);
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
 }
 
 .product:hover {
@@ -234,4 +235,33 @@ position: relative;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  color: white;
+  z-index: 5;
+  backdrop-filter: blur(6px);
+}
+
+.badge.new {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.badge.low {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.badge.out {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.badge.coming {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
 }

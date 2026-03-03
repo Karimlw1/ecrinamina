@@ -176,9 +176,10 @@ document.addEventListener("DOMContentLoaded", function () {
       div.dataset.id = product.id;
 
       div.innerHTML = `
-        ${isProductNew(product) ? '<span class="new">Nouveau</span>' : ""}
-        ${product.isRunningLow ? '<span class="running-low">Bientôt épuisé</span>' : ""}
-        ${product.epuised ? '<span class="epuised">Épuisé</span>' : ""}
+        ${isProductNew(product) ? '<span class="badge new">Nouveau</span>' : ""}
+        ${product.isRunningLow ? '<span class="badge low">Stock faible</span>' : ""}
+        ${product.epuised ? '<span class="badge out">Épuisé</span>' : ""}
+        ${product.comingSoon ? '<span class="badge coming">Bientôt disponible</span>' : ""}
 
         <button class="wishlist-btn" data-id="${product.id}">
           <i class="fa ${wishlist.includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
