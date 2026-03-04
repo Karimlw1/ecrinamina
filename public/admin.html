@@ -48,6 +48,7 @@
 
       /* SIDEBAR */
       .sidebar {
+        padding-top: 131px;
         width: 250px;
         background: rgb(21 39 49);
         backdrop-filter: blur(25px);
@@ -60,11 +61,17 @@
       .sidebar h2 {
         margin-bottom: 20px;
         font-weight: 700;
+        text-align: center;
       }
 
       .sidebar img {
-        width: 160px;
+        width: 211px;
+        background: white;
         margin: 10px 0 30px;
+        align-self: center;
+        display: flex;
+        justify-self: center;
+        border-radius: 127px;
       }
 
       .sidebar nav {
@@ -413,7 +420,20 @@
 
         <div class="section hidden" id="stats">
           <h3>Statistiques</h3>
-          Produits existants : <span id="npe">...</span> <br /><br />
+          Produits existants :
+          <span
+            id="npe"
+            style="
+              background: red;
+              padding: 5px;
+              border-radius: 8px;
+              font-weight: bold;
+              color: aliceblue;
+              box-shadow: 0 0 10px -2px yellowgreen;
+            "
+            >...</span
+          >
+          <br /><br />
           <button id="downloadProducts">
             <span class="btn-text">Télécharger products.json</span>
           </button>
