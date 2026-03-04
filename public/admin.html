@@ -17,8 +17,9 @@
         padding: 0;
       }
       .securitysection {
-        width: -webkit-fill-available;
-        height: -webkit-fill-available;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
         position: absolute;
         z-index: 1;
         background: linear-gradient(135deg, #0f172a, #1e293b);
@@ -506,6 +507,7 @@
         } else {
           alert("nom d'utilisateur ou mot de passe incorrect!!");
         }
+        console.log(userNameV + passwordV);
       }
       const sidebar = document.getElementById("sidebar");
       const sidebarOverlay = document.getElementById("sidebarOverlay");
