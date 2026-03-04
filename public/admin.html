@@ -447,13 +447,6 @@
       const overlay = document.getElementById("overlay");
       const toast = document.getElementById("toast");
 
-      function showToast(message, isError = false) {
-        toast.textContent = message;
-        toast.className = "toast show";
-        if (isError) toast.classList.add("error");
-        setTimeout(() => toast.classList.remove("show"), 3000);
-      }
-
       function setLoading(button, loading, text) {
         const span = button.querySelector(".btn-text");
         if (loading) {
