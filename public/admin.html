@@ -11,254 +11,255 @@
     />
 
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background: linear-gradient(135deg, #0f172a, #1e293b);
-        color: #f8fafc;
-        min-height: 100vh;
-      }
-
-      .layout {
-        display: flex;
-        min-height: 100vh;
-      }
-
-      /* HAMBURGER */
-      .hamburger {
-        display: none;
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 2000;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(10px);
-        border: none;
-        padding: 10px 14px;
-        border-radius: 12px;
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-      }
-
-      /* SIDEBAR */
-      .sidebar {
-        width: 250px;
-        background: rgb(21 39 49);
-        backdrop-filter: blur(25px);
-        padding: 30px 20px;
-        border-right: 1px solid rgba(255, 255, 255, 0.08);
-        transition: 0.3s;
-        box-shadow: 4px 1px 20px 0px rgba(0, 0, 0, 0.4);
-      }
-
-      .sidebar h2 {
-        margin-bottom: 20px;
-        font-weight: 700;
-      }
-
-      .sidebar img {
-        width: 160px;
-        margin: 10px 0 30px;
-      }
-
-      .sidebar nav {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .menu-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: white;
-        padding: 12px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.2s;
-        text-align: left;
-      }
-
-      .menu-btn:hover {
-        background: rgba(56, 189, 248, 0.2);
-      }
-
-      .menu-btn.active {
-        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      }
-
-      /* ADMIN CONTENT */
-      .admin {
-        flex: 1;
-        padding: 60px 40px;
-        max-width: 1200px;
-        margin: auto;
-      }
-
-      .section {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(20px);
-        padding: 30px;
-        color: steelblue;
-        border-radius: 18px;
-        margin-bottom: 30px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        animation: fadeIn 0.2s ease;
-      }
-      .h3 {
-        margin: 20px;
-        text-align: center;
-      }
-      .hidden {
-        display: none;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(5px);
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
         }
-        to {
+
+        body {
+          font-family: "Inter", sans-serif;
+          background: linear-gradient(135deg, #0f172a, #1e293b);
+          color: #f8fafc;
+          min-height: 100vh;
+        }
+
+        .layout {
+          display: flex;
+          min-height: 100vh;
+        }
+
+        /* HAMBURGER */
+        .hamburger {
+          display: none;
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          z-index: 2000;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(10px);
+          border: none;
+          padding: 10px 14px;
+          border-radius: 12px;
+          color: white;
+          font-size: 20px;
+          cursor: pointer;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+          width: 250px;
+          background: rgb(21 39 49);
+          backdrop-filter: blur(25px);
+          padding: 30px 20px;
+          border-right: 1px solid rgba(255, 255, 255, 0.08);
+          transition: 0.3s;
+          box-shadow: 4px 1px 20px 0px rgba(0, 0, 0, 0.4);
+        }
+
+        .sidebar h2 {
+          margin-bottom: 20px;
+          font-weight: 700;
+        }
+
+        .sidebar img {
+          width: 160px;
+          margin: 10px 0 30px;
+        }
+
+        .sidebar nav {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .menu-btn {
+          background: transparent;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: white;
+          padding: 12px;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: 0.2s;
+          text-align: left;
+        }
+
+        .menu-btn:hover {
+          background: rgba(56, 189, 248, 0.2);
+        }
+
+        .menu-btn.active {
+          background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        }
+
+        /* ADMIN CONTENT */
+        .admin {
+          flex: 1;
+          padding: 60px 40px;
+          max-width: 1200px;
+          margin: auto;
+        }
+
+        .section {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      padding: 30px;
+      color: steelblue;
+      border: 1px solid #8080803d;
+      border-radius: 18px;
+      margin-bottom: 30px;
+      /* border: 1px solid rgba(255, 255, 255, 0.08); */
+      animation: fadeIn 0.2s ease;
+      box-shadow: inset 0 0 10px #203a4f;
+        .h3 {
+          margin: 20px;
+          text-align: center;
+        }
+        .hidden {
+          display: none;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 15px;
+        }
+
+        input,
+        select {
+          padding: 14px;
+          border-radius: 12px;
+          border: 1px solid #8080806e;
+          outline: none;
+          margin-top: 10px;
+          font-size: 14px;
+          color: black;
+          box-shadow: 0 0 4px 0px;
+        }
+
+        button {
+          padding: 14px 22px;
+          border-radius: 12px;
+          border: none;
+          font-weight: 600;
+          cursor: pointer;
+          background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+          color: white;
+          margin-top: 20px;
+          transition: 0.2s;
+        }
+
+        button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .preview {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-top: 15px;
+        }
+
+        .preview-item {
+          position: relative;
+        }
+
+        .preview-item img {
+          width: 90px;
+          height: 90px;
+          border-radius: 12px;
+          object-fit: cover;
+        }
+
+        .remove-img {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #dc2626;
+          border: none;
+          border-radius: 50%;
+          width: 22px;
+          height: 22px;
+          color: white;
+          cursor: pointer;
+        }
+
+        .toast {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 15px 20px;
+          border-radius: 12px;
+          background: #16a34a;
+          color: white;
+          font-weight: 600;
+          opacity: 0;
+          transform: translateY(-10px);
+          transition: 0.3s;
+          z-index: 9999;
+        }
+
+        .toast.show {
           opacity: 1;
           transform: translateY(0);
         }
-      }
 
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-      }
+        .toast.error {
+          background: #dc2626;
+        }
 
-      input,
-      select {
-        padding: 14px;
-        border-radius: 12px;
-        border: 1px solid #8080806e;
-        outline: none;
-        margin-top: 10px;
-        font-size: 14px;
-        color: black;
-        box-shadow: 0 0 4px 0px;
-      }
+        .overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(4px);
+          display: none;
+          z-index: 1500;
+        }
 
-      button {
-        padding: 14px 22px;
-        border-radius: 12px;
-        border: none;
-        font-weight: 600;
-        cursor: pointer;
-        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-        color: white;
-        margin-top: 20px;
-        transition: 0.2s;
-      }
-
-      button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
-      }
-
-      button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      .preview {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 15px;
-      }
-
-      .preview-item {
-        position: relative;
-      }
-
-      .preview-item img {
-        width: 90px;
-        height: 90px;
-        border-radius: 12px;
-        object-fit: cover;
-      }
-
-      .remove-img {
-        position: absolute;
-        top: -6px;
-        right: -6px;
-        background: #dc2626;
-        border: none;
-        border-radius: 50%;
-        width: 22px;
-        height: 22px;
-        color: white;
-        cursor: pointer;
-      }
-
-      .toast {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        border-radius: 12px;
-        background: #16a34a;
-        color: white;
-        font-weight: 600;
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: 0.3s;
-        z-index: 9999;
-      }
-
-      .toast.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .toast.error {
-        background: #dc2626;
-      }
-
-      .overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(4px);
-        display: none;
-        z-index: 1500;
-      }
-
-      .overlay.active {
-        display: block;
-      }
-
-      /* MOBILE */
-      @media (max-width: 900px) {
-        .hamburger {
+        .overlay.active {
           display: block;
         }
 
-        .sidebar {
-          position: fixed;
-          top: 0;
-          left: -260px;
-          height: 100%;
-          z-index: 1800;
-        }
+        /* MOBILE */
+        @media (max-width: 900px) {
+          .hamburger {
+            display: block;
+          }
 
-        .sidebar.active {
-          left: 0;
-        }
+          .sidebar {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            height: 100%;
+            z-index: 1800;
+          }
 
-        .admin {
-          padding: 80px 20px;
+          .sidebar.active {
+            left: 0;
+          }
+
+          .admin {
+            padding: 80px 20px;
+          }
         }
-      }
     </style>
   </head>
 
@@ -288,10 +289,10 @@
         </nav>
       </aside>
       <div class="admin">
-        <h1>Panneau Admin</h1>
+        <h1 style="margin-bottom: 80px; text-align: end">Panneau Admin</h1>
         <!-- ADD PRODUCT -->
         <div class="section" id="add">
-          <h3>Ajouter un produit</h3>
+          <h3 style="margin: 20px">Ajouter un produit</h3>
           <div class="grid">
             <input id="id" placeholder="ID produit" />
             <input id="name" placeholder="Nom du produit" />
