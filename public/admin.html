@@ -502,8 +502,9 @@
         const passwordV = document.querySelector("#password").value;
         const submitbttn = document.querySelector(".connect");
 
-        if (password == passwordV || userNameV == userName) {
-          securitySection.style.Display = "none";
+        if (password === passwordV && userName === userNameV) {
+          securitySection.style.backgroundColor = " green";
+          securitySection.style.display = "none";
         } else {
           alert("nom d'utilisateur ou mot de passe incorrect!!");
         }
