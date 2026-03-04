@@ -1,5 +1,5 @@
 {
- "Produit0": {
+  "Produit0": {
     "id": "Produit0",
     "name": "1 pièce Peignoir unisexe, robe longue, robe d'intérieur, kimono, vêtement de nuit, convient aux hommes et aux femmes de grande taille, usage décontracté à la maison, au spa, au salon, cadeau",
     "price": 45,
@@ -26,6 +26,39 @@
     "newUntil": "2026-03-11T14:03:22.164Z",
     "isRunningLow": false,
     "epuised": false,
-    "comingSoon": true
+    "comingSoon": true,
+    "available": true
+  },
+  "FasionHp1": {
+    "id": "FasionHp1",
+    "name": "karim",
+    "price": 123,
+    "category": "Femme",
+    "type": "accessoire",
+    "images": [
+      "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772638347/ecrinamina_products/uapxhvlp8hqvbj3n2h25.jpg"
+    ],
+    "image": "https://res.cloudinary.com/dpsewpbqa/image/upload/v1772638347/ecrinamina_products/uapxhvlp8hqvbj3n2h25.jpg",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "color": [
+        "Noir",
+        "Blanc",
+        "Bleu",
+        "Rouge"
+      ]
+    },
+    "newUntil": "2026-03-11T15:32:29.595Z",
+    "isRunningLow": false,
+    "epuised": false,
+    "comingSoon": false,
+    "available": false
   }
 }
