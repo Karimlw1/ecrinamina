@@ -87,12 +87,6 @@
           <p>Accessoires</p>
         </div>
 
-        <div class="category" id="habitmuslim" style="cursor: pointer">
-          <img
-            src="https://i.pinimg.com/736x/c7/f6/b2/c7f6b293525a5860ba29f56461378408.jpg"
-          />
-          <p>Habit muslim</p>
-        </div>
         <div class="category" id="sac" style="cursor: pointer">
           <img
             src="https://i.pinimg.com/736x/3d/8e/b8/3d8eb83ecd0fbef47d5eec8bedac20f2.jpg"
@@ -204,7 +198,6 @@
               chaussure: document.querySelectorAll(".chaussure"),
               accessoires: document.querySelectorAll(".accessoire"),
               complet: document.querySelectorAll(".complet"),
-              habitmuslim: document.querySelectorAll(".habitmuslim"),
               sac: document.querySelectorAll(".sac"),
             };
           });
@@ -213,7 +206,7 @@
       // Render products
       function renderProducts(productsArray) {
         productsContainer.innerHTML = "";
-        productsArray = productsArray.filter((p) => p.category === "Homme");
+        productsArray = productsArray.filter((p) => p.category === "Sport");
         productsArray.forEach((p) => {
           const div = document.createElement("div");
           div.className = "product";

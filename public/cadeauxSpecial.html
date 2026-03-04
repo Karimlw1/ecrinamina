@@ -83,49 +83,148 @@
         </a>
       </div>
     </section>
-    <section class="products">
-      <div class="product details" data-id="CDSP01">
-        <img
-          src="https://i.pinimg.com/736x/3b/53/3d/3b533d5acc64be322ddba28b5b9f1750.jpg"
-          alt=""
-        />
-        <div class="info">
-          <div class="price">$30</div>
-          <button class="details-bttn">Voir produit</button>
-        </div>
-      </div>
+    <section class="productContainer"></section>
+    <script>
+      function getCategoryClasses(product) {
+        const classes = [];
 
-      <div class="product details" data-id="CDSP02">
-        <img
-          src="https://i.pinimg.com/1200x/7c/a6/1d/7ca61d16736365380366f8cdb385168a.jpg"
-          alt=""
-        />
-        <div class="info">
-          <div class="price">$10</div>
-          <button class="details-bttn">Voir produit</button>
-        </div>
-      </div>
-      <div class="product details" data-id="CDSP03">
-        <img
-          src="https://i.pinimg.com/1200x/9b/9a/1d/9b9a1d82a447d69ad9e1015d224861a1.jpg"
-          alt=""
-        />
-        <div class="info">
-          <div class="price">$100</div>
-          <button class="details-bttn">Voir produit</button>
-        </div>
-      </div>
-      <div class="product details" data-id="CDSP04">
-        <img
-          src="https://i.pinimg.com/736x/d6/0b/76/d60b76a8290a041a8df5457d50a1b203.jpg"
-          alt=""
-        />
-        <div class="info">
-          <div class="price">$80</div>
-          <button class="details-bttn">Voir produit</button>
-        </div>
-      </div>
-    </section>
+        // Add main category
+        if (product.category) {
+          classes.push(product.category.toLowerCase());
+        }
+
+        if (product.type) {
+          classes.push(product.type.toLowerCase());
+        }
+
+        if (product.options?.size) {
+          product.options.size.forEach((size) => {
+            classes.push(size.toLowerCase());
+          });
+        }
+
+        if (product.options?.color) {
+          product.options.color.forEach((color) => {
+            classes.push(color.toLowerCase());
+          });
+        }
+
+        return classes.join(" "); // <- this is OK here
+      }
+
+      //*  PRODUCTS + WISHLIST
+
+      const productsContainer = document.getElementById("productsContainer");
+
+      // Load wishlist from localStorage
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      // Toggle wishlist (correct logic)
+      function toggleWishlist(productId) {
+        const index = wishlist.indexOf(productId);
+
+        if (index === -1) {
+          wishlist.push(productId); // add
+        } else {
+          wishlist.splice(index, 1); // remove
+        }
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      }
+
+      // Fetch products
+      if (productsContainer) {
+        fetch("/api/products")
+          .then((res) => res.json())
+          .then((productsObject) => {
+            const productsArray = Object.values(productsObject);
+
+            // Shuffle products
+            for (let i = productsArray.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [productsArray[i], productsArray[j]] = [
+                productsArray[j],
+                productsArray[i],
+              ];
+            }
+
+            renderProducts(productsArray);
+
+            const categories = {
+              haut: document.querySelectorAll(".haut"),
+              bas: document.querySelectorAll(".bas"),
+              chaussure: document.querySelectorAll(".chaussure"),
+              accessoires: document.querySelectorAll(".accessoire"),
+              abaya: document.querySelectorAll(".abaya"),
+              complet: document.querySelectorAll(".complet"),
+              lingerie: document.querySelectorAll(".lingerie"),
+              robe: document.querySelectorAll(".robe"),
+            };
+          });
+      }
+
+      // Render products
+      function renderProducts(productsArray) {
+        productsContainer.innerHTML = "";
+        productsArray = productsArray.filter(
+          (p) => p.category === "CadeauSpecial",
+        );
+        productsArray.forEach((p) => {
+          const div = document.createElement("div");
+          div.className = `product details ${getCategoryClasses(p)}`;
+          div.dataset.id = p.id;
+
+          div.innerHTML = `
+            ${p.isNew ? '<span class="new">Nouveau</span>' : ""}
+            ${p.isRunningLow ? '<span class="running-low">Bientôt épuisé</span>' : ""}
+            ${p.epuised ? '<span class="epuised">Épuisé</span>' : ""}
+
+            <button class="wishlist-btn" data-id="${p.id}">
+              <i class="fa ${wishlist.includes(p.id) ? "fa-solid" : "fa-regular"} fa-heart"></i>
+            </button>
+
+            <img src="${p.image}" alt="${p.name}" />
+
+            <div class="info">
+              <div class="price">$${p.price}</div>
+              <button class="voir" onclick="window.location.href='product.html?id=${p.id}'">Voir</button>
+            </div>
+          `;
+          productsContainer.appendChild(div);
+        });
+
+        attachWishlistEvents();
+      }
+
+      // Heart click
+      function attachWishlistEvents() {
+        document.querySelectorAll(".wishlist-btn").forEach((button) => {
+          button.addEventListener("click", function (e) {
+            e.stopPropagation(); // VERY IMPORTANT
+
+            const productId = this.dataset.id;
+
+            toggleWishlist(productId);
+
+            const icon = this.querySelector("i");
+
+            if (wishlist.includes(productId)) {
+              icon.classList.remove("fa-regular");
+              icon.classList.add("fa-solid");
+              icon.style.color = "#ff0000";
+              icon.style.textShadow = "0 0 5px #ff0000";
+              icon.style.transition = "all 0.3s ease";
+            } else {
+              icon.classList.remove("fa-solid");
+              icon.classList.add("fa-regular");
+              icon.style.color = "";
+              icon.style.textShadow = "";
+              icon.style.transition = "all 0.3s ease";
+            }
+          });
+        });
+      }
+    </script>
     <script src="mode.js"></script>
     <script src="cart.js"></script>
     <script src="filter.js"></script>
