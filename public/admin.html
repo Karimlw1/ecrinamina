@@ -387,8 +387,7 @@
             <button class="menu-btn" data-target="availability">
               Disponibilité
             </button>
-            <button class="menu-btn" data-target="price">Prix</button>
-            <button class="menu-btn" data-target="name">Nom</button>
+
             <button class="menu-btn" data-target="badges">Badges</button>
             <button class="menu-btn" data-target="delete">Supprimer</button>
             <button class="menu-btn" data-target="stats">Statistiques</button>
@@ -467,22 +466,7 @@
             </button>
           </div>
 
-          <!-- OTHER SECTIONS (hidden initially) -->
-
-          <div class="section hidden" id="availability">
-            <h3>Modifier disponibilité</h3>
-            <input id="modifyProductId" placeholder="ID" />
-            <select id="modifyAvailability">
-              <option value="">Choisir</option>
-              <option value="true">Disponible</option>
-              <option value="false">Indisponible</option>
-            </select>
-            <button id="modifyBtn">
-              <span class="btn-text">Modifier</span>
-            </button>
-          </div>
-
-          <div class="section hidden" id="price">
+          <div class="section" id="price">
             <h3>Modifier prix</h3>
             <input id="modifyProductPriceId" placeholder="ID" />
             <input
@@ -495,11 +479,25 @@
             </button>
           </div>
 
-          <div class="section hidden" id="name">
+          <div class="section" id="name">
             <h3>Modifier nom</h3>
             <input id="modifyProductNameId" placeholder="ID" />
             <input id="modifyProductName" placeholder="Nouveau nom" />
             <button id="modifyNameBtn">
+              <span class="btn-text">Modifier</span>
+            </button>
+          </div>
+          <!-- OTHER SECTIONS (hidden initially) -->
+
+          <div class="section hidden" id="availability">
+            <h3>Modifier disponibilité</h3>
+            <input id="modifyProductId" placeholder="ID" />
+            <select id="modifyAvailability">
+              <option value="">Choisir</option>
+              <option value="true">Disponible</option>
+              <option value="false">Indisponible</option>
+            </select>
+            <button id="modifyBtn">
               <span class="btn-text">Modifier</span>
             </button>
           </div>
