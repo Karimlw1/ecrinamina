@@ -403,6 +403,20 @@
     </div>
 
     <script>
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("sidebarOverlay");
+      const hamburger = document.getElementById("hamburger");
+
+      hamburger.onclick = () => {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      };
+
+      overlay.onclick = () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      };
+
       const menuButtons = document.querySelectorAll(".menu-btn");
       const sections = document.querySelectorAll(".section");
 
@@ -410,12 +424,24 @@
         btn.addEventListener("click", function () {
           menuButtons.forEach((b) => b.classList.remove("active"));
           this.classList.add("active");
+
           sections.forEach((s) => s.classList.add("hidden"));
           document
             .getElementById(this.dataset.target)
             .classList.remove("hidden");
+
+          sidebar.classList.remove("active");
+          overlay.classList.remove("active");
         });
       });
+
+      function showToast(message, isError = false) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = "toast show";
+        if (isError) toast.classList.add("error");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
 
       const ADMIN_KEY = "1234";
       const overlay = document.getElementById("overlay");
