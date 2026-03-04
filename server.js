@@ -53,6 +53,27 @@ function isAdmin(req, res, next) {
 
 // ROUTES
 
+// Modifier badges
+  app.put("/admin/modify-product/:id/badges", isAdmin, (req, res) => {
+  const products = readProducts();
+  const id = req.params.id;
+
+  if (!products[id]) {
+    return res.json({ success: false, error: "Produit introuvable" });
+  }
+
+  const { newUntil, isRunningLow, epuised, comingSoon } = req.body;
+
+  products[id].newUntil = newUntil;
+  products[id].isRunningLow = isRunningLow;
+  products[id].epuised = epuised;
+  products[id].comingSoon = comingSoon;
+
+  saveProducts(products);
+
+  res.json({ success: true, message: "Badges modifiés ✔" });
+});
+
 function readProducts() {
   return JSON.parse(fs.readFileSync(PRODUCTS_FILE, "utf-8"));
 }
@@ -160,6 +181,7 @@ app.delete("/admin/delete-product/:id", isAdmin, async (req, res) => {
     // Ne pas bloquer le front-end
   }
 
+  
   res.json({ success: true, message: `Produit ${productId} supprimé ✔` });
 });
 // Modifier la disponibilité d'un produit
@@ -170,7 +192,7 @@ app.put("/admin/modify-product/:id", isAdmin, (req, res) => {
   if (!products[id])
     return res.json({ success:false, error:"Produit introuvable" });
 
-  products[id].available = req.body.available;
+  products[id].epuised = !req.body.available;
 
   saveProducts(products);
 
@@ -179,6 +201,7 @@ app.put("/admin/modify-product/:id", isAdmin, (req, res) => {
     message:"Disponibilité modifiée"
   });
 });
+
 
 //modifier le prix d'un produit
 app.put("/admin/modify-product/:id/price", isAdmin, (req, res) => {
