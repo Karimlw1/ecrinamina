@@ -17,8 +17,8 @@
         padding: 0;
       }
       .securitySection {
-        width: stretch;
-        height: 180%;
+        width: 100%;
+        height: 100%;
         position: absolute;
         z-index: 2001;
         backdrop-filter: blur(12px);
@@ -134,7 +134,7 @@
       /* ADMIN CONTENT */
       .admin {
         flex: 1;
-        padding: 60px 40px;
+        padding: 60px 10px;
         max-width: 1200px;
         margin: auto;
       }
@@ -331,6 +331,7 @@
   </head>
 
   <body>
+    <!--
     <div class="securitySection">
       <div class="securityBox">
         <h1 style="margin-bottom: 54px">Admin</h1>
@@ -367,7 +368,8 @@
         </button>
       </div>
     </div>
-    <section class="bodyHidden" style="display: none">
+  -->
+    <section class="bodyHidden">
       <button class="hamburger" id="hamburger">☰</button>
       <div class="sidebarOverlay" id="sidebarOverlay"></div>
       <div class="toast" id="toast"></div>
@@ -556,11 +558,11 @@
     </section>
 
     <script>
-      function securityCheck() {
+      /*  function securityCheck() {
         const bodyH = document.querySelector(".bodyHidden");
         const securitySection = document.querySelector(".securitySection");
-        const password = "ecrin123";
-        const userName = "admin";
+        const password = "12345";
+        const userName = "Amina";
 
         const userNameV = document.querySelector("#userName").value;
         const passwordV = document.querySelector("#password").value;
@@ -575,6 +577,7 @@
         }
         console.log(userNameV + passwordV);
       }
+      */
 
       const sidebar = document.getElementById("sidebar");
       const sidebarOverlay = document.getElementById("sidebarOverlay");
@@ -607,7 +610,6 @@
           sidebarOverlay.classList.remove("active");
         });
       });
-      function toggleOverlay(show) {}
 
       function showToast(message, isError = false) {
         const toast = document.getElementById("toast");
@@ -621,6 +623,7 @@
 
       function setLoading(button, loading, text) {
         const span = button.querySelector(".btn-text");
+
         if (loading) {
           button.classList.add("loading");
           span.innerHTML =
@@ -643,18 +646,24 @@
         }
       }
 
+      /* IMAGE UPLOAD */
+
       document.getElementById("uploadBtn").onclick = async function () {
         setLoading(this, true, "Veuillez patienter...");
+
         const files = document.getElementById("imageInput").files;
         const preview = document.getElementById("preview");
+
         for (const file of files) {
           const formData = new FormData();
           formData.append("image", file);
+
           const data = await safeFetch("/admin/upload-image", {
             method: "POST",
             headers: { "x-admin-key": ADMIN_KEY },
             body: formData,
           });
+
           if (data.imageUrl) {
             const wrapper = document.createElement("div");
             wrapper.className = "preview-item";
@@ -665,7 +674,6 @@
             const removeBtn = document.createElement("button");
             removeBtn.className = "remove-img";
             removeBtn.innerHTML = "×";
-
             removeBtn.onclick = function () {
               wrapper.remove();
             };
@@ -675,12 +683,14 @@
             preview.appendChild(wrapper);
           }
         }
+
         setLoading(this, false, "Generer images");
       };
 
+      /* SAVE PRODUCT */
+
       document.getElementById("saveProduct").onclick = async function () {
         setLoading(this, true, "Enregistrement...");
-        toggleOverlay(true);
 
         try {
           const stockStatus = document.getElementById("stockStatus").value;
@@ -699,32 +709,25 @@
             price: Number(document.getElementById("price").value),
             category: document.getElementById("category").value,
             type: document.getElementById("type").value,
-
             images: Array.from(
               document.getElementById("preview").querySelectorAll("img"),
             ).map((img) => img.src),
-
             image:
-              Array.from(
-                document.getElementById("preview").querySelectorAll("img"),
-              )[0]?.src || null,
-
+              document.getElementById("preview").querySelector("img")?.src ||
+              null,
             options: {
               size: document
                 .getElementById("sizes")
                 .value.split(",")
                 .map((s) => s.trim())
                 .filter(Boolean),
-
               color: document
                 .getElementById("colors")
                 .value.split(",")
                 .map((c) => c.trim())
                 .filter(Boolean),
             },
-
             newUntil: newUntil,
-
             isRunningLow: stockStatus === "low",
             epuised: stockStatus === "out",
             comingSoon: stockStatus === "coming",
@@ -744,92 +747,104 @@
             body: JSON.stringify(product),
           });
 
-          if (data.success) {
-            showToast("Produit ajouté avec succès");
-            document.querySelectorAll("input").forEach((i) => (i.value = ""));
-            document.getElementById("preview").innerHTML = "";
-          } else {
-            showToast("Erreur serveur", true);
-          }
+          data.success
+            ? showToast("Produit ajouté avec succès")
+            : showToast("Erreur serveur", true);
         } catch (e) {
           showToast(e.message, true);
         }
 
-        toggleOverlay(false);
-        setLoading(this, false, "Enregistrer");
+        setLoading(this, false, "Enregistrer Produit");
       };
+
+      /* MODIFY AVAILABILITY */
 
       document.getElementById("modifyBtn").onclick = async function () {
         setLoading(this, true, "Modification...");
+
         try {
           const id = document.getElementById("modifyProductId").value;
+          const availability =
+            document.getElementById("modifyAvailability").value === "true";
+
           const data = await safeFetch(`/admin/modify-product/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
               "x-admin-key": ADMIN_KEY,
             },
-            body: JSON.stringify({
-              available: modifyAvailability.value === "true",
-            }),
+            body: JSON.stringify({ available: availability }),
           });
+
           data.success
             ? showToast("Disponibilité modifiée")
             : showToast("Erreur", true);
         } catch (e) {
           showToast(e.message, true);
         }
+
         setLoading(this, false, "Modifier");
       };
 
+      /* MODIFY PRICE */
+
       document.getElementById("modifyPriceBtn").onclick = async function () {
         setLoading(this, true, "Modification...");
+
         try {
-          const data = await safeFetch(
-            `/admin/modify-product/${modifyProductPriceId.value}/price`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                "x-admin-key": ADMIN_KEY,
-              },
-              body: JSON.stringify({
-                price: Number(modifyProductPrice.value),
-              }),
-            },
+          const id = document.getElementById("modifyProductPriceId").value;
+          const price = Number(
+            document.getElementById("modifyProductPrice").value,
           );
+
+          const data = await safeFetch(`/admin/modify-product/${id}/price`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify({ price }),
+          });
+
           data.success ? showToast("Prix modifié") : showToast("Erreur", true);
         } catch (e) {
           showToast(e.message, true);
         }
+
         setLoading(this, false, "Modifier");
       };
 
+      /* MODIFY NAME */
+
       document.getElementById("modifyNameBtn").onclick = async function () {
         setLoading(this, true, "Modification...");
+
         try {
-          const data = await safeFetch(
-            `/admin/modify-product/${modifyProductNameId.value}/name`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                "x-admin-key": ADMIN_KEY,
-              },
-              body: JSON.stringify({
-                name: modifyProductName.value,
-              }),
+          const id = document.getElementById("modifyProductNameId").value;
+          const name = document.getElementById("modifyProductName").value;
+
+          const data = await safeFetch(`/admin/modify-product/${id}/name`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
             },
-          );
+            body: JSON.stringify({ name }),
+          });
+
           data.success ? showToast("Nom modifié") : showToast("Erreur", true);
         } catch (e) {
           showToast(e.message, true);
         }
+
         setLoading(this, false, "Modifier");
       };
 
+      /* MODIFY BADGES */
+
       document.getElementById("modifyBadgesBtn").onclick = async function () {
         setLoading(this, true, "Modification...");
+
         try {
           const productId = document
             .getElementById("badgeProductId")
@@ -841,7 +856,6 @@
           );
 
           let newUntil = null;
-
           if (newDays > 0) {
             const date = new Date();
             date.setDate(date.getDate() + newDays);
@@ -857,7 +871,7 @@
                 "x-admin-key": ADMIN_KEY,
               },
               body: JSON.stringify({
-                newUntil: newUntil,
+                newUntil,
                 isRunningLow: stockStatus === "low",
                 epuised: stockStatus === "out",
                 comingSoon: stockStatus === "coming",
@@ -875,41 +889,52 @@
         setLoading(this, false, "Modifier badges");
       };
 
+      /* DELETE PRODUCT */
+
       document.getElementById("deleteBtn").onclick = async function () {
         if (!confirm("Confirmer la suppression ?")) return;
+
         setLoading(this, true, "Suppression...");
+
         try {
-          const data = await safeFetch(
-            `/admin/delete-product/${deleteProductId.value}`,
-            {
-              method: "DELETE",
-              headers: { "x-admin-key": ADMIN_KEY },
-            },
-          );
+          const id = document.getElementById("deleteProductId").value;
+
+          const data = await safeFetch(`/admin/delete-product/${id}`, {
+            method: "DELETE",
+            headers: { "x-admin-key": ADMIN_KEY },
+          });
+
           data.success
             ? showToast("Produit supprimé")
             : showToast("Erreur", true);
         } catch (e) {
           showToast(e.message, true);
         }
+
         setLoading(this, false, "Supprimer");
       };
 
+      /* DOWNLOAD PRODUCTS */
+
       document.getElementById("downloadProducts").onclick = async function () {
         setLoading(this, true, "Téléchargement...");
-        toggleOverlay(true);
+
         const res = await fetch("/admin/download-products", {
           headers: { "x-admin-key": ADMIN_KEY },
         });
+
         const blob = await res.blob();
         const url = window.URL.createObjectURL(blob);
+
         const a = document.createElement("a");
         a.href = url;
         a.download = "products.json";
         a.click();
-        toggleOverlay(false);
+
         setLoading(this, false, "Télécharger products.json");
       };
+
+      /* STATS */
 
       safeFetch("/api/products")
         .then((products) => {
