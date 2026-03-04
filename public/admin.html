@@ -584,6 +584,7 @@
           sidebarOverlay.classList.remove("active");
         });
       });
+      function toggleOverlay(show) {}
 
       function showToast(message, isError = false) {
         const toast = document.getElementById("toast");
@@ -620,7 +621,7 @@
       }
 
       document.getElementById("uploadBtn").onclick = async function () {
-        setLoading(this, true, "Upload...");
+        setLoading(this, true, "Veuillez patienter...");
         const files = document.getElementById("imageInput").files;
         const preview = document.getElementById("preview");
         for (const file of files) {
@@ -651,7 +652,7 @@
             preview.appendChild(wrapper);
           }
         }
-        setLoading(this, false, "Uploader images");
+        setLoading(this, false, "Generer images");
       };
 
       document.getElementById("saveProduct").onclick = async function () {
@@ -738,19 +739,17 @@
       document.getElementById("modifyBtn").onclick = async function () {
         setLoading(this, true, "Modification...");
         try {
-          const data = await safeFetch(
-            `/admin/modify-product/${modifyProductId.value}`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                "x-admin-key": ADMIN_KEY,
-              },
-              body: JSON.stringify({
-                available: modifyAvailability.value === "true",
-              }),
+          const id = document.getElementById("modifyProductId").value;
+          const data = await safeFetch(`/admin/modify-product/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
             },
-          );
+            body: JSON.stringify({
+              available: modifyAvailability.value === "true",
+            }),
+          });
           data.success
             ? showToast("Disponibilité modifiée")
             : showToast("Erreur", true);
