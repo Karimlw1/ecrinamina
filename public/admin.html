@@ -408,7 +408,7 @@
               placeholder="Jours badge Nouveau"
             />
           </div>
-
+          loading
           <input
             type="file"
             id="imageInput"
@@ -569,7 +569,6 @@
       }
 
       const ADMIN_KEY = "1234";
-      const loadingOverlay = document.getElementById("loadingOverlay");
 
       function setLoading(button, loading, text) {
         const span = button.querySelector(".btn-text");
@@ -580,10 +579,6 @@
           button.classList.remove("loading");
           span.textContent = text;
         }
-      }
-
-      function toggleOverlay(show) {
-        loadingOverlay.classList.toggle("active", show);
       }
 
       async function safeFetch(url, options) {
