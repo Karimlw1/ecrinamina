@@ -18,15 +18,7 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = "karimlw1";
 const REPO = "ecrinamina";
 const BRANCH = "main";
-//check admin middleware
-function checkAdmin(req, res, next) {
-  if (req.headers["x-admin-key"] !== process.env.ADMIN_KEY) {
-    return res.status(403).json({ error: "Accès refusé / you are not admin" });
-  }
-  next();
-
-}    
-
+   
 // Cloudinary setup
 
 cloudinary.config({
@@ -345,12 +337,12 @@ app.get("/order/:id", (req, res) => {
         text-decoration: none;
       }
         </style>
-  </head>`;
+  </head>
+  <body>`;
   let total = 0;
   order.forEach(item => {
     total += item.price * (item.qty || 1);
     html += `
-    <body>
     <a href="ecrinamina.onrender.com">
     <button class="back">
       Retour au Site 
