@@ -163,7 +163,7 @@ app.delete("/admin/delete-product/:id", isAdmin, async (req, res) => {
   res.json({ success: true, message: `Produit ${productId} supprimé ✔` });
 });
 // Modifier la disponibilité d'un produit
-app.put("/admin/modify-product/:id", checkAdmin, (req, res) => {
+app.put("/admin/modify-product/:id", isAdmin, (req, res) => {
   const products = readProducts();
   const id = req.params.id;
 
@@ -181,7 +181,7 @@ app.put("/admin/modify-product/:id", checkAdmin, (req, res) => {
 });
 
 //modifier le prix d'un produit
-app.put("/admin/modify-product/:id/price", checkAdmin, (req, res) => {
+app.put("/admin/modify-product/:id/price", isAdmin, (req, res) => {
   const products = readProducts();
   const id = req.params.id;
 
@@ -195,7 +195,7 @@ app.put("/admin/modify-product/:id/price", checkAdmin, (req, res) => {
   res.json({ success:true, message:"Prix modifié" });
 });
 // Modifier le nom d'un produit
-app.put("/admin/modify-product/:id/name", checkAdmin, (req, res) => {
+app.put("/admin/modify-product/:id/name", isAdmin, (req, res) => {
   const products = readProducts();
   const id = req.params.id;
 
@@ -240,7 +240,6 @@ app.post("/create-order", (req, res) => {
   fs.writeFileSync(ORDERS_FILE, JSON.stringify(orders, null, 2));
   res.json({ orderId });
 });
-
 app.get("/order/:id", (req, res) => {
   const orders = JSON.parse(fs.readFileSync(ORDERS_FILE));
   const order = orders[req.params.id];
