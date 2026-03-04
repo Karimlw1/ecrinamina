@@ -226,7 +226,7 @@
         background: #dc2626;
       }
 
-      .overlay {
+      .sidebarOverlay {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.6);
@@ -235,7 +235,7 @@
         z-index: 1500;
       }
 
-      .overlay.active {
+      .sidebarOverlay.active {
         display: block;
       }
 
@@ -266,7 +266,7 @@
 
   <body>
     <button class="hamburger" id="hamburger">☰</button>
-    <div class="overlay" id="sidebarOverlay"></div>
+    <div class="sidebarOverlay" id="sidebarOverlay"></div>
     <div class="toast" id="toast"></div>
 
     <div class="layout">
@@ -464,7 +464,6 @@
 
       const ADMIN_KEY = "1234";
       const loadingOverlay = document.getElementById("loadingOverlay");
-      const toast = document.getElementById("toast");
 
       function setLoading(button, loading, text) {
         const span = button.querySelector(".btn-text");
