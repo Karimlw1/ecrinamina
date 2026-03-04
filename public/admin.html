@@ -17,13 +17,14 @@
         padding: 0;
       }
       .securitysection {
+        width: -webkit-fill-available;
+        height: -webkit-fill-available;
         position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: white;
+        z-index: 1;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
         display: flex;
         justify-content: center;
-        align-content: center;
+        align-items: center;
       }
       .securityBox {
         width: 400px;
@@ -316,7 +317,9 @@
           placeholder="Mot de passe"
           required
         />
-        <button type="submit" class="connect">Se connecter</button>
+        <button type="submit" class="connect" onclick="securityCheck()">
+          Se connecter
+        </button>
       </div>
     </div>
     <button class="hamburger" id="hamburger">☰</button>
@@ -489,19 +492,21 @@
     </div>
 
     <script>
-      const password = "ecrin123";
-      const userName = "admin";
+      function securityCheck() {
+        const securitySection = document.querySelector(".securitySection");
+        const password = "ecrin123";
+        const userName = "admin";
 
-      const userNameV = document.querySelector("#userName").value;
-      const passwordV = document.querySelector("#password").value;
-      const submitbttn = document.querySelector(".connect");
+        const userNameV = document.querySelector("#userName").value;
+        const passwordV = document.querySelector("#password").value;
+        const submitbttn = document.querySelector(".connect");
 
-      if (password == passwordV || userNameV == userName) {
-        submitbttn.onclick.window.location.href = "/admin.html";
-      } else {
-        alert("nom d'utilisateur ou mot de passe incorrect!!");
+        if (password == passwordV || userNameV == userName) {
+          securitySection.style.Display = "none";
+        } else {
+          alert("nom d'utilisateur ou mot de passe incorrect!!");
+        }
       }
-
       const sidebar = document.getElementById("sidebar");
       const sidebarOverlay = document.getElementById("sidebarOverlay");
       const hamburger = document.getElementById("hamburger");
