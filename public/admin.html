@@ -367,71 +367,146 @@
         </button>
       </div>
     </div>
-    <button class="hamburger" id="hamburger">☰</button>
-    <div class="sidebarOverlay" id="sidebarOverlay"></div>
-    <div class="toast" id="toast"></div>
+    <section class="bodyHidden" style="display: none">
+      <button class="hamburger" id="hamburger">☰</button>
+      <div class="sidebarOverlay" id="sidebarOverlay"></div>
+      <div class="toast" id="toast"></div>
 
-    <div class="layout">
-      <aside class="sidebar" id="sidebar">
-        <h2>Admin</h2>
-        <img
-          src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png"
-          alt="logo"
-        />
+      <div class="layout">
+        <aside class="sidebar" id="sidebar">
+          <h2>Admin</h2>
+          <img
+            src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png"
+            alt="logo"
+          />
 
-        <nav>
-          <button class="menu-btn active" data-target="add">Ajouter</button>
-          <button class="menu-btn" data-target="availability">
-            Disponibilité
-          </button>
-          <button class="menu-btn" data-target="price">Prix</button>
-          <button class="menu-btn" data-target="name">Nom</button>
-          <button class="menu-btn" data-target="badges">Badges</button>
-          <button class="menu-btn" data-target="delete">Supprimer</button>
-          <button class="menu-btn" data-target="stats">Statistiques</button>
-        </nav>
-      </aside>
-      <div class="admin">
-        <h1 style="margin-bottom: 39px; margin-top: 33px">Panneau Admin</h1>
-        <!-- ADD PRODUCT -->
-        <div class="section" id="add">
-          <h3 style="margin: 20px">Ajouter un produit</h3>
-          <div class="grid">
-            <input id="id" placeholder="ID produit" />
-            <input id="name" placeholder="Nom du produit" />
-            <input id="price" type="number" placeholder="Prix" />
-            <select id="category">
-              <option value="">Choisir la page</option>
-              <option value="Homme">Homme</option>
-              <option value="Femme">Femme</option>
-              <option value="Enfant">Enfant</option>
-              <option value="Cadeau">Cadeau</option>
-              <option value="Maternite">Maternite</option>
-              <option value="CadeauSpecial">Cadeau Special</option>
-              <option value="Sport">Sport</option>
+          <nav>
+            <button class="menu-btn active" data-target="add">Ajouter</button>
+            <button class="menu-btn" data-target="availability">
+              Disponibilité
+            </button>
+            <button class="menu-btn" data-target="price">Prix</button>
+            <button class="menu-btn" data-target="name">Nom</button>
+            <button class="menu-btn" data-target="badges">Badges</button>
+            <button class="menu-btn" data-target="delete">Supprimer</button>
+            <button class="menu-btn" data-target="stats">Statistiques</button>
+          </nav>
+        </aside>
+        <div class="admin">
+          <h1 style="margin-bottom: 39px; margin-top: 33px">Panneau Admin</h1>
+          <!-- ADD PRODUCT -->
+          <div class="section" id="add">
+            <h3 style="margin: 20px">Ajouter un produit</h3>
+            <div class="grid">
+              <input id="id" placeholder="ID produit" />
+              <input id="name" placeholder="Nom du produit" />
+              <input id="price" type="number" placeholder="Prix" />
+              <select id="category">
+                <option value="">Choisir la page</option>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+                <option value="Enfant">Enfant</option>
+                <option value="Cadeau">Cadeau</option>
+                <option value="Maternite">Maternite</option>
+                <option value="CadeauSpecial">Cadeau Special</option>
+                <option value="Sport">Sport</option>
+              </select>
+              <select id="type">
+                <option value="">Type de produit</option>
+                <option value="haut">Haut</option>
+                <option value="bas">Bas</option>
+                <option value="chaussure">Chaussure</option>
+                <option value="accessoire">Accessoire</option>
+                <option value="lingerie">Lingerie</option>
+                <option value="robe">Robe</option>
+                <option value="complet">Complet</option>
+                <option value="Sac">Sac</option>
+                <option value="Pijama">Pijama</option>
+                <option value="Mailles">Mailles</option>
+                <option value="Tenuesdeceremonie">Tenues de Cérémonie</option>
+                <option value="Allaitement">Allaitement</option>
+                <option value="Ensembledenuit">Ensemble de Nuit</option>
+                <option value="Shooting">Shooting</option>
+                <option value="Gourde">Gourde</option>
+                n>
+              </select>
+              <input id="sizes" placeholder="Tailles (S,M,L)" />
+              <input id="colors" placeholder="Couleurs" />
+              <select id="stockStatus">
+                <option value="">Statut stock</option>
+                <option value="normal">Normal</option>
+                <option value="low">Stock faible</option>
+                <option value="out">Épuisé</option>
+                <option value="coming">Bientôt disponible</option>
+              </select>
+              <input
+                id="newDays"
+                type="number"
+                value="7"
+                placeholder="Jours badge Nouveau"
+              />
+            </div>
+            loading
+            <input
+              type="file"
+              id="imageInput"
+              multiple=""
+              style="background: chartreuse"
+            />
+            <button id="uploadBtn">
+              <span class="btn-text">Generer l'image</span>
+            </button>
+            <div class="preview" id="preview"></div>
+            <button
+              id="saveProduct"
+              fdprocessedid="ziukap"
+              style="background: red"
+            >
+              <span class="btn-text" style="">Enregistrer Produit</span>
+            </button>
+          </div>
+
+          <!-- OTHER SECTIONS (hidden initially) -->
+
+          <div class="section hidden" id="availability">
+            <h3>Modifier disponibilité</h3>
+            <input id="modifyProductId" placeholder="ID" />
+            <select id="modifyAvailability">
+              <option value="">Choisir</option>
+              <option value="true">Disponible</option>
+              <option value="false">Indisponible</option>
             </select>
-            <select id="type">
-              <option value="">Type de produit</option>
-              <option value="haut">Haut</option>
-              <option value="bas">Bas</option>
-              <option value="chaussure">Chaussure</option>
-              <option value="accessoire">Accessoire</option>
-              <option value="lingerie">Lingerie</option>
-              <option value="robe">Robe</option>
-              <option value="complet">Complet</option>
-              <option value="Sac">Sac</option>
-              <option value="Pijama">Pijama</option>
-              <option value="Mailles">Mailles</option>
-              <option value="Tenuesdeceremonie">Tenues de Cérémonie</option>
-              <option value="Allaitement">Allaitement</option>
-              <option value="Ensembledenuit">Ensemble de Nuit</option>
-              <option value="Shooting">Shooting</option>
-              <option value="Gourde">Gourde</option>
-              n>
-            </select>
-            <input id="sizes" placeholder="Tailles (S,M,L)" />
-            <input id="colors" placeholder="Couleurs" />
-            <select id="stockStatus">
+            <button id="modifyBtn">
+              <span class="btn-text">Modifier</span>
+            </button>
+          </div>
+
+          <div class="section hidden" id="price">
+            <h3>Modifier prix</h3>
+            <input id="modifyProductPriceId" placeholder="ID" />
+            <input
+              id="modifyProductPrice"
+              type="number"
+              placeholder="Nouveau prix"
+            />
+            <button id="modifyPriceBtn">
+              <span class="btn-text">Modifier</span>
+            </button>
+          </div>
+
+          <div class="section hidden" id="name">
+            <h3>Modifier nom</h3>
+            <input id="modifyProductNameId" placeholder="ID" />
+            <input id="modifyProductName" placeholder="Nouveau nom" />
+            <button id="modifyNameBtn">
+              <span class="btn-text">Modifier</span>
+            </button>
+          </div>
+
+          <div class="section hidden" id="badges">
+            <h3>Modifier badges</h3>
+            <input id="badgeProductId" placeholder="ID produit" />
+            <select id="modifyStockStatus">
               <option value="">Statut stock</option>
               <option value="normal">Normal</option>
               <option value="low">Stock faible</option>
@@ -439,116 +514,50 @@
               <option value="coming">Bientôt disponible</option>
             </select>
             <input
-              id="newDays"
+              id="modifyNewDays"
               type="number"
-              value="7"
-              placeholder="Jours badge Nouveau"
+              placeholder="Jours Nouveau"
             />
+            <button id="modifyBadgesBtn">
+              <span class="btn-text">Modifier badges</span>
+            </button>
           </div>
-          loading
-          <input
-            type="file"
-            id="imageInput"
-            multiple=""
-            style="background: chartreuse"
-          />
-          <button id="uploadBtn">
-            <span class="btn-text">Generer l'image</span>
-          </button>
-          <div class="preview" id="preview"></div>
-          <button
-            id="saveProduct"
-            fdprocessedid="ziukap"
-            style="background: red"
-          >
-            <span class="btn-text" style="">Enregistrer Produit</span>
-          </button>
-        </div>
 
-        <!-- OTHER SECTIONS (hidden initially) -->
+          <div class="section hidden" id="delete">
+            <h3>Supprimer produit</h3>
+            <input id="deleteProductId" placeholder="ID" />
+            <button id="deleteBtn">
+              <span class="btn-text">Supprimer</span>
+            </button>
+          </div>
 
-        <div class="section hidden" id="availability">
-          <h3>Modifier disponibilité</h3>
-          <input id="modifyProductId" placeholder="ID" />
-          <select id="modifyAvailability">
-            <option value="">Choisir</option>
-            <option value="true">Disponible</option>
-            <option value="false">Indisponible</option>
-          </select>
-          <button id="modifyBtn"><span class="btn-text">Modifier</span></button>
-        </div>
-
-        <div class="section hidden" id="price">
-          <h3>Modifier prix</h3>
-          <input id="modifyProductPriceId" placeholder="ID" />
-          <input
-            id="modifyProductPrice"
-            type="number"
-            placeholder="Nouveau prix"
-          />
-          <button id="modifyPriceBtn">
-            <span class="btn-text">Modifier</span>
-          </button>
-        </div>
-
-        <div class="section hidden" id="name">
-          <h3>Modifier nom</h3>
-          <input id="modifyProductNameId" placeholder="ID" />
-          <input id="modifyProductName" placeholder="Nouveau nom" />
-          <button id="modifyNameBtn">
-            <span class="btn-text">Modifier</span>
-          </button>
-        </div>
-
-        <div class="section hidden" id="badges">
-          <h3>Modifier badges</h3>
-          <input id="badgeProductId" placeholder="ID produit" />
-          <select id="modifyStockStatus">
-            <option value="">Statut stock</option>
-            <option value="normal">Normal</option>
-            <option value="low">Stock faible</option>
-            <option value="out">Épuisé</option>
-            <option value="coming">Bientôt disponible</option>
-          </select>
-          <input id="modifyNewDays" type="number" placeholder="Jours Nouveau" />
-          <button id="modifyBadgesBtn">
-            <span class="btn-text">Modifier badges</span>
-          </button>
-        </div>
-
-        <div class="section hidden" id="delete">
-          <h3>Supprimer produit</h3>
-          <input id="deleteProductId" placeholder="ID" />
-          <button id="deleteBtn">
-            <span class="btn-text">Supprimer</span>
-          </button>
-        </div>
-
-        <div class="section hidden" id="stats">
-          <h3>Statistiques</h3>
-          Produits existants :
-          <span
-            id="npe"
-            style="
-              background: red;
-              padding: 5px;
-              border-radius: 8px;
-              font-weight: bold;
-              color: aliceblue;
-              box-shadow: 0 0 10px -2px yellowgreen;
-            "
-            >...</span
-          >
-          <br /><br />
-          <button id="downloadProducts">
-            <span class="btn-text">Télécharger products.json</span>
-          </button>
+          <div class="section hidden" id="stats">
+            <h3>Statistiques</h3>
+            Produits existants :
+            <span
+              id="npe"
+              style="
+                background: red;
+                padding: 5px;
+                border-radius: 8px;
+                font-weight: bold;
+                color: aliceblue;
+                box-shadow: 0 0 10px -2px yellowgreen;
+              "
+              >...</span
+            >
+            <br /><br />
+            <button id="downloadProducts">
+              <span class="btn-text">Télécharger products.json</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <script>
       function securityCheck() {
+        const bodyH = document.querySelector(".bodyHidden");
         const securitySection = document.querySelector(".securitySection");
         const password = "ecrin123";
         const userName = "admin";
@@ -560,11 +569,13 @@
         if (password === passwordV && userName === userNameV) {
           securitySection.style.backgroundColor = " green";
           securitySection.style.display = "none";
+          bodyH.style.display = "block";
         } else {
           alert("nom d'utilisateur ou mot de passe incorrect!!");
         }
         console.log(userNameV + passwordV);
       }
+
       const sidebar = document.getElementById("sidebar");
       const sidebarOverlay = document.getElementById("sidebarOverlay");
       const hamburger = document.getElementById("hamburger");
