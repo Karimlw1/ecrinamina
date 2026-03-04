@@ -49,11 +49,12 @@
       /* SIDEBAR */
       .sidebar {
         width: 250px;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgb(21 39 49);
         backdrop-filter: blur(25px);
         padding: 30px 20px;
         border-right: 1px solid rgba(255, 255, 255, 0.08);
         transition: 0.3s;
+        box-shadow: 4px 1px 20px 0px rgba(0, 0, 0, 0.4);
       }
 
       .sidebar h2 {
@@ -103,12 +104,16 @@
         background: rgba(255, 255, 255, 0.06);
         backdrop-filter: blur(20px);
         padding: 30px;
+        color: steelblue;
         border-radius: 18px;
         margin-bottom: 30px;
         border: 1px solid rgba(255, 255, 255, 0.08);
         animation: fadeIn 0.2s ease;
       }
-
+      .h3 {
+        margin: 20px;
+        text-align: center;
+      }
       .hidden {
         display: none;
       }
@@ -134,10 +139,12 @@
       select {
         padding: 14px;
         border-radius: 12px;
-        border: none;
+        border: 1px solid #8080806e;
         outline: none;
         margin-top: 10px;
         font-size: 14px;
+        color: black;
+        box-shadow: 0 0 4px 0px;
       }
 
       button {
@@ -281,6 +288,7 @@
         </nav>
       </aside>
       <div class="admin">
+        <h1>Panneau Admin</h1>
         <!-- ADD PRODUCT -->
         <div class="section" id="add">
           <h3>Ajouter un produit</h3>
@@ -323,13 +331,22 @@
             />
           </div>
 
-          <input type="file" id="imageInput" multiple />
+          <input
+            type="file"
+            id="imageInput"
+            multiple=""
+            style="background: chartreuse"
+          />
           <button id="uploadBtn">
-            <span class="btn-text">Uploader images</span>
+            <span class="btn-text">Generer l'image</span>
           </button>
           <div class="preview" id="preview"></div>
-          <button id="saveProduct">
-            <span class="btn-text">Enregistrer</span>
+          <button
+            id="saveProduct"
+            fdprocessedid="ziukap"
+            style="background: red"
+          >
+            <span class="btn-text" style="">Enregistrer Produit</span>
           </button>
         </div>
 
@@ -404,17 +421,17 @@
 
     <script>
       const sidebar = document.getElementById("sidebar");
-      const overlay = document.getElementById("sidebarOverlay");
+      const sidebarOverlay = document.getElementById("sidebarOverlay");
       const hamburger = document.getElementById("hamburger");
 
       hamburger.onclick = () => {
         sidebar.classList.toggle("active");
-        overlay.classList.toggle("active");
+        sidebarOverlay.classList.toggle("active");
       };
 
-      overlay.onclick = () => {
+      sidebarOverlay.onclick = () => {
         sidebar.classList.remove("active");
-        overlay.classList.remove("active");
+        sidebarOverlay.classList.remove("active");
       };
 
       const menuButtons = document.querySelectorAll(".menu-btn");
@@ -431,7 +448,7 @@
             .classList.remove("hidden");
 
           sidebar.classList.remove("active");
-          overlay.classList.remove("active");
+          sidebarOverlay.classList.remove("active");
         });
       });
 
@@ -444,7 +461,7 @@
       }
 
       const ADMIN_KEY = "1234";
-      const overlay = document.getElementById("overlay");
+      const loadingOverlay = document.getElementById("loadingOverlay");
       const toast = document.getElementById("toast");
 
       function setLoading(button, loading, text) {
@@ -459,7 +476,7 @@
       }
 
       function toggleOverlay(show) {
-        overlay.classList.toggle("active", show);
+        loadingOverlay.classList.toggle("active", show);
       }
 
       async function safeFetch(url, options) {
