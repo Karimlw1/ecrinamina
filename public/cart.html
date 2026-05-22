@@ -169,7 +169,7 @@ function renderCart() {
           <div class="cart-item-meta">
             ${item.size ? `Taille: <strong>${item.size}</strong><br>` : ''}
             ${item.color ? `Couleur: <strong>${item.color}</strong><br>` : ''}
-            ${item.localisation ? `📍 <strong>${item.localisation}</strong>` : ''}
+            ${item.localisation ? `<i class="fa fa-map-marker-alt" style="color:var(--muted);font-size:11px;margin-right:3px"></i><strong>${item.localisation}</strong>` : ''}
           </div>
           <div class="cart-item-bottom">
             <div class="cart-item-price">$${subtotal}</div>
@@ -223,12 +223,12 @@ function removeItem(idx) {
   saveCart(cart);
   renderCart();
   updateCartBadge();
-  showToast('Article retiré du panier');
+  showToast('Article retiré');
 }
 
 function sendOrder() {
   const cart = getCart();
-  if (!cart.length) { showToast('⚠️ Votre panier est vide'); return; }
+  if (!cart.length) { showToast('Votre panier est vide'); return; }
 
   const btn = document.querySelector('.btn-whatsapp');
   btn.disabled = true;
@@ -245,18 +245,18 @@ function sendOrder() {
     .then(r => r.json())
     .then(data => {
       const orderLink = `${serverUrl}/order/${data.orderId}`;
-      const msg = `🛍️ Nouvelle commande Écrin d'art d'Amina\n\nVoir le panier 👇\n${orderLink}`;
+      const msg = `Nouvelle commande Ecrin d'art d'Amina\n\nVoir le panier :\n${orderLink}`;
       popup.location.href = `https://wa.me/243976203805?text=${encodeURIComponent(msg)}`;
       localStorage.removeItem('cart');
       updateCartBadge();
       renderCart();
-      showToast('✅ Commande envoyée !');
+      showToast('Commande envoyée');
     })
     .catch(() => {
       popup.close();
       btn.disabled = false;
       btn.innerHTML = '<i class="fa-brands fa-whatsapp" style="font-size:20px"></i> Commander via WhatsApp';
-      showToast('❌ Erreur. Réessayez.');
+      showToast('Erreur — veuillez réessayer');
     });
 }
 

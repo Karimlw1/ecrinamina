@@ -28,7 +28,7 @@
 
 <nav class="bottom-nav">
   <a href="index.html" class="nav-tab"><i class="fa fa-home"></i><span>Accueil</span></a>
-  <a href="wishlist.html" class="nav-tab active"><i class="fa-solid fa-heart" style="color:var(--danger)"></i><span>Favoris</span></a>
+  <a href="wishlist.html" class="nav-tab active"><i class="fa-solid fa-heart></i><span>Favoris</span></a>
   <a href="cart.html" class="nav-tab"><i class="fa fa-shopping-bag"></i><span>Panier</span></a>
 </nav>
 
@@ -65,7 +65,7 @@ if (!wishlist.length) {
         div.innerHTML = `
           <div class="card-img-wrap">
             <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400'" />
-            <button class="wishlist-btn active" data-id="${p.id}"><i class="fa-solid fa-heart" style="color:var(--danger)"></i></button>
+            <button class="wishlist-btn active" data-id="${p.id}"><i class="fa-solid fa-heart></i></button>
             <div class="card-overlay">
               <button class="btn-quick-view" onclick="event.stopPropagation();location.href='product.html?id=${p.id}'">Voir le produit</button>
             </div>

@@ -52,7 +52,7 @@
 </head>
 <body>
 <div class="admin-header">
-  <h1>⚙️ Admin Panel</h1>
+  <h1>Admin Panel</h1>
   <p>Écrin d'Amina — Gestion des produits</p>
   <a href="index.html" style="color:var(--muted);font-size:13px;text-decoration:none;margin-top:8px;display:inline-block">← Voir le site</a>
 </div>
@@ -257,7 +257,7 @@ async function addProduct() {
 
     const res = await fetch('/admin/add-product', { method:'POST', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify(product) });
     const data = await res.json();
-    if (data.success) msg('addMsg','✔ Produit ajouté avec succès !');
+    if (data.success) msg('addMsg','Produit ajouté avec succès');
     else msg('addMsg','Erreur: ' + (data.error||'inconnue'), false);
   } catch(e) { msg('addMsg', 'Erreur: ' + e.message, false); }
 }
@@ -268,7 +268,7 @@ async function deleteProduct() {
   if (!confirm(`Supprimer le produit "${id}" ?`)) return;
   const res = await fetch(`/admin/delete-product/${id}`, { method:'DELETE', headers:{'x-admin-key':ADMIN_KEY} });
   const data = await res.json();
-  if (data.success) msg('deleteMsg','✔ Produit supprimé');
+  if (data.success) msg('deleteMsg','Produit supprimé');
   else msg('deleteMsg', 'Erreur: ' + (data.error||'introuvable'), false);
 }
 
@@ -278,7 +278,7 @@ async function modifyName() {
   if (!id || !name) { msg('modifyMsg','ID et nom requis',false); return; }
   const res = await fetch(`/admin/modify-product/${id}/name`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify({name}) });
   const data = await res.json();
-  msg('modifyMsg', data.success ? '✔ Nom modifié' : 'Erreur: '+(data.error||''), data.success);
+  msg('modifyMsg', data.success ? 'Nom modifié' : 'Erreur: '+(data.error||''), data.success);
 }
 
 async function modifyPrice() {
@@ -287,7 +287,7 @@ async function modifyPrice() {
   if (!id || !price) { msg('modifyMsg','ID et prix requis',false); return; }
   const res = await fetch(`/admin/modify-product/${id}/price`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify({price}) });
   const data = await res.json();
-  msg('modifyMsg', data.success ? '✔ Prix modifié' : 'Erreur: '+(data.error||''), data.success);
+  msg('modifyMsg', data.success ? 'Prix modifié' : 'Erreur: '+(data.error||''), data.success);
 }
 
 async function modifyBadges() {
@@ -301,7 +301,7 @@ async function modifyBadges() {
   };
   const res = await fetch(`/admin/modify-product/${id}/badges`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify(body) });
   const data = await res.json();
-  msg('modifyMsg', data.success ? '✔ Badges mis à jour' : 'Erreur: '+(data.error||''), data.success);
+  msg('modifyMsg', data.success ? 'Badges mis à jour' : 'Erreur: '+(data.error||''), data.success);
 }
 
 async function download(type) {

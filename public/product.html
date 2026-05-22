@@ -432,7 +432,7 @@ function render() {
       wishlist.push(product.id);
       wishBtn.classList.add('active');
       wishBtn.querySelector('i').className = 'fa-solid fa-heart';
-      showToast('❤️ Ajouté aux favoris');
+      showToast('Ajouté aux favoris');
     } else {
       wishlist.splice(idx, 1);
       wishBtn.classList.remove('active');
@@ -453,7 +453,7 @@ function render() {
     if (!loc) {
       document.getElementById('localisation').focus();
       document.getElementById('localisation').style.borderColor = 'var(--danger)';
-      showToast('⚠️ Entrez votre lieu de livraison');
+      showToast('Entrez votre lieu de livraison');
       return;
     }
     document.getElementById('localisation').style.borderColor = '';
@@ -484,7 +484,7 @@ function render() {
       updateCartBadge();
       btn.disabled = false;
       btn.innerHTML = '<i class="fa fa-check"></i><span>Ajouté !</span>';
-      showToast('🛍️ Produit ajouté au panier');
+      showToast('Produit ajouté au panier');
       setTimeout(() => { btn.innerHTML = '<i class="fa fa-shopping-bag"></i><span>Ajouter au panier</span>'; }, 2000);
     }, 700);
   };

@@ -3,69 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sport & Active — Écrin d'Amina</title>
+  <title>Sport et Actif — Écrin d'Amina</title>
   <link rel="shortcut icon" href="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <style>
     .page-hero {
-      background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-mid) 100%);
-      padding: 48px 24px 36px;
+      background: var(--charcoal);
+      padding: 44px 24px 32px;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .page-hero::before {
-      content: '🏃';
+    .page-hero-icon {
       position: absolute;
-      font-size: 160px;
-      opacity: 0.06;
-      top: -20px;
-      right: -20px;
+      font-size: 140px;
+      opacity: 0.04;
+      top: -10px; right: -10px;
+      color: white;
       line-height: 1;
+      pointer-events: none;
     }
     .page-hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      color: white;
-      font-weight: 700;
-      margin-bottom: 8px;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      color: white; font-weight: 700;
+      margin-bottom: 6px;
     }
-    .page-hero p { color: rgba(255,255,255,0.6); font-size: 14px; }
-    .page-hero .gold { color: var(--gold); }
+    .page-hero p { color: rgba(255,255,255,0.5); font-size: 13px; }
 
     .filter-bar {
-      padding: 16px 16px 0;
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      padding: 14px 16px 0;
+      display: flex; gap: 8px;
+      overflow-x: auto; scrollbar-width: none;
     }
     .filter-bar::-webkit-scrollbar { display: none; }
     .filter-chip {
       flex-shrink: 0;
-      padding: 6px 16px;
-      border-radius: 50px;
-      border: 1.5px solid var(--cream-dark);
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
       background: var(--white);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      color: var(--charcoal);
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      color: var(--muted); font-family: var(--font-body);
     }
     .filter-chip.active, .filter-chip:hover {
-      border-color: var(--gold);
-      background: var(--gold);
-      color: var(--charcoal);
+      border-color: var(--charcoal);
+      background: var(--charcoal);
+      color: white;
     }
   </style>
 </head>
 <body>
 <header class="navbar">
   <button class="nav-icon-btn" onclick="history.back()"><i class="fa fa-arrow-left"></i></button>
-  <img src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" alt="Logo" class="navbar-logo" style="height:36px" />
+  <img src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" alt="Logo" class="navbar-logo" style="height:34px" />
   <a href="cart.html" class="nav-icon-btn">
     <i class="fa fa-shopping-bag"></i>
     <span class="badge" id="cartCount" style="display:none">0</span>
@@ -73,14 +67,15 @@
 </header>
 
 <div class="page-hero">
-  <h1>🏃 <span class="gold">Sport & Active</span></h1>
-  <p>Découvrez notre sélection exclusive</p>
+  <i class="fa fa-dumbbell page-hero-icon"></i>
+  <h1>Sport et Actif</h1>
+  <p>Sélection exclusive pour vous</p>
 </div>
 
 <div class="filter-bar" id="filterBar"></div>
 
-<div style="padding: 16px 16px 120px;">
-  <div id="resultsCount" style="font-size:13px;color:var(--muted);padding:8px 4px 12px"></div>
+<div style="padding: 14px 16px 120px;">
+  <div id="resultsCount" style="font-size:12px;color:var(--muted);padding:6px 2px 12px"></div>
   <div class="products-grid" id="productsContainer">
     <div class="loader-wrapper"><div class="spinner"></div></div>
   </div>
@@ -102,65 +97,63 @@ document.documentElement.setAttribute('data-theme', savedTheme);
 
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent=msg; t.className='toast show';
-  setTimeout(()=>t.className='toast',2500);
+  t.textContent = msg; t.className = 'toast show';
+  setTimeout(() => t.className = 'toast', 2400);
 }
 
 let allProducts = [];
-let wishlist = JSON.parse(localStorage.getItem('wishlist')||'[]');
-let activeType = 'Tous';
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 const container = document.getElementById('productsContainer');
 
 fetch('/api/products')
-  .then(r=>r.json())
-  .then(data=>{
-    allProducts = Object.values(data).filter(p=>{
+  .then(r => r.json())
+  .then(data => {
+    allProducts = Object.values(data).filter(p => {
       const field = 'type';
       const val = '';
-      if(!val) return true;
-      return (p[field]||'').toLowerCase() === val.toLowerCase();
+      if (!val) return true;
+      return (p[field] || '').toLowerCase() === val.toLowerCase();
     });
     buildFilters();
     renderProducts(allProducts);
   });
 
 function buildFilters() {
-  const types = ['Tous', ...new Set(allProducts.map(p=>p.type).filter(Boolean))];
+  const types = ['Tous', ...new Set(allProducts.map(p => p.type).filter(Boolean))];
   const bar = document.getElementById('filterBar');
-  bar.innerHTML = types.map(t=>`<button class="filter-chip ${t==='Tous'?'active':''}" onclick="setFilter(this,'${t}')">${t}</button>`).join('');
+  bar.innerHTML = types.map(t => `<button class="filter-chip ${t==='Tous'?'active':''}" onclick="setFilter(this,'${t}')">${t.charAt(0).toUpperCase()+t.slice(1)}</button>`).join('');
 }
 
 function setFilter(btn, type) {
-  document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  activeType = type;
-  const filtered = type==='Tous' ? allProducts : allProducts.filter(p=>p.type===type);
+  const filtered = type === 'Tous' ? allProducts : allProducts.filter(p => p.type === type);
   renderProducts(filtered);
 }
 
 function renderProducts(arr) {
   document.getElementById('resultsCount').textContent = arr.length + ' article(s)';
-  container.innerHTML='';
-  if(!arr.length){
-    container.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><i class="fa fa-box-open"></i><h3>Aucun article</h3><p>Revenez bientôt</p></div>`;
+  container.innerHTML = '';
+  if (!arr.length) {
+    container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><i class="fa fa-box-open"></i><h3>Aucun article</h3><p>Revenez bientôt</p></div>`;
     return;
   }
-  arr.forEach(p=>{
-    const inWish=wishlist.includes(p.id);
-    const div=document.createElement('div');
-    div.className='product-card';
-    const isNew = p.newUntil && new Date()<=new Date(p.newUntil);
-    div.innerHTML=`
+  arr.forEach(p => {
+    const inWish = wishlist.includes(p.id);
+    const div = document.createElement('div');
+    div.className = 'product-card';
+    const isNew = p.newUntil && new Date() <= new Date(p.newUntil);
+    div.innerHTML = `
       <div class="card-img-wrap">
         <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400'" />
         <div class="product-badges">
-          ${isNew?'<span class="badge-label new">Nouveau</span>':''}
-          ${p.isRunningLow?'<span class="badge-label low">Stock limité</span>':''}
-          ${p.epuised?'<span class="badge-label out">Épuisé</span>':''}
-          ${p.comingSoon?'<span class="badge-label soon">Bientôt</span>':''}
+          ${isNew ? '<span class="badge-label new">Nouveau</span>' : ''}
+          ${p.isRunningLow ? '<span class="badge-label low">Stock limité</span>' : ''}
+          ${p.epuised ? '<span class="badge-label out">Épuisé</span>' : ''}
+          ${p.comingSoon ? '<span class="badge-label soon">Bientôt</span>' : ''}
         </div>
-        <button class="wishlist-btn ${inWish?'active':''}" data-id="${p.id}">
-          <i class="${inWish?'fa-solid':'fa-regular'} fa-heart" style="${inWish?'color:var(--danger)':''}"></i>
+        <button class="wishlist-btn ${inWish ? 'active' : ''}" data-id="${p.id}">
+          <i class="${inWish ? 'fa-solid' : 'fa-regular'} fa-heart" ${inWish ? 'style="color:var(--danger)"' : ''}></i>
         </button>
         <div class="card-overlay">
           <button class="btn-quick-view" onclick="event.stopPropagation();location.href='product.html?id=${p.id}'">Voir le produit</button>
@@ -173,18 +166,18 @@ function renderProducts(arr) {
           <button class="btn-add-card" onclick="event.stopPropagation();location.href='product.html?id=${p.id}'"><i class="fa fa-arrow-right"></i></button>
         </div>
       </div>`;
-    div.onclick=()=>location.href=`product.html?id=${p.id}`;
+    div.onclick = () => location.href = `product.html?id=${p.id}`;
     container.appendChild(div);
   });
 
-  document.querySelectorAll('.wishlist-btn').forEach(btn=>{
-    btn.addEventListener('click',function(e){
+  document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      const id=this.dataset.id;
-      const idx=wishlist.indexOf(id);
-      if(idx===-1){wishlist.push(id);this.classList.add('active');this.querySelector('i').className='fa-solid fa-heart';this.querySelector('i').style.color='var(--danger)';showToast('❤️ Ajouté aux favoris');}
-      else{wishlist.splice(idx,1);this.classList.remove('active');this.querySelector('i').className='fa-regular fa-heart';this.querySelector('i').style.color='';showToast('Retiré des favoris');}
-      localStorage.setItem('wishlist',JSON.stringify(wishlist));
+      const id = this.dataset.id;
+      const idx = wishlist.indexOf(id);
+      if (idx === -1) { wishlist.push(id); this.classList.add('active'); this.querySelector('i').className = 'fa-solid fa-heart'; this.querySelector('i').style.color = 'var(--danger)'; showToast('Ajouté aux favoris'); }
+      else { wishlist.splice(idx, 1); this.classList.remove('active'); this.querySelector('i').className = 'fa-regular fa-heart'; this.querySelector('i').style.color = ''; showToast('Retiré des favoris'); }
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
     });
   });
 }
