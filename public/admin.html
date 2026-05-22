@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administration — Écrin d'Amina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #0f0f0f; color: #f0f0f0; }
+    .admin-wrap { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
+    .admin-header { text-align: center; padding: 40px 20px 32px; }
+    .admin-header h1 { font-family: var(--font-display); font-size: 2rem; color: var(--gold); }
+    .admin-header p { color: var(--muted); font-size: 14px; margin-top: 8px; }
+
+    .key-gate { max-width: 420px; margin: 0 auto 40px; display: flex; gap: 12px; }
+    .key-gate input { flex:1; padding: 13px 16px; border: 1.5px solid #333; border-radius: 12px; background: #1a1a1a; color: white; font-family: var(--font-body); font-size: 14px; outline: none; }
+    .key-gate input:focus { border-color: var(--gold); }
+    .key-gate button { padding: 13px 20px; border-radius: 12px; background: var(--gold); border: none; color: #111; font-weight: 700; cursor: pointer; transition: var(--transition); }
+    .key-gate button:hover { background: var(--gold-light); }
+
+    .admin-section { background: #1a1a1a; border-radius: 16px; padding: 28px; margin-bottom: 24px; border: 1px solid #2a2a2a; }
+    .admin-section h2 { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 11px 14px; border: 1.5px solid #333; border-radius: 10px;
+      background: #111; color: white; font-family: var(--font-body); font-size: 14px; outline: none;
+      transition: var(--transition);
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group select option { background: #111; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+    .btn-admin { padding: 13px 28px; border-radius: 10px; border: none; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; transition: var(--transition); }
+    .btn-gold { background: var(--gold); color: #111; }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-danger:hover { background: #c62828; }
+    .btn-outline { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); }
+    .btn-outline:hover { background: var(--gold); color: #111; }
+
+    .msg { margin-top: 12px; padding: 10px 16px; border-radius: 8px; font-size: 13px; display: none; }
+    .msg.ok { background: rgba(76,175,80,0.15); color: #81C784; border: 1px solid rgba(76,175,80,0.3); display: block; }
+    .msg.err { background: rgba(229,57,53,0.15); color: #E57373; border: 1px solid rgba(229,57,53,0.3); display: block; }
+
+    .preview-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; margin-top: 10px; display: none; border: 2px solid var(--gold); }
+    .divider { height: 1px; background: #2a2a2a; margin: 8px 0 20px; }
+  </style>
+</head>
+<body>
+<div class="admin-header">
+  <h1>⚙️ Admin Panel</h1>
+  <p>Écrin d'Amina — Gestion des produits</p>
+  <a href="index.html" style="color:var(--muted);font-size:13px;text-decoration:none;margin-top:8px;display:inline-block">← Voir le site</a>
+</div>
+
+<div class="admin-wrap">
+  <!-- KEY -->
+  <div class="key-gate">
+    <input type="password" id="adminKey" placeholder="Clé admin..." />
+    <button onclick="setKey()"><i class="fa fa-unlock"></i></button>
+  </div>
+
+  <!-- ADD PRODUCT -->
+  <div class="admin-section">
+    <h2><i class="fa fa-plus-circle"></i> Ajouter un produit</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nom du produit</label>
+        <input type="text" id="prodName" placeholder="Ex: Robe fleurie..." />
+      </div>
+      <div class="form-group">
+        <label>Prix (USD)</label>
+        <input type="number" id="prodPrice" placeholder="Ex: 45" min="0" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Catégorie</label>
+        <select id="prodCategory">
+          <option value="Femme">Femme</option>
+          <option value="Homme">Homme</option>
+          <option value="Enfant">Enfant</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Type</label>
+        <select id="prodType">
+          <option value="robe">Robe</option>
+          <option value="haut">Haut</option>
+          <option value="bas">Bas</option>
+          <option value="chaussure">Chaussure</option>
+          <option value="Sac">Sac</option>
+          <option value="complet">Complet</option>
+          <option value="accessoire">Accessoire</option>
+          <option value="Mailles">Mailles</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Tailles (séparées par virgule)</label>
+        <input type="text" id="prodSizes" placeholder="XS, S, M, L, XL" />
+      </div>
+      <div class="form-group">
+        <label>Couleurs (séparées par virgule)</label>
+        <input type="text" id="prodColors" placeholder="Rouge, Bleu, Noir" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Image du produit</label>
+      <input type="file" id="prodImage" accept="image/*" onchange="previewImg(this)" />
+      <img id="imgPreview" class="preview-img" />
+    </div>
+    <div class="form-group">
+      <label>Badge "Nouveau" jusqu'au</label>
+      <input type="datetime-local" id="prodNewUntil" />
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:4px;">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="prodLow" /> Stock limité
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="prodEpuised" /> Épuisé
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="prodSoon" /> Bientôt dispo
+      </label>
+    </div>
+    <button class="btn-admin btn-gold" style="margin-top:20px" onclick="addProduct()">
+      <i class="fa fa-plus"></i> Ajouter le produit
+    </button>
+    <div class="msg" id="addMsg"></div>
+  </div>
+
+  <!-- DELETE PRODUCT -->
+  <div class="admin-section">
+    <h2><i class="fa fa-trash"></i> Supprimer un produit</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label>ID du produit</label>
+        <input type="text" id="deleteId" placeholder="Ex: Produit0" />
+      </div>
+    </div>
+    <button class="btn-admin btn-danger" onclick="deleteProduct()"><i class="fa fa-trash"></i> Supprimer</button>
+    <div class="msg" id="deleteMsg"></div>
+  </div>
+
+  <!-- MODIFY PRODUCT -->
+  <div class="admin-section">
+    <h2><i class="fa fa-edit"></i> Modifier un produit</h2>
+    <div class="form-group">
+      <label>ID du produit</label>
+      <input type="text" id="modifyId" placeholder="Ex: Produit0" />
+    </div>
+    <div class="divider"></div>
+    <div class="form-row">
+      <div>
+        <div class="form-group"><label>Nouveau nom</label><input type="text" id="modifyName" placeholder="Nouveau nom..." /></div>
+        <button class="btn-admin btn-outline" onclick="modifyName()">Changer le nom</button>
+      </div>
+      <div>
+        <div class="form-group"><label>Nouveau prix</label><input type="number" id="modifyPrice" placeholder="Nouveau prix..." /></div>
+        <button class="btn-admin btn-outline" onclick="modifyPrice()">Changer le prix</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="mLow" /> Stock limité
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="mEpuised" /> Épuisé
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" id="mSoon" /> Bientôt dispo
+      </label>
+      <div class="form-group" style="margin:0;flex:1">
+        <label>Nouveau jusqu'au</label>
+        <input type="datetime-local" id="mNewUntil" />
+      </div>
+    </div>
+    <button class="btn-admin btn-outline" onclick="modifyBadges()">Mettre à jour les badges</button>
+    <div class="msg" id="modifyMsg"></div>
+  </div>
+
+  <!-- DOWNLOADS -->
+  <div class="admin-section">
+    <h2><i class="fa fa-download"></i> Téléchargements</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-admin btn-outline" onclick="download('products')"><i class="fa fa-box"></i> products.json</button>
+      <button class="btn-admin btn-outline" onclick="download('orders')"><i class="fa fa-receipt"></i> orders.json</button>
+    </div>
+    <div class="msg" id="dlMsg"></div>
+  </div>
+</div>
+
+<script>
+let ADMIN_KEY = localStorage.getItem('adminKey') || '';
+if (ADMIN_KEY) document.getElementById('adminKey').value = ADMIN_KEY;
+
+function setKey() {
+  ADMIN_KEY = document.getElementById('adminKey').value.trim();
+  localStorage.setItem('adminKey', ADMIN_KEY);
+  alert('Clé enregistrée ✔');
+}
+
+function msg(id, text, ok=true) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'msg ' + (ok ? 'ok' : 'err');
+}
+
+function previewImg(input) {
+  const prev = document.getElementById('imgPreview');
+  if (input.files && input.files[0]) {
+    const r = new FileReader();
+    r.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
+    r.readAsDataURL(input.files[0]);
+  }
+}
+
+async function addProduct() {
+  const name = document.getElementById('prodName').value.trim();
+  const price = Number(document.getElementById('prodPrice').value);
+  const category = document.getElementById('prodCategory').value;
+  const type = document.getElementById('prodType').value;
+  const sizes = document.getElementById('prodSizes').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const colors = document.getElementById('prodColors').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const file = document.getElementById('prodImage').files[0];
+  const newUntil = document.getElementById('prodNewUntil').value;
+
+  if (!name || !price || !file) { msg('addMsg','Remplissez tous les champs obligatoires',false); return; }
+
+  try {
+    const fd = new FormData();
+    fd.append('image', file);
+    const upRes = await fetch('/admin/upload-image', { method:'POST', headers:{'x-admin-key':ADMIN_KEY}, body:fd });
+    const upData = await upRes.json();
+    if (!upData.imageUrl) throw new Error('Upload échoué');
+
+    const id = 'Produit_' + Date.now();
+    const product = {
+      id, name, price, category, type,
+      image: upData.imageUrl,
+      images: [upData.imageUrl],
+      options: { size: sizes, color: colors },
+      newUntil: newUntil ? new Date(newUntil).toISOString() : null,
+      isRunningLow: document.getElementById('prodLow').checked,
+      epuised: document.getElementById('prodEpuised').checked,
+      comingSoon: document.getElementById('prodSoon').checked,
+      available: true
+    };
+
+    const res = await fetch('/admin/add-product', { method:'POST', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify(product) });
+    const data = await res.json();
+    if (data.success) msg('addMsg','✔ Produit ajouté avec succès !');
+    else msg('addMsg','Erreur: ' + (data.error||'inconnue'), false);
+  } catch(e) { msg('addMsg', 'Erreur: ' + e.message, false); }
+}
+
+async function deleteProduct() {
+  const id = document.getElementById('deleteId').value.trim();
+  if (!id) { msg('deleteMsg','Entrez un ID',false); return; }
+  if (!confirm(`Supprimer le produit "${id}" ?`)) return;
+  const res = await fetch(`/admin/delete-product/${id}`, { method:'DELETE', headers:{'x-admin-key':ADMIN_KEY} });
+  const data = await res.json();
+  if (data.success) msg('deleteMsg','✔ Produit supprimé');
+  else msg('deleteMsg', 'Erreur: ' + (data.error||'introuvable'), false);
+}
+
+async function modifyName() {
+  const id = document.getElementById('modifyId').value.trim();
+  const name = document.getElementById('modifyName').value.trim();
+  if (!id || !name) { msg('modifyMsg','ID et nom requis',false); return; }
+  const res = await fetch(`/admin/modify-product/${id}/name`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify({name}) });
+  const data = await res.json();
+  msg('modifyMsg', data.success ? '✔ Nom modifié' : 'Erreur: '+(data.error||''), data.success);
+}
+
+async function modifyPrice() {
+  const id = document.getElementById('modifyId').value.trim();
+  const price = Number(document.getElementById('modifyPrice').value);
+  if (!id || !price) { msg('modifyMsg','ID et prix requis',false); return; }
+  const res = await fetch(`/admin/modify-product/${id}/price`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify({price}) });
+  const data = await res.json();
+  msg('modifyMsg', data.success ? '✔ Prix modifié' : 'Erreur: '+(data.error||''), data.success);
+}
+
+async function modifyBadges() {
+  const id = document.getElementById('modifyId').value.trim();
+  if (!id) { msg('modifyMsg','Entrez un ID',false); return; }
+  const body = {
+    newUntil: document.getElementById('mNewUntil').value ? new Date(document.getElementById('mNewUntil').value).toISOString() : null,
+    isRunningLow: document.getElementById('mLow').checked,
+    epuised: document.getElementById('mEpuised').checked,
+    comingSoon: document.getElementById('mSoon').checked
+  };
+  const res = await fetch(`/admin/modify-product/${id}/badges`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify(body) });
+  const data = await res.json();
+  msg('modifyMsg', data.success ? '✔ Badges mis à jour' : 'Erreur: '+(data.error||''), data.success);
+}
+
+async function download(type) {
+  try {
+    const res = await fetch(`/admin/download-${type}`, { headers:{'x-admin-key':ADMIN_KEY} });
+    if (!res.ok) throw new Error('Accès refusé');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `${type}.json`; a.click();
+    URL.revokeObjectURL(url);
+    msg('dlMsg', `✔ ${type}.json téléchargé`);
+  } catch(e) { msg('dlMsg', 'Erreur: ' + e.message, false); }
+}
+</script>
+</body>
+</html>

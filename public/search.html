@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recherche — Écrin d'Amina</title>
+  <link rel="shortcut icon" href="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="navbar">
+  <button class="nav-icon-btn" onclick="history.back()"><i class="fa fa-arrow-left"></i></button>
+  <span style="font-family:var(--font-display);font-size:1rem;font-weight:600">Recherche</span>
+  <a href="cart.html" class="nav-icon-btn">
+    <i class="fa fa-shopping-bag"></i>
+    <span class="badge" id="cartCount" style="display:none">0</span>
+  </a>
+</header>
+
+<div class="search-section" style="padding:20px 20px 0">
+  <div class="search-bar">
+    <i class="fa fa-search"></i>
+    <input type="text" id="SearchInput" placeholder="Robe, chaussure, enfant..." autocomplete="off" autofocus />
+    <button id="clearBtn" style="display:none"><i class="fa fa-times"></i></button>
+  </div>
+  <div id="resultsCount" style="padding:12px 4px;font-size:13px;color:var(--muted)"></div>
+</div>
+
+<div style="padding: 0 16px 120px;">
+  <div class="products-grid" id="resultsContainer"></div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-tab"><i class="fa fa-home"></i><span>Accueil</span></a>
+  <a href="search.html" class="nav-tab active"><i class="fa fa-search"></i><span>Recherche</span></a>
+  <a href="wishlist.html" class="nav-tab"><i class="fa-regular fa-heart"></i><span>Favoris</span></a>
+  <a href="cart.html" class="nav-tab"><i class="fa fa-shopping-bag"></i><span>Panier</span></a>
+</nav>
+
+<script src="cart-core.js"></script>
+<script src="cart.js"></script>
+<script>
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+const searchInput = document.getElementById('SearchInput');
+const clearBtn = document.getElementById('clearBtn');
+const container = document.getElementById('resultsContainer');
+const resultsCount = document.getElementById('resultsCount');
+let allProducts = [];
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+function normalize(t) { return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+fetch('/api/products')
+  .then(r => r.json())
+  .then(data => {
+    allProducts = Object.values(data);
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) { searchInput.value = q; clearBtn.style.display='block'; doSearch(q); }
+    else { showAll(); }
+  });
+
+searchInput.addEventListener('input', function() {
+  clearBtn.style.display = this.value ? 'block' : 'none';
+  doSearch(this.value);
+});
+
+clearBtn.onclick = () => {
+  searchInput.value = ''; clearBtn.style.display='none';
+  resultsCount.textContent = ''; showAll();
+};
+
+function doSearch(q) {
+  if (!q.trim()) { showAll(); resultsCount.textContent=''; return; }
+  const nq = normalize(q);
+  const res = allProducts.filter(p =>
+    normalize(`${p.name} ${p.category} ${p.type} ${p.price} ${(p.options?.color||[]).join(' ')} ${(p.options?.size||[]).join(' ')}`).includes(nq)
+  );
+  resultsCount.textContent = `${res.length} résultat(s) pour "${q}"`;
+  renderProducts(res);
+}
+
+function showAll() { renderProducts(allProducts); }
+
+function renderProducts(arr) {
+  container.innerHTML = '';
+  if (!arr.length) {
+    container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><i class="fa fa-search"></i><h3>Aucun résultat</h3><p>Essayez un autre terme</p></div>`;
+    return;
+  }
+  arr.forEach(p => {
+    const inWish = wishlist.includes(p.id);
+    const div = document.createElement('div');
+    div.className = 'product-card';
+    div.innerHTML = `
+      <div class="card-img-wrap">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400'" />
+        <button class="wishlist-btn ${inWish?'active':''}" data-id="${p.id}">
+          <i class="${inWish?'fa-solid':'fa-regular'} fa-heart" style="${inWish?'color:var(--danger)':''}"></i>
+        </button>
+      </div>
+      <div class="card-info">
+        <div class="card-name">${p.name}</div>
+        <div class="card-bottom">
+          <div class="card-price">$${p.price}</div>
+          <button class="btn-add-card" onclick="event.stopPropagation();location.href='product.html?id=${p.id}'"><i class="fa fa-arrow-right"></i></button>
+        </div>
+      </div>`;
+    div.onclick = () => location.href = `product.html?id=${p.id}`;
+    container.appendChild(div);
+  });
+
+  document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const id = this.dataset.id;
+      const idx = wishlist.indexOf(id);
+      if (idx===-1) { wishlist.push(id); this.classList.add('active'); this.querySelector('i').className='fa-solid fa-heart'; this.querySelector('i').style.color='var(--danger)'; }
+      else { wishlist.splice(idx,1); this.classList.remove('active'); this.querySelector('i').className='fa-regular fa-heart'; this.querySelector('i').style.color=''; }
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    });
+  });
+}
+updateCartBadge();
+</script>
+</body>
+</html>

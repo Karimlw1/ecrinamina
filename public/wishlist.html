@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favoris — Écrin d'Amina</title>
+  <link rel="shortcut icon" href="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="navbar">
+  <button class="nav-icon-btn" onclick="history.back()"><i class="fa fa-arrow-left"></i></button>
+  <span style="font-family:var(--font-display);font-size:1rem;font-weight:600">Mes Favoris</span>
+  <a href="cart.html" class="nav-icon-btn">
+    <i class="fa fa-shopping-bag"></i>
+    <span class="badge" id="cartCount" style="display:none">0</span>
+  </a>
+</header>
+
+<div style="padding: 24px 16px 120px;">
+  <div class="section-title">Vos coups de cœur</div>
+  <div class="products-grid" id="wishlistContainer">
+    <div class="loader-wrapper"><div class="spinner"></div></div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-tab"><i class="fa fa-home"></i><span>Accueil</span></a>
+  <a href="wishlist.html" class="nav-tab active"><i class="fa-solid fa-heart" style="color:var(--danger)"></i><span>Favoris</span></a>
+  <a href="cart.html" class="nav-tab"><i class="fa fa-shopping-bag"></i><span>Panier</span></a>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script src="cart-core.js"></script>
+<script src="cart.js"></script>
+<script>
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show';
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
+const container = document.getElementById('wishlistContainer');
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+if (!wishlist.length) {
+  container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><i class="fa-regular fa-heart"></i><h3>Aucun favori</h3><p>Cliquez sur ❤️ pour sauvegarder vos articles préférés</p><a href="index.html" style="display:inline-block;margin-top:16px;padding:12px 28px;background:var(--charcoal);color:white;border-radius:50px;text-decoration:none;font-weight:600">Découvrir les produits</a></div>`;
+} else {
+  fetch('/api/products')
+    .then(r => r.json())
+    .then(data => {
+      const prods = Object.values(data).filter(p => wishlist.includes(p.id));
+      if (!prods.length) { container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><i class="fa-regular fa-heart"></i><h3>Aucun favori</h3></div>`; return; }
+
+      container.innerHTML = '';
+      prods.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product-card';
+        div.innerHTML = `
+          <div class="card-img-wrap">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400'" />
+            <button class="wishlist-btn active" data-id="${p.id}"><i class="fa-solid fa-heart" style="color:var(--danger)"></i></button>
+            <div class="card-overlay">
+              <button class="btn-quick-view" onclick="event.stopPropagation();location.href='product.html?id=${p.id}'">Voir le produit</button>
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="card-name">${p.name}</div>
+            <div class="card-bottom">
+              <div class="card-price">$${p.price}</div>
+              <button class="btn-add-card" onclick="event.stopPropagation();location.href='product.html?id=${p.id}'"><i class="fa fa-arrow-right"></i></button>
+            </div>
+          </div>`;
+        div.onclick = () => location.href = `product.html?id=${p.id}`;
+        container.appendChild(div);
+      });
+
+      document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const id = this.dataset.id;
+          wishlist = wishlist.filter(w => w !== id);
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+          this.closest('.product-card').style.opacity = '0';
+          this.closest('.product-card').style.transform = 'scale(0.9)';
+          this.closest('.product-card').style.transition = 'all 0.3s ease';
+          setTimeout(() => this.closest('.product-card').remove(), 300);
+          showToast('Retiré des favoris');
+        });
+      });
+    });
+}
+updateCartBadge();
+</script>
+</body>
+</html>

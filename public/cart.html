@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Panier — Écrin d'Amina</title>
+  <link rel="shortcut icon" href="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .cart-page { max-width: 800px; margin: 0 auto; padding: 24px 20px 180px; }
+    .cart-empty { text-align: center; padding: 80px 20px; }
+    .cart-empty i { font-size: 64px; color: var(--cream-dark); display: block; margin-bottom: 20px; }
+    .cart-empty h2 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 10px; }
+    .cart-empty p { color: var(--muted); margin-bottom: 24px; }
+    .cart-empty a { display: inline-block; padding: 14px 32px; background: var(--charcoal); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition); }
+    .cart-empty a:hover { background: var(--gold); }
+
+    .cart-item {
+      display: flex;
+      gap: 16px;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+    .cart-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .cart-item-img {
+      width: 88px; height: 110px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+    .cart-item-body { flex: 1; min-width: 0; }
+    .cart-item-name { font-size: 13px; font-weight: 600; color: var(--charcoal); line-height: 1.3; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .cart-item-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; line-height: 1.7; }
+    .cart-item-meta strong { color: var(--charcoal); }
+    .cart-item-bottom { display: flex; align-items: center; justify-content: space-between; }
+    .cart-item-price { font-size: 15px; font-weight: 700; color: var(--gold-dark); font-family: var(--font-display); }
+    .cart-item-qty { display: flex; align-items: center; gap: 0; border: 1px solid var(--cream-dark); border-radius: 50px; overflow: hidden; }
+    .cq-btn { width: 30px; height: 30px; background: none; border: none; cursor: pointer; font-size: 13px; color: var(--charcoal); transition: var(--transition); display: flex; align-items: center; justify-content: center; }
+    .cq-btn:hover { background: var(--cream-dark); color: var(--gold); }
+    .cq-val { width: 32px; text-align: center; font-size: 13px; font-weight: 600; font-family: var(--font-body); border: none; background: none; color: var(--charcoal); }
+    .btn-remove { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border-radius: 50%; background: none; border: none; cursor: pointer; color: var(--muted); font-size: 12px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    .btn-remove:hover { background: rgba(229,57,53,0.1); color: var(--danger); }
+
+    .cart-summary {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-top: 24px;
+    }
+    .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 14px; color: var(--muted); border-bottom: 1px solid var(--cream-dark); }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-total { font-size: 18px; font-weight: 700; color: var(--charcoal); font-family: var(--font-display); }
+    .summary-total-val { font-size: 22px; color: var(--gold-dark); }
+
+    .checkout-section { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .btn-whatsapp {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 18px 32px;
+      border-radius: 50px;
+      border: none;
+      background: #25D366;
+      color: white;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,211,102,0.45); }
+    .btn-continue { display: block; text-align: center; padding: 14px; color: var(--muted); font-size: 13px; text-decoration: none; transition: var(--transition); }
+    .btn-continue:hover { color: var(--gold); }
+
+    .info-card {
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.04));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 24px;
+    }
+    .info-card h4 { font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .info-card ol { padding-left: 18px; font-size: 13px; color: var(--muted); line-height: 2; }
+
+    .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--charcoal); color: white; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 500; z-index: 9999; opacity: 0; transition: all 0.3s ease; white-space: nowrap; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <button class="nav-icon-btn" onclick="history.back()">
+    <i class="fa fa-arrow-left"></i>
+  </button>
+  <span style="font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--charcoal)">Mon Panier</span>
+  <a href="index.html" class="nav-icon-btn">
+    <i class="fa fa-home"></i>
+  </a>
+</header>
+
+<div class="cart-page">
+  <div id="cartContent"></div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-tab">
+    <i class="fa fa-home"></i><span>Accueil</span>
+  </a>
+  <a href="wishlist.html" class="nav-tab">
+    <i class="fa-regular fa-heart"></i><span>Favoris</span>
+  </a>
+  <a href="cart.html" class="nav-tab active">
+    <i class="fa fa-shopping-bag"></i><span>Panier</span>
+  </a>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script src="cart-core.js"></script>
+<script>
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show';
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
+function getCart() { return JSON.parse(localStorage.getItem('cart') || '[]'); }
+function saveCart(c) { localStorage.setItem('cart', JSON.stringify(c)); }
+
+function renderCart() {
+  const cart = getCart();
+  const el = document.getElementById('cartContent');
+
+  if (!cart.length) {
+    el.innerHTML = `
+      <div class="cart-empty">
+        <i class="fa fa-shopping-bag"></i>
+        <h2>Panier vide</h2>
+        <p>Ajoutez des articles pour commencer vos achats</p>
+        <a href="index.html">Découvrir nos produits</a>
+      </div>`;
+    return;
+  }
+
+  let total = 0;
+  let itemsHTML = '';
+
+  cart.forEach((item, i) => {
+    const subtotal = item.price * (item.qty || 1);
+    total += subtotal;
+    itemsHTML += `
+      <div class="cart-item" id="ci-${i}">
+        <div class="cart-item-img">
+          <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/88x110'" />
+        </div>
+        <div class="cart-item-body">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-meta">
+            ${item.size ? `Taille: <strong>${item.size}</strong><br>` : ''}
+            ${item.color ? `Couleur: <strong>${item.color}</strong><br>` : ''}
+            ${item.localisation ? `📍 <strong>${item.localisation}</strong>` : ''}
+          </div>
+          <div class="cart-item-bottom">
+            <div class="cart-item-price">$${subtotal}</div>
+            <div class="cart-item-qty">
+              <button class="cq-btn" onclick="changeQty(${i}, -1)"><i class="fa fa-minus"></i></button>
+              <input class="cq-val" value="${item.qty || 1}" readonly />
+              <button class="cq-btn" onclick="changeQty(${i}, 1)"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <button class="btn-remove" onclick="removeItem(${i})"><i class="fa fa-times"></i></button>
+      </div>`;
+  });
+
+  const count = cart.reduce((s,i) => s + (i.qty||1), 0);
+
+  el.innerHTML = itemsHTML + `
+    <div class="cart-summary">
+      <div class="summary-row"><span>Articles (${count})</span><span>$${total}</span></div>
+      <div class="summary-row"><span>Livraison</span><span style="color:var(--success)">À confirmer</span></div>
+      <div class="summary-row summary-total"><span>Total</span><span class="summary-total-val">$${total}</span></div>
+    </div>
+    <div class="checkout-section">
+      <button class="btn-whatsapp" onclick="sendOrder()">
+        <i class="fa-brands fa-whatsapp" style="font-size:20px"></i>
+        Commander via WhatsApp
+      </button>
+      <a href="index.html" class="btn-continue">← Continuer mes achats</a>
+    </div>
+    <div class="info-card">
+      <h4><i class="fa fa-circle-info" style="color:var(--gold)"></i> Avant de commander</h4>
+      <ol>
+        <li>Conservez une capture de votre panier pour votre sécurité</li>
+        <li>Livraison fiable et rapide partout à Kinshasa</li>
+        <li>Notre équipe WhatsApp est disponible pour vous accompagner</li>
+      </ol>
+    </div>`;
+}
+
+function changeQty(idx, delta) {
+  const cart = getCart();
+  cart[idx].qty = Math.max(1, (cart[idx].qty || 1) + delta);
+  saveCart(cart);
+  renderCart();
+  updateCartBadge();
+}
+
+function removeItem(idx) {
+  const cart = getCart();
+  cart.splice(idx, 1);
+  saveCart(cart);
+  renderCart();
+  updateCartBadge();
+  showToast('Article retiré du panier');
+}
+
+function sendOrder() {
+  const cart = getCart();
+  if (!cart.length) { showToast('⚠️ Votre panier est vide'); return; }
+
+  const btn = document.querySelector('.btn-whatsapp');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="width:20px;height:20px;border-width:2px;border-color:rgba(255,255,255,0.3);border-top-color:white"></div>';
+
+  const popup = window.open('', '_blank');
+  const serverUrl = 'https://ecrinamina.onrender.com';
+
+  fetch(`${serverUrl}/create-order`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({cart})
+  })
+    .then(r => r.json())
+    .then(data => {
+      const orderLink = `${serverUrl}/order/${data.orderId}`;
+      const msg = `🛍️ Nouvelle commande Écrin d'art d'Amina\n\nVoir le panier 👇\n${orderLink}`;
+      popup.location.href = `https://wa.me/243976203805?text=${encodeURIComponent(msg)}`;
+      localStorage.removeItem('cart');
+      updateCartBadge();
+      renderCart();
+      showToast('✅ Commande envoyée !');
+    })
+    .catch(() => {
+      popup.close();
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-brands fa-whatsapp" style="font-size:20px"></i> Commander via WhatsApp';
+      showToast('❌ Erreur. Réessayez.');
+    });
+}
+
+renderCart();
+updateCartBadge();
+</script>
+</body>
+</html>

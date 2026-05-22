@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Écrin d'Amina — Mode élégante pour femme, homme et enfant. Livraison à Kinshasa." />
+  <title>Écrin d'Amina — Boutique Mode</title>
+  <link rel="shortcut icon" href="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  ✨ Livraison rapide à Kinshasa • Commandez via WhatsApp ✨
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-left">
+    <button class="nav-icon-btn" onclick="openSocials()" title="Contact & Réseaux">
+      <i class="fa fa-bars"></i>
+    </button>
+  </div>
+
+  <a href="index.html">
+    <img src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" alt="Écrin d'Amina" class="navbar-logo" />
+  </a>
+
+  <nav class="desktop-nav">
+    <a href="FashionF.html">Femme</a>
+    <a href="FashionH.html">Homme</a>
+    <a href="enfant.html">Enfants</a>
+    <a href="maternite.html">Maternité</a>
+    <a href="sport.html">Sport</a>
+    <a href="gift.html">Cadeaux</a>
+  </nav>
+
+  <div class="nav-right">
+    <button class="nav-icon-btn" onclick="toggleTheme()" title="Mode sombre">
+      <i class="fa fa-moon" id="themeIcon"></i>
+    </button>
+    <a href="wishlist.html" class="nav-icon-btn" title="Favoris">
+      <i class="fa-regular fa-heart"></i>
+    </a>
+    <a href="cart.html" class="nav-icon-btn" title="Panier">
+      <i class="fa fa-shopping-bag"></i>
+      <span class="badge" id="cartCount" style="display:none">0</span>
+    </a>
+  </div>
+</header>
+
+<!-- SOCIAL OVERLAY -->
+<div class="socials-overlay" id="socialsOverlay">
+  <button class="close-btn" onclick="closeSocials()"><i class="fa fa-times"></i></button>
+  <a href="https://wa.me/243976203805" target="_blank" class="social-link wa">
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+  </a>
+  <a href="https://www.instagram.com/aminaabdallahmw" target="_blank" class="social-link ig">
+    <i class="fa-brands fa-instagram"></i> Instagram
+  </a>
+  <a href="https://www.tiktok.com/@aminaabdallah00" target="_blank" class="social-link tt">
+    <i class="fa-brands fa-tiktok"></i> TikTok
+  </a>
+</div>
+
+<!-- HERO CAROUSEL -->
+<section class="hero">
+  <div class="slides" id="heroSlides">
+    <div class="slide">
+      <img src="https://i.pinimg.com/736x/2f/3d/0b/2f3d0bc8d1ef0458842eda799f021baf.jpg" alt="Fashion" loading="eager" />
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">
+        <h2>Nouvelle<br>Collection</h2>
+        <p>Des pièces soigneusement sélectionnées pour sublimer votre style</p>
+        <a href="FashionF.html" class="btn-hero">Découvrir →</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="https://i.pinimg.com/736x/d2/02/40/d202405b27f0f500b19b5d3fd84cd70a.jpg" alt="Fashion" loading="lazy" />
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">
+        <h2>Mode pour<br>Tous</h2>
+        <p>Femme, Homme, Enfant — une mode tendance pour toute la famille</p>
+        <a href="index.html#products" class="btn-hero">Voir les produits →</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="https://i.pinimg.com/736x/af/2c/33/af2c3348c634de48619c29748ed1a499.jpg" alt="Fashion" loading="lazy" />
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">
+        <h2>Livraison<br>Express</h2>
+        <p>Livraison directe à Kinshasa en moins de 48h</p>
+        <a href="cart.html" class="btn-hero">Commander →</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="https://i.pinimg.com/736x/63/7e/18/637e18a19aeb6fc90c13e5cee1f42797.jpg" alt="Fashion" loading="lazy" />
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">
+        <h2>Idées<br>Cadeaux</h2>
+        <p>Offrez ce qu'il y a de plus beau — cadeaux spéciaux pour vos proches</p>
+        <a href="gift.html" class="btn-hero">Voir les cadeaux →</a>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-nav prev" id="heroPrev"><i class="fa fa-chevron-left"></i></button>
+  <button class="carousel-nav next" id="heroNext"><i class="fa fa-chevron-right"></i></button>
+  <div class="carousel-dots" id="heroDots">
+    <button class="dot active"></button>
+    <button class="dot"></button>
+    <button class="dot"></button>
+    <button class="dot"></button>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-section">
+  <div class="search-bar">
+    <i class="fa fa-search"></i>
+    <input type="text" id="SearchInput" placeholder="Rechercher produit, couleur, taille..." autocomplete="off" />
+    <button id="clearSearch" style="display:none"><i class="fa fa-times"></i></button>
+  </div>
+  <div id="resultsCount"></div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="section-title">Catégories</div>
+  <div class="categories-scroll">
+    <a href="FashionF.html" class="cat-chip">
+      <div class="cat-icon">👗</div>
+      <span>Femme</span>
+    </a>
+    <a href="FashionH.html" class="cat-chip">
+      <div class="cat-icon">👔</div>
+      <span>Homme</span>
+    </a>
+    <a href="enfant.html" class="cat-chip">
+      <div class="cat-icon">🧒</div>
+      <span>Enfants</span>
+    </a>
+    <a href="maternite.html" class="cat-chip">
+      <div class="cat-icon">🤰</div>
+      <span>Maternité</span>
+    </a>
+    <a href="sport.html" class="cat-chip">
+      <div class="cat-icon">🏃</div>
+      <span>Sport</span>
+    </a>
+    <a href="gift.html" class="cat-chip">
+      <div class="cat-icon">🎁</div>
+      <span>Cadeaux</span>
+    </a>
+    <a href="wishlist.html" class="cat-chip">
+      <div class="cat-icon">❤️</div>
+      <span>Favoris</span>
+    </a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-title">Nos Produits</div>
+  <div class="products-grid" id="productsContainer">
+    <div class="loader-wrapper"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- BOTTOM NAV (MOBILE) -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-tab active">
+    <i class="fa fa-home"></i>
+    <span>Accueil</span>
+  </a>
+  <a href="search.html" class="nav-tab">
+    <i class="fa fa-search"></i>
+    <span>Recherche</span>
+  </a>
+  <a href="wishlist.html" class="nav-tab">
+    <i class="fa-regular fa-heart"></i>
+    <span>Favoris</span>
+  </a>
+  <a href="cart.html" class="nav-tab">
+    <i class="fa fa-shopping-bag"></i>
+    <span>Panier</span>
+  </a>
+  <button class="nav-tab" onclick="openSocials()">
+    <i class="fa fa-comment"></i>
+    <span>Contact</span>
+  </button>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="cart-core.js"></script>
+<script src="cart.js"></script>
+<script>
+// ---- THEME ----
+const html = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', savedTheme);
+document.getElementById('themeIcon').className = savedTheme === 'dark' ? 'fa fa-sun' : 'fa fa-moon';
+
+function toggleTheme() {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('themeIcon').className = next === 'dark' ? 'fa fa-sun' : 'fa fa-moon';
+}
+
+// ---- SOCIALS ----
+function openSocials() { document.getElementById('socialsOverlay').classList.add('visible'); }
+function closeSocials() { document.getElementById('socialsOverlay').classList.remove('visible'); }
+document.getElementById('socialsOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeSocials();
+});
+
+// ---- HERO CAROUSEL ----
+(function() {
+  const slides = document.getElementById('heroSlides');
+  const dots = document.querySelectorAll('#heroDots .dot');
+  let idx = 0, timer;
+
+  function go(n) {
+    idx = (n + 4) % 4;
+    slides.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  function auto() { timer = setInterval(() => go(idx + 1), 4000); }
+  function reset() { clearInterval(timer); auto(); }
+
+  document.getElementById('heroNext').onclick = () => { go(idx + 1); reset(); };
+  document.getElementById('heroPrev').onclick = () => { go(idx - 1); reset(); };
+  dots.forEach((d, i) => d.onclick = () => { go(i); reset(); });
+
+  let sx = 0;
+  slides.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive: true});
+  slides.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) { go(dx < 0 ? idx + 1 : idx - 1); reset(); }
+  }, {passive: true});
+
+  auto();
+})();
+
+// ---- TOAST ----
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.innerHTML = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
+// ---- SEARCH ----
+const searchInput = document.getElementById('SearchInput');
+const clearBtn = document.getElementById('clearSearch');
+let allProducts = [];
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+searchInput.addEventListener('input', function() {
+  clearBtn.style.display = this.value ? 'block' : 'none';
+  filterProducts(this.value);
+});
+
+searchInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && this.value.trim()) {
+    window.location.href = 'search.html?q=' + encodeURIComponent(this.value.trim());
+  }
+});
+
+clearBtn.onclick = () => {
+  searchInput.value = '';
+  clearBtn.style.display = 'none';
+  renderProducts(allProducts);
+  document.getElementById('resultsCount').textContent = '';
+};
+
+function normalize(t) {
+  return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function filterProducts(q) {
+  if (!q.trim()) { renderProducts(allProducts); document.getElementById('resultsCount').textContent = ''; return; }
+  const nq = normalize(q);
+  const filtered = allProducts.filter(p =>
+    normalize(`${p.name} ${p.category} ${p.type} ${p.price} ${(p.options?.color||[]).join(' ')} ${(p.options?.size||[]).join(' ')}`).includes(nq)
+  );
+  document.getElementById('resultsCount').textContent = `${filtered.length} résultat(s) pour "${q}"`;
+  renderProducts(filtered);
+}
+
+// ---- PRODUCTS ----
+const container = document.getElementById('productsContainer');
+
+fetch('/api/products')
+  .then(r => r.json())
+  .then(data => {
+    allProducts = Object.values(data);
+    // shuffle
+    for (let i = allProducts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allProducts[i], allProducts[j]] = [allProducts[j], allProducts[i]];
+    }
+    renderProducts(allProducts);
+  })
+  .catch(() => {
+    container.innerHTML = `<div class="empty-state"><i class="fa fa-wifi-slash"></i><h3>Erreur de chargement</h3><p>Vérifiez votre connexion</p></div>`;
+  });
+
+function isNew(p) { return p.newUntil && new Date() <= new Date(p.newUntil); }
+
+function renderProducts(arr) {
+  container.innerHTML = '';
+  if (!arr.length) {
+    container.innerHTML = `<div class="empty-state"><i class="fa fa-search"></i><h3>Aucun produit trouvé</h3><p>Essayez un autre terme</p></div>`;
+    return;
+  }
+  arr.forEach((p, i) => {
+    const inWish = wishlist.includes(p.id);
+    const div = document.createElement('div');
+    div.className = 'product-card';
+    div.style.animationDelay = `${Math.min(i * 0.05, 0.5)}s`;
+    div.innerHTML = `
+      <div class="card-img-wrap">
+        <img src="${p.image || ''}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400?text=Image'" />
+        <div class="product-badges">
+          ${isNew(p) ? '<span class="badge-label new">Nouveau</span>' : ''}
+          ${p.isRunningLow ? '<span class="badge-label low">Stock limité</span>' : ''}
+          ${p.epuised ? '<span class="badge-label out">Épuisé</span>' : ''}
+          ${p.comingSoon ? '<span class="badge-label soon">Bientôt</span>' : ''}
+        </div>
+        <button class="wishlist-btn ${inWish ? 'active' : ''}" data-id="${p.id}">
+          <i class="${inWish ? 'fa-solid' : 'fa-regular'} fa-heart" style="${inWish ? 'color:var(--danger)' : ''}"></i>
+        </button>
+        <div class="card-overlay">
+          <button class="btn-quick-view" onclick="event.stopPropagation(); window.location.href='product.html?id=${p.id}'">Voir le produit</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-name">${p.name}</div>
+        <div class="card-bottom">
+          <div class="card-price">$${p.price}</div>
+          <button class="btn-add-card" onclick="event.stopPropagation(); goProduct('${p.id}')" title="Voir produit">
+            <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    `;
+    div.addEventListener('click', () => window.location.href = `product.html?id=${p.id}`);
+    container.appendChild(div);
+  });
+
+  // wishlist events
+  document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const id = this.dataset.id;
+      const idx = wishlist.indexOf(id);
+      if (idx === -1) {
+        wishlist.push(id);
+        this.classList.add('active');
+        this.querySelector('i').className = 'fa-solid fa-heart';
+        this.querySelector('i').style.color = 'var(--danger)';
+        showToast('❤️ Ajouté aux favoris');
+      } else {
+        wishlist.splice(idx, 1);
+        this.classList.remove('active');
+        this.querySelector('i').className = 'fa-regular fa-heart';
+        this.querySelector('i').style.color = '';
+        showToast('Retiré des favoris');
+      }
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    });
+  });
+}
+
+function goProduct(id) { window.location.href = `product.html?id=${id}`; }
+</script>
+</body>
+</html>
