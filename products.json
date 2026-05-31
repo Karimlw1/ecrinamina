@@ -221,7 +221,7 @@
   "Produit10": {
     "id": "Produit10",
     "name": "Nouveau sac d’hiver pour femme en cuir véritable (cuir de vachette première couche), grande capacité, sac à main et sac bandoulière, modèle “smiley” en forme de coquille, sac pour femme en cuir véritable.",
-    "price": 70,
+    "price": 80,
     "category": "Femme",
     "type": "Sac",
     "images": [
@@ -247,7 +247,7 @@
   "Produit11": {
     "id": "Produit11",
     "name": "Sac pour femme 2025, nouveau sac de travail en cuir véritable, sac pour femme grande capacité, sac pour maman, sac bandoulière, sac à main haut de gamme.",
-    "price": 45,
+    "price": 50,
     "category": "Femme",
     "type": "Sac",
     "images": [
@@ -324,7 +324,7 @@
   "Produit14": {
     "id": "Produit14",
     "name": "Sac en cuir de vachette première couche, grande capacité, sac à main simple, sac bandoulière, nouveau modèle printemps 2026, style coréen pour le travail, sac pour femme en cuir véritable.",
-    "price": 65,
+    "price": 75,
     "category": "Femme",
     "type": "Sac",
     "images": [
@@ -348,7 +348,7 @@
   "Produit15": {
     "id": "Produit15",
     "name": "Sac pour femme en cuir véritable, design original haut de gamme, sac sous le bras, nouveau modèle automne-hiver 2025, sac “tofu”, sac à une épaule et sac bandoulière.",
-    "price": 50,
+    "price": 60,
     "category": "Femme",
     "type": "Sac",
     "images": [
@@ -1357,7 +1357,7 @@
   "Produit57": {
     "id": "Produit57",
     "name": "Robe de premier anniversaire pour enfant – nouveau modèle 2026 – robe de princesse rouge et douce – style européen et américain – robe pour bébé fille – produit destiné au commerce transfrontalier (type Amazon).",
-    "price": 45,
+    "price": 0,
     "category": "Enfant",
     "type": "robe",
     "images": [
