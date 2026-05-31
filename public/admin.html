@@ -1,525 +1,946 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Administration — Écrin d'Amina</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin – Ecrin d'art d'amina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    body {
-      font-family: 'Jost', sans-serif;
-      background: #f4f6fb;
-      color: #1a1a2e;
-      min-height: 100vh;
-    }
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    /* ---- SIDEBAR ---- */
-    .sidebar {
-      width: 220px;
-      background: #0a1628;
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 32px 0 24px;
-      z-index: 100;
-    }
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .securitySection {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2001;
+        backdrop-filter: blur(12px);
+        background: linear-gradient(135deg, #0f172a61, #1e293b94);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .securityBox {
+        width: 370px;
+        height: 419px;
+        margin-top: 110px;
+        border: 1px solid rgb(87 69 69);
+        box-shadow: 0 0 10px 2px #917777;
+        display: flex;
+        flex-direction: column;
+        padding: 50px 30px;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+        border-radius: 34px;
+        text-align: center;
+      }
+      .securityBox.submit {
+        justify-self: center;
+        width: max-content;
+        padding: 10px 20px;
+        background-color: #0ea5e9;
+        color: white;
+      }
 
-    .sidebar-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: #fff;
-      padding: 0 24px 32px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      line-height: 1.3;
-    }
-    .sidebar-logo span { color: #6B9FD4; font-size: 11px; display: block; font-family: 'Jost', sans-serif; font-weight: 400; margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #f8fafc;
+        min-height: 100vh;
+      }
 
-    .sidebar-nav { display: flex; flex-direction: column; padding: 16px 0; flex: 1; }
+      .layout {
+        display: flex;
+        min-height: 100vh;
+      }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 24px;
-      color: rgba(255,255,255,0.55);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s ease;
-      border-left: 3px solid transparent;
-      text-decoration: none;
-    }
-    .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
-    .nav-item.active { color: #fff; border-left-color: #6B9FD4; background: rgba(107,159,212,0.1); }
-    .nav-item i { width: 16px; text-align: center; font-size: 14px; }
+      /* HAMBURGER */
+      .hamburger {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 2000;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        border: none;
+        padding: 10px 14px;
+        border-radius: 12px;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
 
-    .sidebar-footer {
-      padding: 16px 24px 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .sidebar-footer a {
-      color: rgba(255,255,255,0.4);
-      font-size: 12px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.18s ease;
-    }
-    .sidebar-footer a:hover { color: rgba(255,255,255,0.7); }
+      /* SIDEBAR */
+      .sidebar {
+        padding-top: 131px;
+        width: 250px;
+        background: rgb(21 39 49);
+        backdrop-filter: blur(25px);
+        padding: 30px 20px;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        transition: 0.3s;
+        box-shadow: 4px 1px 20px 0px rgba(0, 0, 0, 0.4);
+      }
 
-    /* ---- MAIN ---- */
-    .main {
-      margin-left: 220px;
-      padding: 32px;
-      min-height: 100vh;
-    }
+      .sidebar h2 {
+        margin-bottom: 20px;
+        font-weight: 700;
+        text-align: center;
+      }
 
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .main { margin-left: 0; padding: 20px 16px; }
-    }
+      .sidebar img {
+        width: 211px;
+        background: white;
+        margin: 10px 0 30px;
+        align-self: center;
+        display: flex;
+        justify-self: center;
+        border-radius: 127px;
+      }
 
-    /* ---- TOP BAR ---- */
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 32px;
-    }
-    .topbar h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #0a1628;
-      font-weight: 600;
-    }
-    .topbar p { font-size: 13px; color: #8892a4; margin-top: 2px; }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
 
-    /* ---- CARDS ---- */
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 28px;
-      margin-bottom: 20px;
-      border: 1px solid #e8ecf4;
-    }
+      .menu-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+        text-align: left;
+      }
 
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #0a1628;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-    .card-title i { color: #6B9FD4; font-size: 15px; }
+      .menu-btn:hover {
+        background: rgba(56, 189, 248, 0.2);
+      }
 
-    /* ---- FORM ---- */
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+      .menu-btn.active {
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+      }
 
-    .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #8892a4;
-      margin-bottom: 6px;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1.5px solid #e8ecf4;
-      border-radius: 8px;
-      background: #f9fafc;
-      color: #1a1a2e;
-      font-family: 'Jost', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.18s ease;
-    }
-    .form-group input:focus,
-    .form-group select:focus { border-color: #6B9FD4; background: #fff; }
-    .form-group select option { background: #fff; }
+      /* ADMIN CONTENT */
+      .admin {
+        flex: 1;
+        padding: 60px 10px;
+        max-width: 1200px;
+        margin: auto;
+      }
 
-    .checkrow {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-    .checkrow label {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      color: #555;
-      cursor: pointer;
-    }
-    .checkrow input[type=checkbox] {
-      width: 15px; height: 15px;
-      accent-color: #0a1628;
-    }
+      .section {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(20px);
+        padding: 30px;
+        color: steelblue;
+        border: 1px solid #8080803d;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        /* border: 1px solid rgba(255, 255, 255, 0.08); */
+        animation: fadeIn 0.2s ease;
+        box-shadow: inset 0 0 10px #203a4f;
+        width: 89%;
+        justify-self: center;
+      }
+      .h3 {
+        margin: 20px;
+        text-align: center;
+      }
+      .hidden {
+        display: none;
+      }
 
-    .divider { height: 1px; background: #f0f2f8; margin: 8px 0 20px; }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    /* ---- PREVIEW IMG ---- */
-    .preview-img {
-      width: 72px; height: 72px;
-      border-radius: 8px;
-      object-fit: cover;
-      margin-top: 10px;
-      display: none;
-      border: 2px solid #6B9FD4;
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
 
-    /* ---- BUTTONS ---- */
-    .btn {
-      padding: 10px 22px;
-      border-radius: 8px;
-      border: none;
-      font-family: 'Jost', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.18s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .btn-dark { background: #0a1628; color: #fff; }
-    .btn-dark:hover { background: #1a2d4a; transform: translateY(-1px); }
-    .btn-blue { background: #6B9FD4; color: #fff; }
-    .btn-blue:hover { background: #5a8ec3; transform: translateY(-1px); }
-    .btn-red { background: #fff; color: #c0392b; border: 1.5px solid #f0d0ce; }
-    .btn-red:hover { background: #fdf0ef; border-color: #c0392b; }
-    .btn-outline { background: #fff; color: #0a1628; border: 1.5px solid #e8ecf4; }
-    .btn-outline:hover { border-color: #0a1628; transform: translateY(-1px); }
+      input,
+      select {
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid #8080806e;
+        outline: none;
+        margin-top: 10px;
+        font-size: 14px;
+        color: black;
+        box-shadow: 0 0 4px 0px;
+      }
 
-    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+      button {
+        padding: 14px 22px;
+        border-radius: 12px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        color: white;
+        margin-top: 20px;
+        transition: 0.2s;
+      }
 
-    /* ---- MSG ---- */
-    .msg {
-      margin-top: 12px;
-      padding: 10px 14px;
-      border-radius: 7px;
-      font-size: 13px;
-      display: none;
-    }
-    .msg.ok { background: #edf7ed; color: #2e7d32; border: 1px solid #c8e6c9; display: block; }
-    .msg.err { background: #fdecea; color: #c0392b; border: 1px solid #f5c6c3; display: block; }
-  </style>
-</head>
-<body>
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+      }
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    Écrin d'Amina
-    <span>Administration</span>
-  </div>
-  <nav class="sidebar-nav">
-    <a class="nav-item active" onclick="show('sec-add')">
-      <i class="fa fa-plus"></i> Ajouter produit
-    </a>
-    <a class="nav-item" onclick="show('sec-delete')">
-      <i class="fa fa-trash"></i> Supprimer
-    </a>
-    <a class="nav-item" onclick="show('sec-modify')">
-      <i class="fa fa-pen"></i> Modifier
-    </a>
-    <a class="nav-item" onclick="show('sec-dl')">
-      <i class="fa fa-download"></i> Téléchargements
-    </a>
-  </nav>
-  <div class="sidebar-footer">
-    <a href="index.html"><i class="fa fa-arrow-left"></i> Voir le site</a>
-  </div>
-</aside>
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
 
-<!-- MAIN -->
-<div class="main">
-  <div class="topbar">
-    <div>
-      <h1>Tableau de bord</h1>
-      <p>Gestion des produits — Écrin d'Amina</p>
-    </div>
-  </div>
+      .preview {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
 
-  <!-- ADD PRODUCT -->
-  <div class="card" id="sec-add">
-    <div class="card-title"><i class="fa fa-plus-circle"></i> Ajouter un produit</div>
+      .preview-item {
+        position: relative;
+      }
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>Nom du produit *</label>
-        <input type="text" id="prodName" placeholder="Ex: Robe fleurie..." />
+      .preview-item img {
+        width: 90px;
+        height: 90px;
+        border-radius: 12px;
+        object-fit: cover;
+      }
+
+      .remove-img {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: #dc2626;
+        border: none;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 12px;
+        background: #16a34a;
+        color: white;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: 0.3s;
+        z-index: 9999;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .toast.error {
+        background: #dc2626;
+      }
+
+      .sidebarOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        display: none;
+        z-index: 1500;
+      }
+
+      .sidebarOverlay.active {
+        display: block;
+      }
+
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top: 2px solid white;
+        border-radius: 50%;
+        display: inline-block;
+        animation: spin 0.6s linear infinite;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      button.loading {
+        pointer-events: none;
+        opacity: 0.8;
+      }
+
+      /* MOBILE */
+      @media (max-width: 900px) {
+        .hamburger {
+          display: block;
+        }
+
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: -260px;
+          height: 100%;
+          z-index: 1800;
+        }
+
+        .sidebar.active {
+          left: 0;
+        }
+
+        .admin {
+          padding: 80px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--
+    <div class="securitySection">
+      <div class="securityBox">
+        <h1 style="margin-bottom: 54px">Admin</h1>
+        <input
+          type="text"
+          name="userName"
+          id="userName"
+          placeholder="Nom d'utilisateur"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Mot de passe"
+          required
+        />
+        <button
+          type="submit"
+          class="connect"
+          onclick="securityCheck()"
+          fdprocessedid="44i64q"
+          style="
+            display: flex;
+            margin-top: 60px;
+            width: 200px;
+            justify-self: center;
+            align-self: center;
+            justify-content: center;
+            background: forestgreen;
+          "
+        >
+          Se connecter
+        </button>
       </div>
-      <div class="form-group">
-        <label>Prix (USD) *</label>
-        <input type="number" id="prodPrice" placeholder="45" min="0" />
-      </div>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Catégorie</label>
-        <select id="prodCategory">
-          <option value="Femme">Femme</option>
-          <option value="Homme">Homme</option>
-          <option value="Enfant">Enfant</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Type</label>
-        <select id="prodType">
-          <option value="robe">Robe</option>
-          <option value="haut">Haut</option>
-          <option value="bas">Bas</option>
-          <option value="chaussure">Chaussure</option>
-          <option value="Sac">Sac</option>
-          <option value="complet">Complet</option>
-          <option value="accessoire">Accessoire</option>
-          <option value="Mailles">Mailles</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Tailles (virgule)</label>
-        <input type="text" id="prodSizes" placeholder="XS, S, M, L, XL" />
-      </div>
-      <div class="form-group">
-        <label>Couleurs (virgule)</label>
-        <input type="text" id="prodColors" placeholder="Rouge, Bleu, Noir" />
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Image du produit *</label>
-      <input type="file" id="prodImage" accept="image/*" onchange="previewImg(this)" />
-      <img id="imgPreview" class="preview-img" />
-    </div>
-    <div class="form-group">
-      <label>Badge "Nouveau" jusqu'au</label>
-      <input type="datetime-local" id="prodNewUntil" />
-    </div>
-    <div class="checkrow">
-      <label><input type="checkbox" id="prodLow" /> Stock limité</label>
-      <label><input type="checkbox" id="prodEpuised" /> Épuisé</label>
-      <label><input type="checkbox" id="prodSoon" /> Bientôt dispo</label>
-    </div>
-    <button class="btn btn-dark" onclick="addProduct()">
-      <i class="fa fa-plus"></i> Ajouter le produit
-    </button>
-    <div class="msg" id="addMsg"></div>
-  </div>
+  -->
+    <section class="bodyHidden">
+      <button class="hamburger" id="hamburger">☰</button>
+      <div class="sidebarOverlay" id="sidebarOverlay"></div>
+      <div class="toast" id="toast"></div>
 
-  <!-- DELETE -->
-  <div class="card" id="sec-delete" style="display:none">
-    <div class="card-title"><i class="fa fa-trash"></i> Supprimer un produit</div>
-    <div class="form-group" style="max-width:360px">
-      <label>ID du produit</label>
-      <input type="text" id="deleteId" placeholder="Ex: Produit0" />
-    </div>
-    <button class="btn btn-red" onclick="deleteProduct()">
-      <i class="fa fa-trash"></i> Supprimer définitivement
-    </button>
-    <div class="msg" id="deleteMsg"></div>
-  </div>
+      <div class="layout">
+        <aside class="sidebar" id="sidebar">
+          <h2>Admin</h2>
+          <img
+            src="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png"
+            alt="logo"
+          />
 
-  <!-- MODIFY -->
-  <div class="card" id="sec-modify" style="display:none">
-    <div class="card-title"><i class="fa fa-pen"></i> Modifier un produit</div>
-    <div class="form-group" style="max-width:360px">
-      <label>ID du produit</label>
-      <input type="text" id="modifyId" placeholder="Ex: Produit0" />
-    </div>
-    <div class="divider"></div>
+          <nav>
+            <button class="menu-btn active" data-target="add">Ajouter</button>
+            <button class="menu-btn" data-target="availability">
+              Disponibilité
+            </button>
 
-    <div class="form-row">
-      <div>
-        <div class="form-group">
-          <label>Nouveau nom</label>
-          <input type="text" id="modifyName" placeholder="Nouveau nom..." />
+            <button class="menu-btn" data-target="badges">Badges</button>
+            <button class="menu-btn" data-target="delete">Supprimer</button>
+            <button class="menu-btn" data-target="stats">Statistiques</button>
+          </nav>
+        </aside>
+        <div class="admin">
+          <h1 style="margin-bottom: 39px; margin-top: 33px">Panneau Admin</h1>
+          <!-- ADD PRODUCT -->
+          <div class="section" id="add">
+            <h3 style="margin: 20px">Ajouter un produit</h3>
+            <div class="grid">
+              <input id="id" placeholder="ID produit" />
+              <input id="name" placeholder="Nom du produit" />
+              <input id="price" type="number" placeholder="Prix" />
+              <select id="category">
+                <option value="">Choisir la page</option>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+                <option value="Enfant">Enfant</option>
+                <option value="Cadeau">Cadeau</option>
+                <option value="Maternite">Maternite</option>
+                <option value="CadeauSpecial">Cadeau Special</option>
+                <option value="Sport">Sport</option>
+              </select>
+              <select id="type">
+                <option value="">Type de produit</option>
+                <option value="haut">Haut</option>
+                <option value="bas">Bas</option>
+                <option value="chaussure">Chaussure</option>
+                <option value="accessoire">Accessoire</option>
+                <option value="lingerie">Lingerie</option>
+                <option value="robe">Robe</option>
+                <option value="complet">Complet</option>
+                <option value="Sac">Sac</option>
+                <option value="Pijama">Pijama</option>
+                <option value="Mailles">Mailles</option>
+                <option value="Tenuesdeceremonie">Tenues de Cérémonie</option>
+                <option value="Allaitement">Allaitement</option>
+                <option value="Ensembledenuit">Ensemble de Nuit</option>
+                <option value="Shooting">Shooting</option>
+                <option value="Gourde">Gourde</option>
+              </select>
+              <input id="sizes" placeholder="Tailles (S,M,L)" />
+              <input id="colors" placeholder="Couleurs" />
+              <select id="stockStatus">
+                <option value="">Statut stock</option>
+                <option value="normal">Normal</option>
+                <option value="low">Stock faible</option>
+                <option value="out">Épuisé</option>
+                <option value="coming">Bientôt disponible</option>
+              </select>
+              <input
+                id="newDays"
+                type="number"
+                value="7"
+                placeholder="Jours badge Nouveau"
+              />
+            </div>
+            loading
+            <input
+              type="file"
+              id="imageInput"
+              multiple=""
+              style="background: chartreuse"
+            />
+            <button id="uploadBtn">
+              <span class="btn-text">Generer l'image</span>
+            </button>
+            <div class="preview" id="preview"></div>
+            <button
+              id="saveProduct"
+              fdprocessedid="ziukap"
+              style="background: red"
+            >
+              <span class="btn-text" style="">Enregistrer Produit</span>
+            </button>
+          </div>
+
+          <div class="section" id="price">
+            <h3>Modifier prix</h3>
+            <input id="modifyProductPriceId" placeholder="ID" />
+            <input
+              id="modifyProductPrice"
+              type="number"
+              placeholder="Nouveau prix"
+            />
+            <button id="modifyPriceBtn">
+              <span class="btn-text">Modifier</span>
+            </button>
+          </div>
+
+          <div class="section" id="name">
+            <h3>Modifier nom</h3>
+            <input id="modifyProductNameId" placeholder="ID" />
+            <input id="modifyProductName" placeholder="Nouveau nom" />
+            <button id="modifyNameBtn">
+              <span class="btn-text">Modifier</span>
+            </button>
+          </div>
+          <!-- OTHER SECTIONS (hidden initially) -->
+
+          <div class="section hidden" id="availability">
+            <h3>Modifier disponibilité</h3>
+            <input id="modifyProductId" placeholder="ID" />
+            <select id="modifyAvailability">
+              <option value="">Choisir</option>
+              <option value="true">Disponible</option>
+              <option value="false">Indisponible</option>
+            </select>
+            <button id="modifyBtn">
+              <span class="btn-text">Modifier</span>
+            </button>
+          </div>
+
+          <div class="section hidden" id="badges">
+            <h3>Modifier badges</h3>
+            <input id="badgeProductId" placeholder="ID produit" />
+            <select id="modifyStockStatus">
+              <option value="">Statut stock</option>
+              <option value="normal">Normal</option>
+              <option value="low">Stock faible</option>
+              <option value="out">Épuisé</option>
+              <option value="coming">Bientôt disponible</option>
+            </select>
+            <input
+              id="modifyNewDays"
+              type="number"
+              placeholder="Jours Nouveau"
+            />
+            <button id="modifyBadgesBtn">
+              <span class="btn-text">Modifier badges</span>
+            </button>
+          </div>
+
+          <div class="section hidden" id="delete">
+            <h3>Supprimer produit</h3>
+            <input id="deleteProductId" placeholder="ID" />
+            <button id="deleteBtn">
+              <span class="btn-text">Supprimer</span>
+            </button>
+          </div>
+
+          <div class="section hidden" id="stats">
+            <h3>Statistiques</h3>
+            Produits existants :
+            <span
+              id="npe"
+              style="
+                background: red;
+                padding: 5px;
+                border-radius: 8px;
+                font-weight: bold;
+                color: aliceblue;
+                box-shadow: 0 0 10px -2px yellowgreen;
+              "
+              >...</span
+            >
+            <br /><br />
+            <button id="downloadProducts">
+              <span class="btn-text">Télécharger products.json</span>
+            </button>
+          </div>
         </div>
-        <button class="btn btn-outline" onclick="modifyName()">Changer le nom</button>
       </div>
-      <div>
-        <div class="form-group">
-          <label>Nouveau prix</label>
-          <input type="number" id="modifyPrice" placeholder="Nouveau prix..." />
-        </div>
-        <button class="btn btn-outline" onclick="modifyPrice()">Changer le prix</button>
-      </div>
-    </div>
+    </section>
 
-    <div class="divider"></div>
-    <div class="checkrow">
-      <label><input type="checkbox" id="mLow" /> Stock limité</label>
-      <label><input type="checkbox" id="mEpuised" /> Épuisé</label>
-      <label><input type="checkbox" id="mSoon" /> Bientôt dispo</label>
-      <div class="form-group" style="margin:0;flex:1;min-width:180px">
-        <label>Nouveau jusqu'au</label>
-        <input type="datetime-local" id="mNewUntil" />
-      </div>
-    </div>
-    <button class="btn btn-blue" onclick="modifyBadges()">Mettre à jour les badges</button>
-    <div class="msg" id="modifyMsg"></div>
-  </div>
+    <script>
+      /*  function securityCheck() {
+        const bodyH = document.querySelector(".bodyHidden");
+        const securitySection = document.querySelector(".securitySection");
+        const password = "12345";
+        const userName = "Amina";
 
-  <!-- DOWNLOADS -->
-  <div class="card" id="sec-dl" style="display:none">
-    <div class="card-title"><i class="fa fa-download"></i> Téléchargements</div>
-    <div class="btn-group">
-      <button class="btn btn-outline" onclick="download('products')">
-        <i class="fa fa-box"></i> products.json
-      </button>
-      <button class="btn btn-outline" onclick="download('orders')">
-        <i class="fa fa-receipt"></i> orders.json
-      </button>
-    </div>
-    <div class="msg" id="dlMsg"></div>
-  </div>
+        const userNameV = document.querySelector("#userName").value;
+        const passwordV = document.querySelector("#password").value;
+        const submitbttn = document.querySelector(".connect");
 
-</div>
+        if (password === passwordV && userName === userNameV) {
+          securitySection.style.backgroundColor = " green";
+          securitySection.style.display = "none";
+          bodyH.style.display = "block";
+        } else {
+          alert("nom d'utilisateur ou mot de passe incorrect!!");
+        }
+        console.log(userNameV + passwordV);
+      }
+      */
 
-<script>
-// No admin key — all requests sent without auth header
-const ADMIN_KEY = '';
+      const sidebar = document.getElementById("sidebar");
+      const sidebarOverlay = document.getElementById("sidebarOverlay");
+      const hamburger = document.getElementById("hamburger");
 
-// ---- NAV ----
-const sections = ['sec-add','sec-delete','sec-modify','sec-dl'];
-const navItems = document.querySelectorAll('.nav-item');
+      hamburger.onclick = () => {
+        sidebar.classList.toggle("active");
+        sidebarOverlay.classList.toggle("active");
+      };
 
-function show(id) {
-  sections.forEach(s => document.getElementById(s).style.display = s === id ? 'block' : 'none');
-  navItems.forEach((n, i) => n.classList.toggle('active', sections[i] === id));
-}
+      sidebarOverlay.onclick = () => {
+        sidebar.classList.remove("active");
+        sidebarOverlay.classList.remove("active");
+      };
 
-// ---- HELPERS ----
-function msg(id, text, ok = true) {
-  const el = document.getElementById(id);
-  el.textContent = text;
-  el.className = 'msg ' + (ok ? 'ok' : 'err');
-}
+      const menuButtons = document.querySelectorAll(".menu-btn");
+      const sections = document.querySelectorAll(".section");
 
-function previewImg(input) {
-  const prev = document.getElementById('imgPreview');
-  if (input.files?.[0]) {
-    const r = new FileReader();
-    r.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
-    r.readAsDataURL(input.files[0]);
-  }
-}
+      menuButtons.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          menuButtons.forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
 
-// ---- ADD ----
-async function addProduct() {
-  const name  = document.getElementById('prodName').value.trim();
-  const price = Number(document.getElementById('prodPrice').value);
-  const file  = document.getElementById('prodImage').files[0];
+          sections.forEach((s) => s.classList.add("hidden"));
+          document
+            .getElementById(this.dataset.target)
+            .classList.remove("hidden");
 
-  if (!name || !price || !file) { msg('addMsg', 'Remplissez tous les champs obligatoires', false); return; }
+          sidebar.classList.remove("active");
+          sidebarOverlay.classList.remove("active");
+        });
+      });
 
-  try {
-    const fd = new FormData();
-    fd.append('image', file);
-    const upRes  = await fetch('/admin/upload-image', { method: 'POST', headers: {'x-admin-key': ADMIN_KEY}, body: fd });
-    const upData = await upRes.json();
-    if (!upData.imageUrl) throw new Error('Upload échoué');
+      function showToast(message, isError = false) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = "toast show";
+        if (isError) toast.classList.add("error");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
 
-    const product = {
-      id: 'Produit_' + Date.now(),
-      name, price,
-      category:    document.getElementById('prodCategory').value,
-      type:        document.getElementById('prodType').value,
-      image:       upData.imageUrl,
-      images:      [upData.imageUrl],
-      options: {
-        size:  document.getElementById('prodSizes').value.split(',').map(s => s.trim()).filter(Boolean),
-        color: document.getElementById('prodColors').value.split(',').map(s => s.trim()).filter(Boolean),
-      },
-      newUntil:     document.getElementById('prodNewUntil').value ? new Date(document.getElementById('prodNewUntil').value).toISOString() : null,
-      isRunningLow: document.getElementById('prodLow').checked,
-      epuised:      document.getElementById('prodEpuised').checked,
-      comingSoon:   document.getElementById('prodSoon').checked,
-      available:    true,
-    };
+      const ADMIN_KEY = "1234";
 
-    const res  = await fetch('/admin/add-product', { method: 'POST', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify(product) });
-    const data = await res.json();
-    if (data.success) msg('addMsg', 'Produit ajouté avec succès');
-    else msg('addMsg', 'Erreur : ' + (data.error || 'inconnue'), false);
-  } catch(e) { msg('addMsg', 'Erreur : ' + e.message, false); }
-}
+      function setLoading(button, loading, text) {
+        const span = button.querySelector(".btn-text");
 
-// ---- DELETE ----
-async function deleteProduct() {
-  const id = document.getElementById('deleteId').value.trim();
-  if (!id) { msg('deleteMsg', 'Entrez un ID', false); return; }
-  if (!confirm(`Supprimer le produit "${id}" ?`)) return;
-  const res  = await fetch(`/admin/delete-product/${id}`, { method: 'DELETE', headers: {'x-admin-key': ADMIN_KEY} });
-  const data = await res.json();
-  data.success ? msg('deleteMsg', 'Produit supprimé') : msg('deleteMsg', 'Erreur : ' + (data.error || 'introuvable'), false);
-}
+        if (loading) {
+          button.classList.add("loading");
+          span.innerHTML =
+            '<span class="spinner"></span><span style="margin-left:8px;">' +
+            text +
+            "</span>";
+        } else {
+          button.classList.remove("loading");
+          span.textContent = text;
+        }
+      }
 
-// ---- MODIFY NAME ----
-async function modifyName() {
-  const id   = document.getElementById('modifyId').value.trim();
-  const name = document.getElementById('modifyName').value.trim();
-  if (!id || !name) { msg('modifyMsg', 'ID et nom requis', false); return; }
-  const res  = await fetch(`/admin/modify-product/${id}/name`, { method: 'PUT', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify({name}) });
-  const data = await res.json();
-  msg('modifyMsg', data.success ? 'Nom modifié' : 'Erreur : ' + (data.error || ''), data.success);
-}
+      async function safeFetch(url, options) {
+        const res = await fetch(url, options);
+        const text = await res.text();
+        try {
+          return JSON.parse(text);
+        } catch {
+          throw new Error("Réponse serveur invalide");
+        }
+      }
 
-// ---- MODIFY PRICE ----
-async function modifyPrice() {
-  const id    = document.getElementById('modifyId').value.trim();
-  const price = Number(document.getElementById('modifyPrice').value);
-  if (!id || !price) { msg('modifyMsg', 'ID et prix requis', false); return; }
-  const res  = await fetch(`/admin/modify-product/${id}/price`, { method: 'PUT', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify({price}) });
-  const data = await res.json();
-  msg('modifyMsg', data.success ? 'Prix modifié' : 'Erreur : ' + (data.error || ''), data.success);
-}
+      /* IMAGE UPLOAD */
 
-// ---- MODIFY BADGES ----
-async function modifyBadges() {
-  const id = document.getElementById('modifyId').value.trim();
-  if (!id) { msg('modifyMsg', 'Entrez un ID', false); return; }
-  const body = {
-    newUntil:     document.getElementById('mNewUntil').value ? new Date(document.getElementById('mNewUntil').value).toISOString() : null,
-    isRunningLow: document.getElementById('mLow').checked,
-    epuised:      document.getElementById('mEpuised').checked,
-    comingSoon:   document.getElementById('mSoon').checked,
-  };
-  const res  = await fetch(`/admin/modify-product/${id}/badges`, { method: 'PUT', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify(body) });
-  const data = await res.json();
-  msg('modifyMsg', data.success ? 'Badges mis à jour' : 'Erreur : ' + (data.error || ''), data.success);
-}
+      document.getElementById("uploadBtn").onclick = async function () {
+        setLoading(this, true, "Veuillez patienter...");
 
-// ---- DOWNLOAD ----
-async function download(type) {
-  try {
-    const res = await fetch(`/admin/download-${type}`, { headers: {'x-admin-key': ADMIN_KEY} });
-    if (!res.ok) throw new Error('Accès refusé');
-    const blob = await res.blob();
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href = url; a.download = `${type}.json`; a.click();
-    URL.revokeObjectURL(url);
-    msg('dlMsg', `${type}.json téléchargé`);
-  } catch(e) { msg('dlMsg', 'Erreur : ' + e.message, false); }
-}
-</script>
-</body>
+        const files = document.getElementById("imageInput").files;
+        const preview = document.getElementById("preview");
+
+        for (const file of files) {
+          const formData = new FormData();
+          formData.append("image", file);
+
+          const data = await safeFetch("/admin/upload-image", {
+            method: "POST",
+            headers: { "x-admin-key": ADMIN_KEY },
+            body: formData,
+          });
+
+          if (data.imageUrl) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "preview-item";
+
+            const img = document.createElement("img");
+            img.src = data.imageUrl;
+
+            const removeBtn = document.createElement("button");
+            removeBtn.className = "remove-img";
+            removeBtn.innerHTML = "×";
+            removeBtn.onclick = function () {
+              wrapper.remove();
+            };
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(removeBtn);
+            preview.appendChild(wrapper);
+          }
+        }
+
+        setLoading(this, false, "Generer images");
+      };
+
+      /* SAVE PRODUCT */
+
+      document.getElementById("saveProduct").onclick = async function () {
+        setLoading(this, true, "Enregistrement...");
+
+        try {
+          const stockStatus = document.getElementById("stockStatus").value;
+          const newDays = Number(document.getElementById("newDays").value);
+
+          let newUntil = null;
+          if (newDays && newDays > 0) {
+            const date = new Date();
+            date.setDate(date.getDate() + newDays);
+            newUntil = date.toISOString();
+          }
+
+          const product = {
+            id: document.getElementById("id").value.trim(),
+            name: document.getElementById("name").value.trim(),
+            price: Number(document.getElementById("price").value),
+            category: document.getElementById("category").value,
+            type: document.getElementById("type").value,
+            images: Array.from(
+              document.getElementById("preview").querySelectorAll("img"),
+            ).map((img) => img.src),
+            image:
+              document.getElementById("preview").querySelector("img")?.src ||
+              null,
+            options: {
+              size: document
+                .getElementById("sizes")
+                .value.split(",")
+                .map((s) => s.trim())
+                .filter(Boolean),
+              color: document
+                .getElementById("colors")
+                .value.split(",")
+                .map((c) => c.trim())
+                .filter(Boolean),
+            },
+            newUntil: newUntil,
+            isRunningLow: stockStatus === "low",
+            epuised: stockStatus === "out",
+            comingSoon: stockStatus === "coming",
+          };
+
+          if (!product.id || !product.name || !product.price) {
+            showToast("Champs obligatoires manquants", true);
+            return;
+          }
+
+          const data = await safeFetch("/admin/add-product", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify(product),
+          });
+
+          data.success
+            ? showToast("Produit ajouté avec succès")
+            : showToast("Erreur serveur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+
+        setLoading(this, false, "Enregistrer Produit");
+      };
+
+      /* MODIFY AVAILABILITY */
+
+      document.getElementById("modifyBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+
+        try {
+          const id = document.getElementById("modifyProductId").value;
+          const availability =
+            document.getElementById("modifyAvailability").value === "true";
+
+          const data = await safeFetch(`/admin/modify-product/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify({ available: availability }),
+          });
+
+          data.success
+            ? showToast("Disponibilité modifiée")
+            : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+
+        setLoading(this, false, "Modifier");
+      };
+
+      /* MODIFY PRICE */
+
+      document.getElementById("modifyPriceBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+
+        try {
+          const id = document.getElementById("modifyProductPriceId").value;
+          const price = Number(
+            document.getElementById("modifyProductPrice").value,
+          );
+
+          const data = await safeFetch(`/admin/modify-product/${id}/price`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify({ price }),
+          });
+
+          data.success ? showToast("Prix modifié") : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+
+        setLoading(this, false, "Modifier");
+      };
+
+      /* MODIFY NAME */
+
+      document.getElementById("modifyNameBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+
+        try {
+          const id = document.getElementById("modifyProductNameId").value;
+          const name = document.getElementById("modifyProductName").value;
+
+          const data = await safeFetch(`/admin/modify-product/${id}/name`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-key": ADMIN_KEY,
+            },
+            body: JSON.stringify({ name }),
+          });
+
+          data.success ? showToast("Nom modifié") : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+
+        setLoading(this, false, "Modifier");
+      };
+
+      /* MODIFY BADGES */
+
+      document.getElementById("modifyBadgesBtn").onclick = async function () {
+        setLoading(this, true, "Modification...");
+
+        try {
+          const productId = document
+            .getElementById("badgeProductId")
+            .value.trim();
+          const stockStatus =
+            document.getElementById("modifyStockStatus").value;
+          const newDays = Number(
+            document.getElementById("modifyNewDays").value,
+          );
+
+          let newUntil = null;
+          if (newDays > 0) {
+            const date = new Date();
+            date.setDate(date.getDate() + newDays);
+            newUntil = date.toISOString();
+          }
+
+          const data = await safeFetch(
+            `/admin/modify-product/${productId}/badges`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "x-admin-key": ADMIN_KEY,
+              },
+              body: JSON.stringify({
+                newUntil,
+                isRunningLow: stockStatus === "low",
+                epuised: stockStatus === "out",
+                comingSoon: stockStatus === "coming",
+              }),
+            },
+          );
+
+          data.success
+            ? showToast("Badges modifiés")
+            : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+
+        setLoading(this, false, "Modifier badges");
+      };
+
+      /* DELETE PRODUCT */
+
+      document.getElementById("deleteBtn").onclick = async function () {
+        if (!confirm("Confirmer la suppression ?")) return;
+
+        setLoading(this, true, "Suppression...");
+
+        try {
+          const id = document.getElementById("deleteProductId").value;
+
+          const data = await safeFetch(`/admin/delete-product/${id}`, {
+            method: "DELETE",
+            headers: { "x-admin-key": ADMIN_KEY },
+          });
+
+          data.success
+            ? showToast("Produit supprimé")
+            : showToast("Erreur", true);
+        } catch (e) {
+          showToast(e.message, true);
+        }
+
+        setLoading(this, false, "Supprimer");
+      };
+
+      /* DOWNLOAD PRODUCTS */
+
+      document.getElementById("downloadProducts").onclick = async function () {
+        setLoading(this, true, "Téléchargement...");
+
+        const res = await fetch("/admin/download-products", {
+          headers: { "x-admin-key": ADMIN_KEY },
+        });
+
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "products.json";
+        a.click();
+
+        setLoading(this, false, "Télécharger products.json");
+      };
+
+      /* STATS */
+
+      safeFetch("/api/products")
+        .then((products) => {
+          document.getElementById("npe").textContent =
+            Object.keys(products).length;
+        })
+        .catch(() => {
+          document.getElementById("npe").textContent = "Erreur";
+        });
+    </script>
+  </body>
 </html>
