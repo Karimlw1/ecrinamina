@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    :root {
+  --navy: #0A2342;
+  --navy-light: #163A63;
+  --navy-hover: #1D4E89;
+}
     .product-page { max-width: 1100px; margin: 0 auto; padding: 24px 20px 140px; }
 
     @media (min-width: 720px) {
@@ -67,7 +72,7 @@
       transition: var(--transition);
       opacity: 0.7;
     }
-    .thumb:hover, .thumb.active { border-color: var(--gold); opacity: 1; }
+    .thumb:hover, .thumb.active { border-color: var(--navy); opacity: 1; }
     .thumb img { width: 100%; height: 100%; object-fit: cover; }
 
     /* PRODUCT INFO */
@@ -77,7 +82,7 @@
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--gold-dark);
+      color: var(--navy-light);
     }
     .pi-name {
       font-family: var(--font-display);
@@ -90,7 +95,7 @@
       font-family: var(--font-display);
       font-size: 2rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--navy-light);
     }
     .pi-badges { display: flex; gap: 8px; flex-wrap: wrap; }
     .pi-divider { height: 1px; background: var(--cream-dark); }
@@ -117,9 +122,9 @@
       color: var(--charcoal);
     }
     .option-chip:hover, .option-chip.selected {
-      border-color: var(--gold);
+      border-color: var(--navy);
       background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.15));
-      color: var(--gold-dark);
+      color: var(--navy-light);
     }
 
     /* QTY */
@@ -134,7 +139,7 @@
       transition: var(--transition);
       display: flex; align-items: center; justify-content: center;
     }
-    .qty-btn:hover { background: var(--cream-dark); color: var(--gold); }
+    .qty-btn:hover { background: var(--cream-dark); color: var(--navy); }
     #qty {
       width: 44px;
       text-align: center;
@@ -207,7 +212,13 @@
     }
 
     /* TOAST */
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--charcoal); color: white; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 500; z-index: 9999; opacity: 0; transition: all 0.3s ease; white-space: nowrap; pointer-events: none; }
+    .toast { position: fixed; bottom: 24px; left: 50%;
+     transform: translateX(-50%) translateY(20px); 
+     background: var(--charcoal); color: white; padding: 12px 24px;
+     border-radius: 50px;
+     font-size: 13px; font-weight: 500; z-index: 9999; opacity: 0;
+     transition: all 0.3s ease;
+     white-space: nowrap; pointer-events: none; }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   </style>
 </head>
@@ -283,7 +294,7 @@
 
     <div style="font-size:12px; color: var(--muted); text-align:center; padding-top:4px;">
       <i class="fa fa-shield-alt" style="color:var(--gold)"></i> Paiement sécurisé via WhatsApp &nbsp;·&nbsp;
-      <i class="fa fa-truck" style="color:var(--gold)"></i> Livraison à Kinshasa
+      <i class="fa fa-truck" style="color:var(--navy)"></i> Livraison à Kinshasa
     </div>
   </div>
 </main>
