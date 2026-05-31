@@ -1,80 +1,274 @@
 <!doctype html>
-<html lang="fr" data-theme="light">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administration — Écrin d'Amina</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
   <style>
-    body { background: #0f0f0f; color: #f0f0f0; }
-    .admin-wrap { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
-    .admin-header { text-align: center; padding: 40px 20px 32px; }
-    .admin-header h1 { font-family: var(--font-display); font-size: 2rem; color: var(--gold); }
-    .admin-header p { color: var(--muted); font-size: 14px; margin-top: 8px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .key-gate { max-width: 420px; margin: 0 auto 40px; display: flex; gap: 12px; }
-    .key-gate input { flex:1; padding: 13px 16px; border: 1.5px solid #333; border-radius: 12px; background: #1a1a1a; color: white; font-family: var(--font-body); font-size: 14px; outline: none; }
-    .key-gate input:focus { border-color: var(--gold); }
-    .key-gate button { padding: 13px 20px; border-radius: 12px; background: var(--gold); border: none; color: #111; font-weight: 700; cursor: pointer; transition: var(--transition); }
-    .key-gate button:hover { background: var(--gold-light); }
-
-    .admin-section { background: #1a1a1a; border-radius: 16px; padding: 28px; margin-bottom: 24px; border: 1px solid #2a2a2a; }
-    .admin-section h2 { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 11px 14px; border: 1.5px solid #333; border-radius: 10px;
-      background: #111; color: white; font-family: var(--font-body); font-size: 14px; outline: none;
-      transition: var(--transition);
+    body {
+      font-family: 'Jost', sans-serif;
+      background: #f4f6fb;
+      color: #1a1a2e;
+      min-height: 100vh;
     }
-    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
-    .form-group select option { background: #111; }
+
+    /* ---- SIDEBAR ---- */
+    .sidebar {
+      width: 220px;
+      background: #0a1628;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 0 24px;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: #fff;
+      padding: 0 24px 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      line-height: 1.3;
+    }
+    .sidebar-logo span { color: #6B9FD4; font-size: 11px; display: block; font-family: 'Jost', sans-serif; font-weight: 400; margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
+
+    .sidebar-nav { display: flex; flex-direction: column; padding: 16px 0; flex: 1; }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 24px;
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border-left: 3px solid transparent;
+      text-decoration: none;
+    }
+    .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-item.active { color: #fff; border-left-color: #6B9FD4; background: rgba(107,159,212,0.1); }
+    .nav-item i { width: 16px; text-align: center; font-size: 14px; }
+
+    .sidebar-footer {
+      padding: 16px 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .sidebar-footer a {
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.18s ease;
+    }
+    .sidebar-footer a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ---- MAIN ---- */
+    .main {
+      margin-left: 220px;
+      padding: 32px;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px 16px; }
+    }
+
+    /* ---- TOP BAR ---- */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .topbar h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #0a1628;
+      font-weight: 600;
+    }
+    .topbar p { font-size: 13px; color: #8892a4; margin-top: 2px; }
+
+    /* ---- CARDS ---- */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+      border: 1px solid #e8ecf4;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0a1628;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .card-title i { color: #6B9FD4; font-size: 15px; }
+
+    /* ---- FORM ---- */
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-    .btn-admin { padding: 13px 28px; border-radius: 10px; border: none; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; transition: var(--transition); }
-    .btn-gold { background: var(--gold); color: #111; }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .btn-danger { background: var(--danger); color: white; }
-    .btn-danger:hover { background: #c62828; }
-    .btn-outline { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); }
-    .btn-outline:hover { background: var(--gold); color: #111; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #8892a4;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #e8ecf4;
+      border-radius: 8px;
+      background: #f9fafc;
+      color: #1a1a2e;
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.18s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus { border-color: #6B9FD4; background: #fff; }
+    .form-group select option { background: #fff; }
 
-    .msg { margin-top: 12px; padding: 10px 16px; border-radius: 8px; font-size: 13px; display: none; }
-    .msg.ok { background: rgba(76,175,80,0.15); color: #81C784; border: 1px solid rgba(76,175,80,0.3); display: block; }
-    .msg.err { background: rgba(229,57,53,0.15); color: #E57373; border: 1px solid rgba(229,57,53,0.3); display: block; }
+    .checkrow {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .checkrow label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+    }
+    .checkrow input[type=checkbox] {
+      width: 15px; height: 15px;
+      accent-color: #0a1628;
+    }
 
-    .preview-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; margin-top: 10px; display: none; border: 2px solid var(--gold); }
-    .divider { height: 1px; background: #2a2a2a; margin: 8px 0 20px; }
+    .divider { height: 1px; background: #f0f2f8; margin: 8px 0 20px; }
+
+    /* ---- PREVIEW IMG ---- */
+    .preview-img {
+      width: 72px; height: 72px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-top: 10px;
+      display: none;
+      border: 2px solid #6B9FD4;
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn {
+      padding: 10px 22px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .btn-dark { background: #0a1628; color: #fff; }
+    .btn-dark:hover { background: #1a2d4a; transform: translateY(-1px); }
+    .btn-blue { background: #6B9FD4; color: #fff; }
+    .btn-blue:hover { background: #5a8ec3; transform: translateY(-1px); }
+    .btn-red { background: #fff; color: #c0392b; border: 1.5px solid #f0d0ce; }
+    .btn-red:hover { background: #fdf0ef; border-color: #c0392b; }
+    .btn-outline { background: #fff; color: #0a1628; border: 1.5px solid #e8ecf4; }
+    .btn-outline:hover { border-color: #0a1628; transform: translateY(-1px); }
+
+    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ---- MSG ---- */
+    .msg {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 7px;
+      font-size: 13px;
+      display: none;
+    }
+    .msg.ok { background: #edf7ed; color: #2e7d32; border: 1px solid #c8e6c9; display: block; }
+    .msg.err { background: #fdecea; color: #c0392b; border: 1px solid #f5c6c3; display: block; }
   </style>
 </head>
 <body>
-<div class="admin-header">
-  <h1>Admin Panel</h1>
-  <p>Écrin d'Amina — Gestion des produits</p>
-  <a href="index.html" style="color:var(--muted);font-size:13px;text-decoration:none;margin-top:8px;display:inline-block">← Voir le site</a>
-</div>
 
-<div class="admin-wrap">
-  <!-- KEY -->
-  <div class="key-gate">
-    <input type="password" id="adminKey" placeholder="Clé admin..." />
-    <button onclick="setKey()"><i class="fa fa-unlock"></i></button>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    Écrin d'Amina
+    <span>Administration</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-item active" onclick="show('sec-add')">
+      <i class="fa fa-plus"></i> Ajouter produit
+    </a>
+    <a class="nav-item" onclick="show('sec-delete')">
+      <i class="fa fa-trash"></i> Supprimer
+    </a>
+    <a class="nav-item" onclick="show('sec-modify')">
+      <i class="fa fa-pen"></i> Modifier
+    </a>
+    <a class="nav-item" onclick="show('sec-dl')">
+      <i class="fa fa-download"></i> Téléchargements
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="index.html"><i class="fa fa-arrow-left"></i> Voir le site</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div>
+      <h1>Tableau de bord</h1>
+      <p>Gestion des produits — Écrin d'Amina</p>
+    </div>
   </div>
 
   <!-- ADD PRODUCT -->
-  <div class="admin-section">
-    <h2><i class="fa fa-plus-circle"></i> Ajouter un produit</h2>
+  <div class="card" id="sec-add">
+    <div class="card-title"><i class="fa fa-plus-circle"></i> Ajouter un produit</div>
+
     <div class="form-row">
       <div class="form-group">
-        <label>Nom du produit</label>
+        <label>Nom du produit *</label>
         <input type="text" id="prodName" placeholder="Ex: Robe fleurie..." />
       </div>
       <div class="form-group">
-        <label>Prix (USD)</label>
-        <input type="number" id="prodPrice" placeholder="Ex: 45" min="0" />
+        <label>Prix (USD) *</label>
+        <input type="number" id="prodPrice" placeholder="45" min="0" />
       </div>
     </div>
     <div class="form-row">
@@ -102,16 +296,16 @@
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>Tailles (séparées par virgule)</label>
+        <label>Tailles (virgule)</label>
         <input type="text" id="prodSizes" placeholder="XS, S, M, L, XL" />
       </div>
       <div class="form-group">
-        <label>Couleurs (séparées par virgule)</label>
+        <label>Couleurs (virgule)</label>
         <input type="text" id="prodColors" placeholder="Rouge, Bleu, Noir" />
       </div>
     </div>
     <div class="form-group">
-      <label>Image du produit</label>
+      <label>Image du produit *</label>
       <input type="file" id="prodImage" accept="image/*" onchange="previewImg(this)" />
       <img id="imgPreview" class="preview-img" />
     </div>
@@ -119,96 +313,101 @@
       <label>Badge "Nouveau" jusqu'au</label>
       <input type="datetime-local" id="prodNewUntil" />
     </div>
-    <div style="display:flex;gap:12px;align-items:center;margin-top:4px;">
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
-        <input type="checkbox" id="prodLow" /> Stock limité
-      </label>
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
-        <input type="checkbox" id="prodEpuised" /> Épuisé
-      </label>
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
-        <input type="checkbox" id="prodSoon" /> Bientôt dispo
-      </label>
+    <div class="checkrow">
+      <label><input type="checkbox" id="prodLow" /> Stock limité</label>
+      <label><input type="checkbox" id="prodEpuised" /> Épuisé</label>
+      <label><input type="checkbox" id="prodSoon" /> Bientôt dispo</label>
     </div>
-    <button class="btn-admin btn-gold" style="margin-top:20px" onclick="addProduct()">
+    <button class="btn btn-dark" onclick="addProduct()">
       <i class="fa fa-plus"></i> Ajouter le produit
     </button>
     <div class="msg" id="addMsg"></div>
   </div>
 
-  <!-- DELETE PRODUCT -->
-  <div class="admin-section">
-    <h2><i class="fa fa-trash"></i> Supprimer un produit</h2>
-    <div class="form-row">
-      <div class="form-group">
-        <label>ID du produit</label>
-        <input type="text" id="deleteId" placeholder="Ex: Produit0" />
-      </div>
+  <!-- DELETE -->
+  <div class="card" id="sec-delete" style="display:none">
+    <div class="card-title"><i class="fa fa-trash"></i> Supprimer un produit</div>
+    <div class="form-group" style="max-width:360px">
+      <label>ID du produit</label>
+      <input type="text" id="deleteId" placeholder="Ex: Produit0" />
     </div>
-    <button class="btn-admin btn-danger" onclick="deleteProduct()"><i class="fa fa-trash"></i> Supprimer</button>
+    <button class="btn btn-red" onclick="deleteProduct()">
+      <i class="fa fa-trash"></i> Supprimer définitivement
+    </button>
     <div class="msg" id="deleteMsg"></div>
   </div>
 
-  <!-- MODIFY PRODUCT -->
-  <div class="admin-section">
-    <h2><i class="fa fa-edit"></i> Modifier un produit</h2>
-    <div class="form-group">
+  <!-- MODIFY -->
+  <div class="card" id="sec-modify" style="display:none">
+    <div class="card-title"><i class="fa fa-pen"></i> Modifier un produit</div>
+    <div class="form-group" style="max-width:360px">
       <label>ID du produit</label>
       <input type="text" id="modifyId" placeholder="Ex: Produit0" />
     </div>
     <div class="divider"></div>
+
     <div class="form-row">
       <div>
-        <div class="form-group"><label>Nouveau nom</label><input type="text" id="modifyName" placeholder="Nouveau nom..." /></div>
-        <button class="btn-admin btn-outline" onclick="modifyName()">Changer le nom</button>
+        <div class="form-group">
+          <label>Nouveau nom</label>
+          <input type="text" id="modifyName" placeholder="Nouveau nom..." />
+        </div>
+        <button class="btn btn-outline" onclick="modifyName()">Changer le nom</button>
       </div>
       <div>
-        <div class="form-group"><label>Nouveau prix</label><input type="number" id="modifyPrice" placeholder="Nouveau prix..." /></div>
-        <button class="btn-admin btn-outline" onclick="modifyPrice()">Changer le prix</button>
+        <div class="form-group">
+          <label>Nouveau prix</label>
+          <input type="number" id="modifyPrice" placeholder="Nouveau prix..." />
+        </div>
+        <button class="btn btn-outline" onclick="modifyPrice()">Changer le prix</button>
       </div>
     </div>
+
     <div class="divider"></div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
-        <input type="checkbox" id="mLow" /> Stock limité
-      </label>
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
-        <input type="checkbox" id="mEpuised" /> Épuisé
-      </label>
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
-        <input type="checkbox" id="mSoon" /> Bientôt dispo
-      </label>
-      <div class="form-group" style="margin:0;flex:1">
+    <div class="checkrow">
+      <label><input type="checkbox" id="mLow" /> Stock limité</label>
+      <label><input type="checkbox" id="mEpuised" /> Épuisé</label>
+      <label><input type="checkbox" id="mSoon" /> Bientôt dispo</label>
+      <div class="form-group" style="margin:0;flex:1;min-width:180px">
         <label>Nouveau jusqu'au</label>
         <input type="datetime-local" id="mNewUntil" />
       </div>
     </div>
-    <button class="btn-admin btn-outline" onclick="modifyBadges()">Mettre à jour les badges</button>
+    <button class="btn btn-blue" onclick="modifyBadges()">Mettre à jour les badges</button>
     <div class="msg" id="modifyMsg"></div>
   </div>
 
   <!-- DOWNLOADS -->
-  <div class="admin-section">
-    <h2><i class="fa fa-download"></i> Téléchargements</h2>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <button class="btn-admin btn-outline" onclick="download('products')"><i class="fa fa-box"></i> products.json</button>
-      <button class="btn-admin btn-outline" onclick="download('orders')"><i class="fa fa-receipt"></i> orders.json</button>
+  <div class="card" id="sec-dl" style="display:none">
+    <div class="card-title"><i class="fa fa-download"></i> Téléchargements</div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="download('products')">
+        <i class="fa fa-box"></i> products.json
+      </button>
+      <button class="btn btn-outline" onclick="download('orders')">
+        <i class="fa fa-receipt"></i> orders.json
+      </button>
     </div>
     <div class="msg" id="dlMsg"></div>
   </div>
+
 </div>
 
 <script>
-let ADMIN_KEY = localStorage.getItem('adminKey') || '';
-if (ADMIN_KEY) document.getElementById('adminKey').value = ADMIN_KEY;
+// No admin key — all requests sent without auth header
+const ADMIN_KEY = '';
 
-function setKey() {
-  ADMIN_KEY = document.getElementById('adminKey').value.trim();
-  localStorage.setItem('adminKey', ADMIN_KEY);
-  alert('Clé enregistrée ✔');
+// ---- NAV ----
+const sections = ['sec-add','sec-delete','sec-modify','sec-dl'];
+const navItems = document.querySelectorAll('.nav-item');
+
+function show(id) {
+  sections.forEach(s => document.getElementById(s).style.display = s === id ? 'block' : 'none');
+  navItems.forEach((n, i) => n.classList.toggle('active', sections[i] === id));
 }
 
-function msg(id, text, ok=true) {
+// ---- HELPERS ----
+function msg(id, text, ok = true) {
   const el = document.getElementById(id);
   el.textContent = text;
   el.className = 'msg ' + (ok ? 'ok' : 'err');
@@ -216,105 +415,110 @@ function msg(id, text, ok=true) {
 
 function previewImg(input) {
   const prev = document.getElementById('imgPreview');
-  if (input.files && input.files[0]) {
+  if (input.files?.[0]) {
     const r = new FileReader();
     r.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
     r.readAsDataURL(input.files[0]);
   }
 }
 
+// ---- ADD ----
 async function addProduct() {
-  const name = document.getElementById('prodName').value.trim();
+  const name  = document.getElementById('prodName').value.trim();
   const price = Number(document.getElementById('prodPrice').value);
-  const category = document.getElementById('prodCategory').value;
-  const type = document.getElementById('prodType').value;
-  const sizes = document.getElementById('prodSizes').value.split(',').map(s=>s.trim()).filter(Boolean);
-  const colors = document.getElementById('prodColors').value.split(',').map(s=>s.trim()).filter(Boolean);
-  const file = document.getElementById('prodImage').files[0];
-  const newUntil = document.getElementById('prodNewUntil').value;
+  const file  = document.getElementById('prodImage').files[0];
 
-  if (!name || !price || !file) { msg('addMsg','Remplissez tous les champs obligatoires',false); return; }
+  if (!name || !price || !file) { msg('addMsg', 'Remplissez tous les champs obligatoires', false); return; }
 
   try {
     const fd = new FormData();
     fd.append('image', file);
-    const upRes = await fetch('/admin/upload-image', { method:'POST', headers:{'x-admin-key':ADMIN_KEY}, body:fd });
+    const upRes  = await fetch('/admin/upload-image', { method: 'POST', headers: {'x-admin-key': ADMIN_KEY}, body: fd });
     const upData = await upRes.json();
     if (!upData.imageUrl) throw new Error('Upload échoué');
 
-    const id = 'Produit_' + Date.now();
     const product = {
-      id, name, price, category, type,
-      image: upData.imageUrl,
-      images: [upData.imageUrl],
-      options: { size: sizes, color: colors },
-      newUntil: newUntil ? new Date(newUntil).toISOString() : null,
+      id: 'Produit_' + Date.now(),
+      name, price,
+      category:    document.getElementById('prodCategory').value,
+      type:        document.getElementById('prodType').value,
+      image:       upData.imageUrl,
+      images:      [upData.imageUrl],
+      options: {
+        size:  document.getElementById('prodSizes').value.split(',').map(s => s.trim()).filter(Boolean),
+        color: document.getElementById('prodColors').value.split(',').map(s => s.trim()).filter(Boolean),
+      },
+      newUntil:     document.getElementById('prodNewUntil').value ? new Date(document.getElementById('prodNewUntil').value).toISOString() : null,
       isRunningLow: document.getElementById('prodLow').checked,
-      epuised: document.getElementById('prodEpuised').checked,
-      comingSoon: document.getElementById('prodSoon').checked,
-      available: true
+      epuised:      document.getElementById('prodEpuised').checked,
+      comingSoon:   document.getElementById('prodSoon').checked,
+      available:    true,
     };
 
-    const res = await fetch('/admin/add-product', { method:'POST', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify(product) });
+    const res  = await fetch('/admin/add-product', { method: 'POST', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify(product) });
     const data = await res.json();
-    if (data.success) msg('addMsg','Produit ajouté avec succès');
-    else msg('addMsg','Erreur: ' + (data.error||'inconnue'), false);
-  } catch(e) { msg('addMsg', 'Erreur: ' + e.message, false); }
+    if (data.success) msg('addMsg', 'Produit ajouté avec succès');
+    else msg('addMsg', 'Erreur : ' + (data.error || 'inconnue'), false);
+  } catch(e) { msg('addMsg', 'Erreur : ' + e.message, false); }
 }
 
+// ---- DELETE ----
 async function deleteProduct() {
   const id = document.getElementById('deleteId').value.trim();
-  if (!id) { msg('deleteMsg','Entrez un ID',false); return; }
+  if (!id) { msg('deleteMsg', 'Entrez un ID', false); return; }
   if (!confirm(`Supprimer le produit "${id}" ?`)) return;
-  const res = await fetch(`/admin/delete-product/${id}`, { method:'DELETE', headers:{'x-admin-key':ADMIN_KEY} });
+  const res  = await fetch(`/admin/delete-product/${id}`, { method: 'DELETE', headers: {'x-admin-key': ADMIN_KEY} });
   const data = await res.json();
-  if (data.success) msg('deleteMsg','Produit supprimé');
-  else msg('deleteMsg', 'Erreur: ' + (data.error||'introuvable'), false);
+  data.success ? msg('deleteMsg', 'Produit supprimé') : msg('deleteMsg', 'Erreur : ' + (data.error || 'introuvable'), false);
 }
 
+// ---- MODIFY NAME ----
 async function modifyName() {
-  const id = document.getElementById('modifyId').value.trim();
+  const id   = document.getElementById('modifyId').value.trim();
   const name = document.getElementById('modifyName').value.trim();
-  if (!id || !name) { msg('modifyMsg','ID et nom requis',false); return; }
-  const res = await fetch(`/admin/modify-product/${id}/name`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify({name}) });
+  if (!id || !name) { msg('modifyMsg', 'ID et nom requis', false); return; }
+  const res  = await fetch(`/admin/modify-product/${id}/name`, { method: 'PUT', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify({name}) });
   const data = await res.json();
-  msg('modifyMsg', data.success ? 'Nom modifié' : 'Erreur: '+(data.error||''), data.success);
+  msg('modifyMsg', data.success ? 'Nom modifié' : 'Erreur : ' + (data.error || ''), data.success);
 }
 
+// ---- MODIFY PRICE ----
 async function modifyPrice() {
-  const id = document.getElementById('modifyId').value.trim();
+  const id    = document.getElementById('modifyId').value.trim();
   const price = Number(document.getElementById('modifyPrice').value);
-  if (!id || !price) { msg('modifyMsg','ID et prix requis',false); return; }
-  const res = await fetch(`/admin/modify-product/${id}/price`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify({price}) });
+  if (!id || !price) { msg('modifyMsg', 'ID et prix requis', false); return; }
+  const res  = await fetch(`/admin/modify-product/${id}/price`, { method: 'PUT', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify({price}) });
   const data = await res.json();
-  msg('modifyMsg', data.success ? 'Prix modifié' : 'Erreur: '+(data.error||''), data.success);
+  msg('modifyMsg', data.success ? 'Prix modifié' : 'Erreur : ' + (data.error || ''), data.success);
 }
 
+// ---- MODIFY BADGES ----
 async function modifyBadges() {
   const id = document.getElementById('modifyId').value.trim();
-  if (!id) { msg('modifyMsg','Entrez un ID',false); return; }
+  if (!id) { msg('modifyMsg', 'Entrez un ID', false); return; }
   const body = {
-    newUntil: document.getElementById('mNewUntil').value ? new Date(document.getElementById('mNewUntil').value).toISOString() : null,
+    newUntil:     document.getElementById('mNewUntil').value ? new Date(document.getElementById('mNewUntil').value).toISOString() : null,
     isRunningLow: document.getElementById('mLow').checked,
-    epuised: document.getElementById('mEpuised').checked,
-    comingSoon: document.getElementById('mSoon').checked
+    epuised:      document.getElementById('mEpuised').checked,
+    comingSoon:   document.getElementById('mSoon').checked,
   };
-  const res = await fetch(`/admin/modify-product/${id}/badges`, { method:'PUT', headers:{'Content-Type':'application/json','x-admin-key':ADMIN_KEY}, body: JSON.stringify(body) });
+  const res  = await fetch(`/admin/modify-product/${id}/badges`, { method: 'PUT', headers: {'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY}, body: JSON.stringify(body) });
   const data = await res.json();
-  msg('modifyMsg', data.success ? 'Badges mis à jour' : 'Erreur: '+(data.error||''), data.success);
+  msg('modifyMsg', data.success ? 'Badges mis à jour' : 'Erreur : ' + (data.error || ''), data.success);
 }
 
+// ---- DOWNLOAD ----
 async function download(type) {
   try {
-    const res = await fetch(`/admin/download-${type}`, { headers:{'x-admin-key':ADMIN_KEY} });
+    const res = await fetch(`/admin/download-${type}`, { headers: {'x-admin-key': ADMIN_KEY} });
     if (!res.ok) throw new Error('Accès refusé');
     const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
     a.href = url; a.download = `${type}.json`; a.click();
     URL.revokeObjectURL(url);
-    msg('dlMsg', `✔ ${type}.json téléchargé`);
-  } catch(e) { msg('dlMsg', 'Erreur: ' + e.message, false); }
+    msg('dlMsg', `${type}.json téléchargé`);
+  } catch(e) { msg('dlMsg', 'Erreur : ' + e.message, false); }
 }
 </script>
 </body>
