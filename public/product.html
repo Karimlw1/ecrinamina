@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Détail Produit — Écrin d'Amina</title>
+  <title>Détail Produit Écrin d'Amina</title>
   <link rel="shortcut icon" href="https://res.cloudinary.com/dpsewpbqa/image/upload/v1772286865/logoEcrin_taiajz.png" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -199,6 +199,13 @@
     }
     .btn-wish:hover, .btn-wish.active { border-color: var(--danger); color: var(--danger); transform: scale(1.08); }
 
+    /* PRODUCT ID */
+    .pi-id {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
     /* TOAST */
     .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--charcoal); color: white; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 500; z-index: 9999; opacity: 0; transition: all 0.3s ease; white-space: nowrap; pointer-events: none; }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -259,6 +266,8 @@
       </div>
     </div>
 
+    <div class="pi-id" id="productId"></div>
+
     <div class="pi-divider"></div>
 
     <!-- CTA -->
@@ -316,6 +325,7 @@ fetch('/api/products')
 function render() {
   document.title = product.name + ' — Écrin d\'Amina';
   document.getElementById('category').textContent = product.category || '';
+  document.getElementById('productId').textContent = 'Réf : ' + (product.id || id);
   document.getElementById('name').textContent = product.name || '';
   document.getElementById('price').textContent = `$${product.price}`;
 
