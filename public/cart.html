@@ -180,7 +180,13 @@ function renderCart() {
             </div>
           </div>
         </div>
-        <button class="btn-remove" onclick="removeItem(${i})"><i class="fa fa-times"></i></button>
+        <button class="btn-remove" onclick="removeItem(${i})">
+        <i class="fa fa-trash" style="
+    color: red;
+    position: relative;
+    left: 6px;
+    font-size: 21px;
+"></i></button>
       </div>`;
   });
 
