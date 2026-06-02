@@ -61,8 +61,8 @@
         <a href="wishlist.html" class="nav-icon-btn">
           <i class="fa-regular fa-heart"></i>
         </a>
-        <a href="cart.html" class="nav-icon-btn">
-          <i class="fa fa-shopping-bag"></i>
+       <a href="cart.html" class="nav-icon-btn" style="border: 1px solid;box-shadow: 2px -2px 6px;">    
+        <i class="fa fa-shopping-bag"></i>
           <span class="badge" id="cartCount" style="display: none">0</span>
         </a>
       </div>
@@ -417,6 +417,7 @@
           container.innerHTML = `<div class="empty-state"><i class="fa fa-search"></i><h3>Aucun produit trouvé</h3><p>Essayez un autre terme</p></div>`;
           return;
         }
+        
         arr.forEach((p, i) => {
           const inWish = wishlist.includes(p.id);
           const div = document.createElement("div");
@@ -441,7 +442,7 @@
       <div class="card-info">
         <div class="card-name">${p.name}</div>
         <div class="card-bottom">
-          <div class="card-price">$${p.price}</div>
+          <div class="card-price" style= "font: message-box">$${p.price}</div>
           <button class="btn-add-card" onclick="event.stopPropagation();location.href='product.html?id=${p.id}'" title="Voir">
             <i class="fa fa-arrow-right"></i>
           </button>
