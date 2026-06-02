@@ -28,7 +28,7 @@
 
 <nav class="bottom-nav">
   <a href="index.html" class="nav-tab"><i class="fa fa-home"></i><span>Accueil</span></a>
-  <a href="wishlist.html" class="nav-tab active"><i class="fa-solid fa-heart></i><span>Favoris</span></a>
+  <a href="wishlist.html" class="nav-tab active"><i class="fa-solid fa-heart"></i><span>Favoris</span></a>
   <a href="cart.html" class="nav-tab"><i class="fa fa-shopping-bag"></i><span>Panier</span></a>
 </nav>
 
@@ -50,7 +50,16 @@ const container = document.getElementById('wishlistContainer');
 let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
 if (!wishlist.length) {
-  container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><i class="fa-regular fa-heart"></i><h3>Aucun favori</h3><p>Cliquez sur ❤️ pour sauvegarder vos articles préférés</p><a href="index.html" style="display:inline-block;margin-top:16px;padding:12px 28px;background:var(--charcoal);color:white;border-radius:50px;text-decoration:none;font-weight:600">Découvrir les produits</a></div>`;
+  container.innerHTML = `
+  <div class="empty-state" style="grid-column:1/-1">
+  <i class="fa-regular fa-heart">
+  </i> <h3>Aucun favori</h3>
+  <p>Cliquez sur le coeur pour sauvegarder vos articles préférés</p>
+  <a href="index.html" 
+  style="display:inline-block;margin-top:16px;padding:12px 28px;background:var(--charcoal);color:white;border-radius:50px;text-decoration:none;font-weight:600">
+  Découvrir les produits
+  </a>
+  </div>`;
 } else {
   fetch('/api/products')
     .then(r => r.json())
