@@ -110,7 +110,7 @@ fetch('/api/products')
   .then(data => {
     allProducts = Object.values(data).filter(p => {
       const field = 'category';
-      const val = 'Femme';
+      const val = 'Maternite';
       if (!val) return true;
       return (p[field] || '').toLowerCase() === val.toLowerCase();
     });
