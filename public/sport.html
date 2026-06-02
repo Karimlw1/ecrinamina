@@ -109,7 +109,7 @@ fetch('/api/products')
   .then(r => r.json())
   .then(data => {
     allProducts = Object.values(data).filter(p => {
-      const field = 'type';
+      const field = 'category';
       const val = 'Sport';
       if (!val) return true;
       return (p[field] || '').toLowerCase() === val.toLowerCase();
